@@ -1,4 +1,4 @@
-# IAB330_Timetable
+# Timetable
 ## Current name: __Timetable Talk__
 
 A multiplatform mobile application for creating and sharing your timetable with your friends.
