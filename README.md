@@ -9,4 +9,4 @@ A multiplatform mobile application for creating and sharing your timetable with 
 -lead a better and more mindful life
 
 ### To-do
-[ ] Everything.
+- [ ] Everything.
