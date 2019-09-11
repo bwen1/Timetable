@@ -1,6 +1,9 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Timetable_talk;
+using Timetable_talk.ViewModels;
+
 
 namespace Timetable_talk
 {
@@ -10,7 +13,7 @@ namespace Timetable_talk
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new TestingPage();
         }
 
         protected override void OnStart()
