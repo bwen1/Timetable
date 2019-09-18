@@ -21,5 +21,9 @@ namespace Timetable_talk.ViewModels
         {
             (sender as Button).BackgroundColor = Color.Black;
         }
+
+        private void onTap(object sender, EventArgs e) {
+            (sender as Button).BackgroundColor = Color.LavenderBlush;
+        }
     }
 }
