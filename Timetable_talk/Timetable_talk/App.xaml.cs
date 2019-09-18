@@ -13,7 +13,7 @@ namespace Timetable_talk
         {
             InitializeComponent();
 
-            MainPage = new TestingPage();
+            MainPage = new NavigationPage(new NavigatingPage());
         }
 
         protected override void OnStart()

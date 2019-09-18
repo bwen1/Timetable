@@ -16,36 +16,12 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!--<Label Text="0.0" Grid.Row="0" Grid.Column="0" />-->
-            
-            <Label Text="8am" Grid.Row="1" Grid.Column="0" >
-                <Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding onTap}" NumberOfTapsRequired="1" />
-                </Label.GestureRecognizers>
-            </Label>
 
-            <Label Text="9am" Grid.Row="2" Grid.Column="0" >
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding onTap}" NumberOfTapsRequired="1" />
-                </Label.GestureRecognizers>
-            </Label>
-            
-            <Label Text="10am" Grid.Row="3" Grid.Column="0" >
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding onTap}" NumberOfTapsRequired="1" />
-                </Label.GestureRecognizers>
-            </Label>
-            
-            <Label Text="11am" Grid.Row="4" Grid.Column="0" >
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding onTap}" NumberOfTapsRequired="1" />
-                </Label.GestureRecognizers>
-            </Label>
-            
-            <Label Text="12pm" Grid.Row="5" Grid.Column="0" >
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding onTap}" NumberOfTapsRequired="1" />
-                </Label.GestureRecognizers>
-            </Label>
+            <Label Text="8am" Grid.Row="1" Grid.Column="0" />
+            <Label Text="9am" Grid.Row="2" Grid.Column="0"/>
+            <Label Text="10am" Grid.Row="3" Grid.Column="0"/>
+            <Label Text="11am" Grid.Row="4" Grid.Column="0"/>
+            <Label Text="12pm" Grid.Row="5" Grid.Column="0"/>
             <Label Text="1pm" Grid.Row="6" Grid.Column="0" />
             <Label Text="2pm" Grid.Row="7" Grid.Column="0" />
             <Label Text="3pm" Grid.Row="8" Grid.Column="0" />
@@ -61,7 +37,7 @@
             <Label Text="Friday" Grid.Row="0" Grid.Column="5" />
 
             <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="1" Grid.Column="1" Clicked="Button_Clicked"/>
-            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="1" Grid.Column="2" />
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="1" Grid.Column="2" Clicked="OnTap"/>
             <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="1" Grid.Column="3" />
             <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="1" Grid.Column="4" />
             <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="1" Grid.Column="5" />

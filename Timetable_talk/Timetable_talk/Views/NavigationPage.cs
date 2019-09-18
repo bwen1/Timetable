@@ -10,19 +10,15 @@ using Xamarin.Forms.Xaml;
 namespace Timetable_talk.ViewModels
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TestingPage : ContentPage
+    public partial class NavigatingPage : ContentPage
     {
-        public TestingPage()
+        public NavigatingPage()
         {
             InitializeComponent();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void NavigateButtonClicked(object sender, EventArgs e)
         {
-            (sender as Button).BackgroundColor = Color.Black;
-        }
-
-        private async void OnTap(object sender, EventArgs e) {
             await Navigation.PushAsync(new SecondPage());
         }
     }
