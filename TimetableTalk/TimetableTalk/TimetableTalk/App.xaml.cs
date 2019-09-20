@@ -1,19 +1,20 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Timetable_talk;
-using Timetable_talk.ViewModels;
+using TimetableTalk.Services;
+using TimetableTalk.Views;
 
-
-namespace Timetable_talk
+namespace TimetableTalk
 {
     public partial class App : Application
     {
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MasterDetailPage1());
+            DependencyService.Register<MockDataStore>();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

@@ -10,16 +10,16 @@ using Xamarin.Forms.Xaml;
 namespace Timetable_talk.ViewModels
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NavigatingPage : ContentPage
+    public partial class ThomasPage : ContentPage
     {
-        public NavigatingPage()
+        public ThomasPage()
         {
             InitializeComponent();
         }
 
         private async void NavigateButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SecondPage());
+            await Navigation.PushAsync(new NavigatingPage());
         }
     }
 }

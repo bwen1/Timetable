@@ -4,11 +4,11 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Timetable_talk.ViewModels.NavigatingPage"
-             Title="NavigatingPage">
+             x:Class="Timetable_talk.ViewModels.JacobPage"
+             Title="JacobPage">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="AntiqueWhite" Padding="60" VerticalOptions="Center"> 
-            <Button Text="Second Page" BackgroundColor="AliceBlue" Clicked="NavigateButtonClicked"/>
+        <StackLayout BackgroundColor="AntiqueWhite" Padding="60" VerticalOptions="Center">
+            <Button Text="Home Page" BackgroundColor="AliceBlue" Clicked="NavigateButtonClicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
