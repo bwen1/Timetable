@@ -22,7 +22,10 @@ namespace TimetableTalk.Views
             {
                 new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" },
-                new HomeMenuItem {Id = MenuItemType.Thomas, Title="Thomas" }
+                new HomeMenuItem {Id = MenuItemType.Thomas, Title="Thomas" },
+                new HomeMenuItem {Id = MenuItemType.Jacob, Title="Jacob" },
+                new HomeMenuItem {Id = MenuItemType.Bill, Title="Bill" },
+                new HomeMenuItem {Id = MenuItemType.Hano, Title="Hano" }
             };
 
             ListViewMenu.ItemsSource = menuItems;

@@ -8,7 +8,10 @@ namespace TimetableTalk.Models
     {
         Browse,
         About,
-        Thomas
+        Thomas,
+        Jacob,
+        Bill,
+        Hano
 
     }
     public class HomeMenuItem

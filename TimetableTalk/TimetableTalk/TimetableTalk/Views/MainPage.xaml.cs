@@ -39,6 +39,15 @@ namespace TimetableTalk.Views
                     case (int)MenuItemType.Thomas:
                         MenuPages.Add(id, new NavigationPage(new ThomasPage()));
                         break;
+                    case (int)MenuItemType.Jacob:
+                        MenuPages.Add(id, new NavigationPage(new JacobPage()));
+                        break;
+                    case (int)MenuItemType.Bill:
+                        MenuPages.Add(id, new NavigationPage(new BillPage()));
+                        break;
+                    case (int)MenuItemType.Hano:
+                        MenuPages.Add(id, new NavigationPage(new HanoPage()));
+                        break;
                 }
             }
 
