@@ -7,7 +7,9 @@ namespace TimetableTalk.Models
     public enum MenuItemType
     {
         Browse,
-        About
+        About,
+        Thomas
+
     }
     public class HomeMenuItem
     {
