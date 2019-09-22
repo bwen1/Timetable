@@ -5,8 +5,9 @@ A multiplatform mobile application for creating and sharing your timetable with 
 
 ### Features
 - Easely find when you can meet up with friends / associates.
-- see your secdual at a glance
+- see your schedule at a glance
 - lead a better and more mindful life
 
 ### To-do
+- [ ] Push code that actually compiles
 - [ ] Everything.
