@@ -5,12 +5,49 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Timetable_talk.MainPage">
+    <ContentPage.Resources>
+        <StyleSheet Source="styles.css" />
+    </ContentPage.Resources>
 
     <StackLayout>
+
+        <Grid IsVisible="True" VerticalOptions="Center" HorizontalOptions="Center" Padding="30" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+
+            <Frame Grid.Row="0"  Grid.Column="0" Margin="10" IsClippedToBounds="True" CornerRadius="50"  HeightRequest="50" WidthRequest="40" BackgroundColor="green">
+                <Label Text="Test" FontSize="16" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+            </Frame>
+            <Frame Grid.Row="0" Grid.Column="1" Margin="10"  IsClippedToBounds="True" CornerRadius="50" HeightRequest="50" WidthRequest="40" BackgroundColor="green">
+                <Label Text="Test" FontSize="16" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+            </Frame>
+            <Frame Grid.Row="1" Grid.Column="0" Margin="10"  IsClippedToBounds="True" CornerRadius="50" HeightRequest="50" WidthRequest="40" BackgroundColor="green">
+                <Label Text="Test" FontSize="16" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+            </Frame>
+            <Frame Grid.Row="1" Grid.Column="1" Margin="10"  IsClippedToBounds="True" CornerRadius="50" HeightRequest="50" WidthRequest="40" BackgroundColor="green">
+                <Label Text="Test" FontSize="16" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+            </Frame>
+            <Frame Grid.Row="2" Grid.Column="0" Margin="10"  IsClippedToBounds="True" CornerRadius="50" HeightRequest="50" WidthRequest="40" BackgroundColor="green">
+                <Label Text="Test" FontSize="16" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+            </Frame>
+            <Frame Grid.Row="2" Grid.Column="1" Margin="10"  IsClippedToBounds="True" CornerRadius="50" HeightRequest="50" WidthRequest="40" BackgroundColor="green">
+                <Label Text="Test" FontSize="16" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+            </Frame>
+
+        </Grid>
+        <Frame Grid.Row="2" Grid.Column="1" Margin="10"  IsClippedToBounds="True" CornerRadius="50" HeightRequest="50" WidthRequest="40" BackgroundColor="green" AnchorX="0.9" AnchorY="0.9"></Frame>
         <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        
     </StackLayout>
 
 </ContentPage>

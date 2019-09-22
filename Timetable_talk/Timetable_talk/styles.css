@@ -1,0 +1,15 @@
+label{
+    display: block;
+    background-color: green;
+    color: whitesmoke;
+    border-radius: 25px;
+    max-width: 40%;
+}
+Grid {
+    max-width: 80%;
+}
+Frame{
+    Background-Color: green;
+    Margin: 10;
+    CornerRadius: 50;
+}

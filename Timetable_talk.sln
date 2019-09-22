@@ -7,7 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timetable_talk.Android", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timetable_talk.iOS", "Timetable_talk\Timetable_talk.iOS\Timetable_talk.iOS.csproj", "{3DB78B7E-6A69-4E79-BF28-ED8CE4F6BEBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timetable_talk", "Timetable_talk\Timetable_talk\Timetable_talk.csproj", "{09E890E1-7559-41B4-B6F9-E7D94E0F8F2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timetable_talk", "Timetable_talk\Timetable_talk\Timetable_talk.csproj", "{09E890E1-7559-41B4-B6F9-E7D94E0F8F2C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{5325221F-441A-46F4-BC82-7C20C9EFAB31}"
+	ProjectSection(SolutionItems) = preProject
+		passwords.txt = passwords.txt
+		styles.css = styles.css
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
