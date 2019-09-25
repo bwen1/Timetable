@@ -24,10 +24,7 @@ namespace Timetable_talk.ViewModels
             if (item == null)
                 return;
 
-            var page = (Page)Activator.CreateInstance(item.TargetType);
-            page.Title = item.Title;
-
-            Detail = new NavigationPage(page);
+            Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));
             IsPresented = false;
 
             MasterPage.ListView.SelectedItem = null;

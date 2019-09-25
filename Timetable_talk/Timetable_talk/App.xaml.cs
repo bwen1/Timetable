@@ -13,7 +13,7 @@ namespace Timetable_talk
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MasterDetailPage1());
+            Application.Current.MainPage = new NavigationPage(new MasterDetailPage1());
         }
 
         protected override void OnStart()
