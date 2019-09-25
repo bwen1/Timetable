@@ -4,19 +4,31 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TimetableTalkShell.Views.BillPage"
+             x:Class="TimetableTalkShell.Views.BillPage" 
              Title="{Binding Title}"
              xmlns:vm="clr-namespace:TimetableTalkShell.ViewModels">
 
-    <ContentPage.BindingContext>
+    <ContentPage.BindingContext> 
         <vm:BillViewModel />
     </ContentPage.BindingContext>
+
+    <!--
+    Title="{Binding Title}"
+             xmlns:vm="clr-namespace:TimetableTalkShell.ViewModels">
+
+    <ContentPage.BindingContext> 
+        <vm:BillViewModel />
+    </ContentPage.BindingContext>
+   
+    -->
+    
     
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Welcome to Xamarin.Forms Bill!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Button Text="About"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
