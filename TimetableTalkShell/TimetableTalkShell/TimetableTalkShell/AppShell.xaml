@@ -29,12 +29,10 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <FlyoutItem Title="Thomas">
-        <Tab>
-            <ShellContent>
-                <views:ThomasPage />
-            </ShellContent>
-        </Tab>
+    <FlyoutItem Title="Test"
+                FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Bill"
+                      ContentTemplate="{DataTemplate views:BillPage}" />
     </FlyoutItem>
     
     <!-- Your Pages -->

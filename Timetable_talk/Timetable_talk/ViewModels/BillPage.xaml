@@ -7,8 +7,8 @@
              x:Class="Timetable_talk.ViewModels.BillPage"
              Title="BillPage">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="AntiqueWhite" Padding="60" VerticalOptions="Center">
-            <Button Text="Home Page" BackgroundColor="AliceBlue" Clicked="NavigateButtonClicked"/>
+        <StackLayout BackgroundColor="Black" Padding="60" HorizontalOptions="Fill">
+            <Button Text="Log Out" BackgroundColor="Black" TextColor="White" Clicked="NavigateButtonClicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
