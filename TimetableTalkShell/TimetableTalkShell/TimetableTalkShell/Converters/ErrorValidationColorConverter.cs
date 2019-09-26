@@ -4,7 +4,8 @@ using System.Text.RegularExpressions;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using TimetableTalkShell.Controls;
-using TimetableTalkShell.ViewModels.Hano Sign Up Page;
+using TimetableTalkShell.ViewModels.Hano_Setup_Pages;
+//using TimetableTalkShell.ViewModels.Hano //Sign Up Page;
 
 namespace TimetableTalkShell.Converters
 {
