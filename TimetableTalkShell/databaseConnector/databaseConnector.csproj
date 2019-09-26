@@ -7,7 +7,15 @@
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.17" />
     <PackageReference Include="Syncfusion.Licensing" Version="17.2.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.2.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="17.2.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="17.2.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.GridCommon" Version="17.2.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="17.2.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="17.2.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.2.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="17.2.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="17.2.0.51" />
   </ItemGroup>
 
 </Project>
