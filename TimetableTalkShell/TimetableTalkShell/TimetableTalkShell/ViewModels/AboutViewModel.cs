@@ -9,7 +9,7 @@ namespace TimetableTalkShell.ViewModels
     {
         public AboutViewModel()
         {
-            Title = "About";
+            Title = "About page";
 
             OpenWebCommand = new Command(() => Device.OpenUri(new Uri("https://xamarin.com/platform")));
         }
