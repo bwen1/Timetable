@@ -1,4 +1,8 @@
-﻿using System;
+using  Syncfusion.XForms.iOS.Graphics;
+using Syncfusion.XForms.iOS.Border;
+using Syncfusion.XForms.iOS.Buttons;
+using Syncfusion.SfBusyIndicator.XForms.iOS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,7 +27,11 @@ namespace TimetableTalkShell.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.SetFlags("Shell_Experimental", "Visual_Experimental", "CollectionView_Experimental", "FastRenderers_Experimental");
-            global::Xamarin.Forms.Forms.Init();
+global::Xamarin.Forms.Forms.Init();
+            SfGradientViewRenderer.Init();
+            SfBorderRenderer.Init();
+            SfButtonRenderer.Init();
+SfBusyIndicatorRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
