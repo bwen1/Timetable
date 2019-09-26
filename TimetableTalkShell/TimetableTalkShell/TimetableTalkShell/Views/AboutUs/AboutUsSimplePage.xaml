@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TimetableTalkShell.Views.AboutUs.AboutUsSimplePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.AboutUs"
+    Title="About"
+    BackgroundColor="{DynamicResource Gray-Black}"
+    NavigationPage.HasNavigationBar="False"
+    Shell.NavBarIsVisible="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <ScrollView HorizontalOptions="Center" VerticalOptions="Center">
+                <StackLayout
+                    HorizontalOptions="Center"
+                    Spacing="0"
+                    VerticalOptions="Center">
+
+                    <StackLayout.BindingContext>
+                        <viewModel:AboutUsViewModel />
+                    </StackLayout.BindingContext>
+
+                    <!--  Product image  -->
+                    <Image HeightRequest="110" WidthRequest="124">
+                        <Image.Source>
+                            <UriImageSource
+                                CacheValidity="14"
+                                CachingEnabled="true"
+                                Uri="{Binding ProductIcon}" />
+                        </Image.Source>
+                    </Image>
+
+                    <!--  Product version  -->
+                    <Label
+                        Margin="0,8.7,0,0"
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource VersionLabelStyle}"
+                        TextColor="{DynamicResource Gray-White}"
+                        Text="{Binding ProductVersion, StringFormat='Version {0}'}" />
+
+                    <!--  Product title  -->
+                    <Label
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource HeaderLabelStyle}"
+                        TextColor="{DynamicResource Gray-White}"
+                        Text="Time Table Talk">
+                        <Label.Margin>
+                            <OnIdiom
+                                x:TypeArguments="Thickness"
+                                Default="0, 32, 0, 8"
+                                Phone="0, 16, 0, 16" />
+                        </Label.Margin>
+                    </Label>
+
+                    <!--  Product description  -->
+                    <Label
+                        Margin="15,0,15,0"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource DescriptionLabelStyle}"
+                        TextColor="{DynamicResource Gray-White}"
+                        Text="Test" />
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
