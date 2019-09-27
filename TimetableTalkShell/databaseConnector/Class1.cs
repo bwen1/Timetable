@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using MySql.Data.MySqlClient;
 
 namespace databaseConnector
@@ -71,13 +73,74 @@ namespace databaseConnector
     }
     public class Backend
     {
-        private Database Database;
         private int UID;
+        private MySqlConnection connection;
+        private string server;
+        private string database;
+        private string uid;
+        private string password;
         public Backend()
         {
-            Database = new Database();
+            Initialize();
             UID = 0;
         }
+        #region Database setup, and connection Statments adapted from some online tutorial.
+        private void Initialize()
+        {
+            server = "timetable.ctymoh38xb5w.us-east-1.rds.amazonaws.com";
+            database = "timetable_app";
+            uid = "admin";
+            password = "CqEcjW7Pe8eDruMhzsiU";
+            string connectionString;
+            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+            connection = new MySqlConnection(connectionString);
+        }
+
+        private bool OpenConnection()
+        {
+            try
+            {
+                connection.Open();
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                //When handling errors, you can your application's response based 
+                //on the error number.
+                //The two most common error numbers when connecting are as follows:
+                //0: Cannot connect to server.
+                //1045: Invalid user name and/or password.
+                switch (ex.Number)
+                {
+                    case 0:
+                        Console.WriteLine("Cannot connect to server.  Contact administrator");
+                        break;
+
+                    case 1045:
+                        Console.WriteLine("Invalid username/password, please try again");
+                        break;
+                }
+                return false;
+            }
+        }
+
+        private bool CloseConnection()
+        {
+            try
+            {
+                connection.Close();
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// Is a user currently logged in, does not refer to database connectivity.
@@ -95,8 +158,53 @@ namespace databaseConnector
         /// <returns>if the username is currently not in use</returns>
         public bool IsUsernameAvalible(string username)
         {
-            return true;
+            bool Avalible;
+            string query = "SELECT EXISTS(select * FROM `users` WHERE `Name` = '"+username+"') AS `Exists`";
+            if (this.OpenConnection() == true)
+            {
+                //create command and assign the query and connection from the constructor
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                dataReader.Read();
+
+                //Read the data determine the result
+                if(int.Parse(dataReader["Exists"]+"") == 1)
+                {
+                    Avalible = false;
+                }
+                else
+                {
+                    Avalible = true;
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close connection
+                this.CloseConnection();
+
+                return Avalible;
+            }
+            return false;
         }
+
+        #region sha256 string generator, from https://stackoverflow.com/questions/3984138/hash-string-in-c-sharp
+        private static byte[] GetHash(string inputString)
+        {
+            HashAlgorithm algorithm = SHA256.Create();
+            return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
+        }
+
+        private static string GetHashString(string inputString)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in GetHash(inputString))
+                sb.Append(b.ToString("X2"));
+
+            return sb.ToString();
+        }
+        #endregion
 
         /// <summary>
         /// Logs the user in, actually It queries the database to confirm details, then sets the users ID as the active user.
@@ -106,7 +214,46 @@ namespace databaseConnector
         /// <returns> A response</returns>
         public Response LogIn(string username, string password)
         {
-            return new Response(statuscode.OK, "Dummy response");
+            bool Avalible;
+            string psh = GetHashString(password);
+            Console.WriteLine(psh);
+            string query = "SELECT EXISTS(select * FROM `users` WHERE `Name` = '" + username + "' AND `passwordHash` = '"+psh+"') AS `Exists`";
+            if (this.OpenConnection() == true)
+            {
+                //create command and assign the query and connection from the constructor
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                dataReader.Read();
+
+                if (int.Parse(dataReader["Exists"] + "") == 1)
+                {
+                    dataReader.Close();
+                    Avalible = true;
+                    string newquery = "select `ID` FROM `users` WHERE `Name` = '" + username + "' AND `passwordHash` = '" + psh + "'";
+                    cmd = new MySqlCommand(newquery, connection);
+                    dataReader = cmd.ExecuteReader();
+                    dataReader.Read();
+                    UID = int.Parse(dataReader["ID"] + "");
+                }
+                else
+                {
+                    Avalible = false;
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close connection
+                this.CloseConnection();
+                if (Avalible)
+                {
+                    return new Response(statuscode.OK, UID.ToString());
+                }
+                return new Response(statuscode.NOT_THESE_DROIDS, "Username or password was incorrect");
+            }
+            
+            return new Response(statuscode.ERROR, "Could not open sql database");
         }
 
         /// <summary>
@@ -121,13 +268,37 @@ namespace databaseConnector
 
         /// <summary>
         /// Registers the user in the database, you should probobly check if the username is avalible first.
+        /// note: this does not log in the new user.
         /// </summary>
         /// <param name="username">the desired username</param>
         /// <param name="password">the desired password, (not stored)</param>
         /// <returns>OK if its all good, or error if the user already exists</returns>
         public Response SignUp(string username, string password)
         {
-            return new Response(statuscode.OK, "Dummy response");
+            if (IsUsernameAvalible(username))
+            {
+                string query = "insert into `users` (`Name`, `passwordHash`) values ( '"+username+"', '"+GetHashString(password)+"')";
+                //open connection
+                if (this.OpenConnection() == true)
+                {
+                    //create command and assign the query and connection from the constructor
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                    //Execute command
+                    cmd.ExecuteNonQuery();
+
+                    //close connection
+                    this.CloseConnection();
+
+                    return new Response(statuscode.OK, "User registered sucessfully");
+                }
+                return new Response(statuscode.ERROR, "Could not open database");
+            }
+            else
+            {
+                return new Response(statuscode.NOT_THESE_DROIDS, "Username is not avalible");
+            }
+            
         }
 
         /// <summary>
