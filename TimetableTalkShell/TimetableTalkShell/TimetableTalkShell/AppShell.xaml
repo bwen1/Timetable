@@ -32,7 +32,7 @@
     <FlyoutItem Title="Test"
                 FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="Bill"
-                      ContentTemplate="{DataTemplate views:ItemsPage}" />
+                  ContentTemplate="{DataTemplate views:ItemsPage}" />
     </FlyoutItem>
     
     <!-- Your Pages -->

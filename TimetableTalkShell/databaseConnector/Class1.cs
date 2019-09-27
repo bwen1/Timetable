@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
 namespace databaseConnector
@@ -77,9 +78,9 @@ namespace databaseConnector
             }
 
             //Insert statement
-            public void Insert()
+            public void Insert(string table, string [] values)
             {
-                string query = "INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
+                string query = "INSERT INTO "+table+" VALUES('John Smith', '33')";
 
                 //open connection
                 if (this.OpenConnection() == true)

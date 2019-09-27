@@ -6,7 +6,9 @@
              mc:Ignorable="d"
              x:Class="TimetableTalkShell.Views.BillPage" 
              Title="{Binding Title}"
-             xmlns:vm="clr-namespace:TimetableTalkShell.ViewModels">
+             xmlns:vm="clr-namespace:TimetableTalkShell.ViewModels"
+             BackgroundColor="White">
+             
 
     <ContentPage.BindingContext> 
         <vm:BillViewModel />
@@ -28,7 +30,8 @@
             <Label Text="Welcome to Xamarin.Forms Bill!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button Text="About"/>
+            <Button Text="{Binding sometext}" Command="{Binding Test_Backend}" >
+            </Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

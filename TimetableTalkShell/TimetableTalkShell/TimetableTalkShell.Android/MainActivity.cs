@@ -9,7 +9,7 @@ using Android.OS;
 
 namespace TimetableTalkShell.Droid
 {
-    [Activity(Label = "TimetableTalkShell", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "TimetableTalkShell", Icon = "@mipmap/icon", Theme = "@style/Custom.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

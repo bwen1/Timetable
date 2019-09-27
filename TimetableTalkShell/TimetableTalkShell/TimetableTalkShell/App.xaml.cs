@@ -9,13 +9,13 @@ namespace TimetableTalkShell
     public partial class App : Application
     {
         public static string BaseImageUrl { get; } = "https://cdn.syncfusion.com/essential-ui-kit-for-xamarin.forms/common/uikitimages/";
-
+        public static databaseConnector.Database Database = new databaseConnector.Database();
         public App()
         {
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+            MainPage = new BillPage();
         }
 
         protected override void OnStart()
