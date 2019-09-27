@@ -15,7 +15,7 @@ namespace TimetableTalkShell.ViewModels.AboutUs
     {
         #region Fields
 
-        private string productDescription;
+       // private string productDescription;
 
         private string productVersion;
 
@@ -32,85 +32,38 @@ namespace TimetableTalkShell.ViewModels.AboutUs
         /// </summary>
         public AboutUsViewModel()
         {
-           /// this.productDescription ="Test product description"; (This is now hard coded)
+            //this.productDescription = "Test product description";
             this.productIcon = App.BaseImageUrl + "Icon.png";
-            this.productVersion = "1.0";
+            this.productVersion = "1.0 Beta";
             this.cardsTopImage = App.BaseImageUrl + "Mask.png";
 
             this.EmployeeDetails = new ObservableCollection<AboutUsModel>
             {
                 new AboutUsModel
                 {
-                    EmployeeName = "Alice",
+                    EmployeeName = "Thomas",
                     Image = App.BaseImageUrl + "ProfileImage15.png",
-                    Designation = "Project Manager"
+                    Designation = "Developer"
                 },
                 new AboutUsModel
                 {
-                    EmployeeName = "Jessica Park",
+                    EmployeeName = "Jacob",
                     Image = App.BaseImageUrl + "ProfileImage10.png",
-                    Designation = "Senior Manager"
+                    Designation = "Developer"
                 },
                 new AboutUsModel
                 {
-                    EmployeeName = "Lisa",
+                    EmployeeName = "Hano",
                     Image = App.BaseImageUrl + "ProfileImage11.png",
-                    Designation = "Senior Developer"
+                    Designation = "Developer"
                 },
                 new AboutUsModel
                 {
-                    EmployeeName = "Rebecca",
+                    EmployeeName = "Bill",
                     Image = App.BaseImageUrl + "ProfileImage12.png",
-                    Designation = "Senior Designer"
+                    Designation = "Developer"
                 },
-                new AboutUsModel
-                {
-                    EmployeeName = "Alexander",
-                    Image = App.BaseImageUrl + "ProfileImage3.png",
-                    Designation = "Senior Manager"
-                },
-                new AboutUsModel
-                {
-                    EmployeeName = "Anthony",
-                    Image = App.BaseImageUrl + "ProfileImage1.png",
-                    Designation = "Senior Developer"
-                },
-                new AboutUsModel
-                {
-                    EmployeeName = "Julia Grant",
-                    Image = App.BaseImageUrl + "ProfileImage2.png",
-                    Designation = "Project Manager"
-                },
-                new AboutUsModel
-                {
-                    EmployeeName = "John",
-                    Image = App.BaseImageUrl + "ProfileImage4.png",
-                    Designation = "Senior Manager"
-                },
-                new AboutUsModel
-                {
-                    EmployeeName = "Danielle",
-                    Image = App.BaseImageUrl + "ProfileImage5.png",
-                    Designation = "Lead Developer"
-                },
-                new AboutUsModel
-                {
-                    EmployeeName = "Kyle Greene",
-                    Image = App.BaseImageUrl + "ProfileImage6.png",
-                    Designation = "Senior Designer"
-                },
-                new AboutUsModel
-                {
-                    EmployeeName = "Navya Sharma",
-                    Image = App.BaseImageUrl + "ProfileImage7.png",
-                    Designation = "Senior Manager"
-                },
-                new AboutUsModel
-                {
-                    EmployeeName = "Jazmine",
-                    Image = App.BaseImageUrl + "ProfileImage8.png",
-                    Designation = "Project Manager"
-                }
+
             };
 
 
@@ -149,7 +102,7 @@ namespace TimetableTalkShell.ViewModels.AboutUs
         /// Gets or sets the description of a product or a company.
         /// </summary>
         /// <value>The product description.</value>
-        public string ProductDescription
+        /*public string ProductDescription
         {
             get { return this.productDescription; }
 
@@ -158,7 +111,7 @@ namespace TimetableTalkShell.ViewModels.AboutUs
                 this.productDescription = value;
                 this.OnPropertyChanged();
             }
-        }
+        }*/
 
         /// <summary>
         /// Gets or sets the product icon.
