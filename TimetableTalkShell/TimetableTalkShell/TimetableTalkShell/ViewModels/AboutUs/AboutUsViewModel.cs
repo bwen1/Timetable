@@ -128,6 +128,8 @@ namespace TimetableTalkShell.ViewModels.AboutUs
             }
         }
 
+
+
         /// <summary>
         /// Gets or sets the product version.
         /// </summary>
@@ -141,7 +143,9 @@ namespace TimetableTalkShell.ViewModels.AboutUs
                 this.productVersion = value;
                 this.OnPropertyChanged();
             }
+
         }
+
 
         /// <summary>
         /// Gets or sets the employee details.

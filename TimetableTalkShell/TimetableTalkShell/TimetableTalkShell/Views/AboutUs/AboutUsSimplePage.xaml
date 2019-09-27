@@ -32,7 +32,7 @@ xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Button
                     <!--  Product image  -->
 
 
-                    
+                    <Image Source="icon.png" />
 
 
 
