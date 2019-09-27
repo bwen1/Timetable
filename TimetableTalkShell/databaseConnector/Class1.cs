@@ -4,6 +4,250 @@ using MySql.Data.MySqlClient;
 
 namespace databaseConnector
 {
+    public enum statuscode { OK, ERROR, NOT_THESE_DROIDS, INVALID_DATA}
+    public enum day { MONDAY, TUESDAY, WEDNSDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY}
+    public enum friends { NO, PENDING_TO, PENDING_FROM, BLOCKED_TO, BLOCKED_FROM, YES}
+    public struct Response
+    {
+        public statuscode status;
+        public string error { get; private set; }
+        public string message { get; private set; }
+        public Response(statuscode statuscode, string message)
+        {
+            status = statuscode;
+            this.message = message;
+            error = null;
+        }
+        public Response(statuscode statuscode, string message, string error)
+        {
+            status = statuscode;
+            this.message = message;
+            this.error = error;
+        }
+
+    }
+    public struct Event
+    {
+        public bool shared { get; private set; }
+        public string eventName { get; private set; }
+        public string location { get; private set; }
+        public string startTime { get; private set; }
+        public string endTime { get; private set; }
+        public day Day { get; private set; }
+        public string notes { get; private set; }
+
+        public Event(string eventName, bool shared, string startTime, string endTime, day d)
+        {
+            this.eventName = eventName;
+            this.shared = shared;
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.Day = d;
+            location = null;
+            notes = null;
+        }
+        public Event(string eventName, bool shared, string startTime, string endTime, day d, string location, string notes)
+        {
+            this.eventName = eventName;
+            this.shared = shared;
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.Day = d;
+            this.location = location;
+            this.notes = notes;
+        }
+    }
+    public struct User
+    {
+        public int ID;
+        public string username;
+        public friends friend;
+        public User(int ID, string username, friends friend)
+        {
+            this.ID = ID;
+            this.username = username;
+            this.friend = friend;
+        }
+    }
+    public class Backend
+    {
+        private Database Database;
+        private int UID;
+        public Backend()
+        {
+            Database = new Database();
+            UID = 0;
+        }
+
+        /// <summary>
+        /// Is a user currently logged in, does not refer to database connectivity.
+        /// </summary>
+        /// <returns>the statments truth</returns>
+        public bool IsLoggedIn()
+        {
+            return (UID == 0 ? false: true);
+        }
+
+        /// <summary>
+        /// Queries the database to see if that username is taken yet.
+        /// </summary>
+        /// <param name="username">the username to search for</param>
+        /// <returns>if the username is currently not in use</returns>
+        public bool IsUsernameAvalible(string username)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Logs the user in, actually It queries the database to confirm details, then sets the users ID as the active user.
+        /// </summary>
+        /// <param name="username"> the users username</param>
+        /// <param name="password"> the users password, this is not ever stored anyware</param>
+        /// <returns> A response</returns>
+        public Response LogIn(string username, string password)
+        {
+            return new Response(statuscode.OK, "Dummy response");
+        }
+
+        /// <summary>
+        /// Logs the user out, actually un-asgines the current user value.
+        /// </summary>
+        /// <returns>A response, not really useful</returns>
+        public Response LogOut()
+        {
+            UID = 0;
+            return new Response(statuscode.OK, "Nothing to see here!");
+        }
+
+        /// <summary>
+        /// Registers the user in the database, you should probobly check if the username is avalible first.
+        /// </summary>
+        /// <param name="username">the desired username</param>
+        /// <param name="password">the desired password, (not stored)</param>
+        /// <returns>OK if its all good, or error if the user already exists</returns>
+        public Response SignUp(string username, string password)
+        {
+            return new Response(statuscode.OK, "Dummy response");
+        }
+
+        /// <summary>
+        /// Sends a friend request to the selected user.
+        /// </summary>
+        /// <param name="user">the user to send to</param>
+        /// <returns>OK if all good, Error if blocked, already a friend, or the user dosen't exist</returns>
+        public Response RequestFriend(User user)
+        {
+            return new Response(statuscode.OK, "Dummy response");
+        }
+
+        /// <summary>
+        /// sends a friend request to the selected user.
+        /// </summary>
+        /// <param name="username"> the user to send to</param>
+        /// <returns>If the user was sucessfully requested</returns>
+        public Response RequestFriend(string username)
+        {
+            return new Response(statuscode.OK, "Dummy response");
+        }
+
+        /// <summary>
+        /// sends a friend request to the selected user.
+        /// </summary>
+        /// <param name="userID"> the ID of the user to send to</param>
+        /// <returns>If the user was sucessfully requested</returns>
+        public Response RequestFriend(int userID)
+        {
+            return new Response(statuscode.OK, "Dummy response");
+        }
+
+        /// <summary>
+        /// Accepts a pending friend request.
+        /// </summary>
+        /// <param name="friendID">the ID of the request to accept</param>
+        /// <returns> if the acceptance was sucessful</returns>
+        public Response AcceptFriend(int friendID)
+        {
+            return new Response(statuscode.OK, "Dummy response");
+        }
+
+        /// <summary>
+        /// Blocks the selected friend, works if pending or already a friend. (you can't block others)
+        /// </summary>
+        /// <param name="friendID">The user to block</param>
+        /// <returns>The sadness in you heart</returns>
+        public Response DenyFriend(int friendID)
+        {
+            return new Response(statuscode.OK, "Dummy response");
+        }
+
+        /// <summary>
+        /// Adds an event to the current users scedual.
+        /// </summary>
+        /// <param name="thing"> the event to add, it not called 'event' because that's a keyword</param>
+        /// <returns>If the event was sucessfully added</returns>
+        public Response AddEvent(Event thing)
+        {
+            return new Response(statuscode.OK, "Dummy response");
+        }
+
+        /// <summary>
+        /// Replaces an old event with a new one.
+        /// </summary>
+        /// <param name="oldEvent">the event pre-edit</param>
+        /// <param name="newEvent">the event post-edit</param>
+        /// <returns>If the event was sucessfully edited</returns>
+        public Response EditEvent(Event oldEvent, Event newEvent)
+        {
+            return new Response(statuscode.OK, "Dummy response");
+        }
+
+        /// <summary>
+        /// Removes the selected event from the current users schedual.
+        /// </summary>
+        /// <param name="thing">the event to remove, it not called 'event' because that's a keyword</param>
+        /// <returns>If the event was 'taken out of the picture', if you know what I mean...</returns>
+        public Response RemoveEvent(Event thing)
+        {
+            return new Response(statuscode.OK, "Dummy response");
+        }
+
+        /// <summary>
+        /// Gets the current user, and their friends events.
+        /// </summary>
+        /// <returns>An array of events</returns>
+        public Event [] GetEvents()
+        {
+            return new Event[] { };
+        }
+
+        /// <summary>
+        /// Gets an array of the current users events.
+        /// </summary>
+        /// <returns>an array of the current users events</returns>
+        public Event [] GetMyEvents()
+        {
+            return new Event[] { };
+        }
+
+        /// <summary>
+        ///  Gets the current users pending, accepted and blocked friends
+        /// </summary>
+        /// <returns>the users friends and their status</returns>
+        public User [] GetFriends()
+        {
+            return new User[] { };
+        }
+
+        /// <summary>
+        /// Gets the public events of the specified user, (they have to be a friend for this to work)
+        /// </summary>
+        /// <param name="user">the user to get events for</param>
+        /// <returns>that users events</returns>
+        public Event [] GetUserEvents(User user)
+        {
+            return new Event[] { };
+        }
+    }
     
         public class Database
         {
