@@ -9,5 +9,5 @@ A multiplatform mobile application for creating and sharing your timetable with 
 - lead a better and more mindful life
 
 ### To-do
-- [ ] Push code that actually compiles
+- [x] Push code that actually compiles
 - [ ] Everything.
