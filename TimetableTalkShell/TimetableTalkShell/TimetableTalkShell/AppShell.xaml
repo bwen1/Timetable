@@ -10,7 +10,7 @@
        x:Class="TimetableTalkShell.AppShell">
 
     <!-- 
-        Styles and Resources 
+        Styles and Resources TESTING COMMIT
     -->
     <Shell.Resources>
         <ResourceDictionary>
