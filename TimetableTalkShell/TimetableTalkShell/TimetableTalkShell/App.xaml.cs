@@ -3,19 +3,20 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using TimetableTalkShell.Services;
 using TimetableTalkShell.Views;
+using databaseConnector;
 
 namespace TimetableTalkShell
 {
     public partial class App : Application
     {
         public static string BaseImageUrl { get; } = "https://cdn.syncfusion.com/essential-ui-kit-for-xamarin.forms/common/uikitimages/";
-        public static databaseConnector.Database Database = new databaseConnector.Database();
+        public static Backend backend { get; } = new Backend();
         public App()
         {
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new BillPage();
+            MainPage = new AppShell();
         }
 
         protected override void OnStart()

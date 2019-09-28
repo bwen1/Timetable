@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 using Xamarin.Forms;
-
+using databaseConnector;
 using TimetableTalkShell.Models;
 using TimetableTalkShell.Services;
 
@@ -34,7 +34,7 @@ namespace TimetableTalkShell.ViewModels
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
                 return false;
-
+            
             backingStore = value;
             onChanged?.Invoke();
             OnPropertyChanged(propertyName);

@@ -21,6 +21,7 @@ namespace TimetableTalkShell.ViewModels
 
         public async void test_backend()
         {
+            
             await DisplayAlert("Alert", "testing Backend connection", "cool");
             sometext = "1";
             OnPropertyChanged(sometext);

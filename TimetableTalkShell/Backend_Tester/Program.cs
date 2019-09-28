@@ -21,7 +21,7 @@ namespace Backend_Tester
             {
                 Console.Write("do:>");
                 com = Console.ReadLine();
-                if(com == "check login")
+                if (com == "check login")
                 {
                     check_login(bk);
                 }
@@ -33,18 +33,27 @@ namespace Backend_Tester
                 {
                     account_login(bk);
                 }
-                else if(com == "quit")
+                else if (com == "logout")
+                {
+                    bk.LogOut();
+                    Console.WriteLine("Logged out!");
+                }
+                else if (com == "sign up")
+                {
+                    account_signup(bk);
+                }
+                else if (com == "quit")
                 {
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("invalid input, avalible: check login, check username, login, quit");
+                    Console.WriteLine("invalid input, avalible: check login, check username, login, sign up, quit");
                 }
             }
 
-           // Console.Write("Now register a new user, Username: ");
-            
+            // Console.Write("Now register a new user, Username: ");
+
 
             Console.WriteLine("End of Current tests, press any key to exit...");
             Console.ReadKey();
@@ -71,6 +80,17 @@ namespace Backend_Tester
             string loginptest = Console.ReadLine();
             Response loginresp = bk.LogIn(loginntest, loginptest);
             Console.WriteLine("The response from the login was\n\tCode: " + loginresp.status.ToString() + "\n\tMessage: " + loginresp.message);
+        }
+
+        static public void account_signup(Backend bk)
+        {
+            Console.Write("Now create an account, Username: ");
+            string usr = Console.ReadLine();
+            Console.Write("\tPassword: ");
+            string pas = Console.ReadLine();
+            Console.WriteLine("Createing account...");
+            Response resp = bk.SignUp(usr, pas);
+            Console.WriteLine("The response from the signup was\n\tCode: " + resp.status.ToString() + "\n\tMessage: " + resp.message);
         }
     }
 }
