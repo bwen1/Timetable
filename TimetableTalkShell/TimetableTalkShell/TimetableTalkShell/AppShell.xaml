@@ -5,6 +5,7 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        mc:Ignorable="d"
        xmlns:views="clr-namespace:TimetableTalkShell.Views"
+       xmlns:controls="clr-namespace:TimetableTalkShell.Controls"
        Title="TimetableTalkShell"
        x:Class="TimetableTalkShell.AppShell">
 
@@ -29,9 +30,12 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <FlyoutItem Title="Test"
-                FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Bill"
+
+    <Shell.FlyoutHeader>
+        <controls:FlyoutHeader />
+    </Shell.FlyoutHeader>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Items Page"
                   ContentTemplate="{DataTemplate views:ItemsPage}" />
     </FlyoutItem>
     
