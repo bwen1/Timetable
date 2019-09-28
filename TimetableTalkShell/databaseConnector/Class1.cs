@@ -30,6 +30,7 @@ namespace databaseConnector
     }
     public struct Event
     {
+        public int ID { get; private set; }
         public bool shared { get; private set; }
         public string eventName { get; private set; }
         public string location { get; private set; }
@@ -38,8 +39,9 @@ namespace databaseConnector
         public day Day { get; private set; }
         public string notes { get; private set; }
 
-        public Event(string eventName, bool shared, string startTime, string endTime, day d)
+        public Event(int userID, string eventName, bool shared, string startTime, string endTime, day d)
         {
+            this.ID = userID;
             this.eventName = eventName;
             this.shared = shared;
             this.startTime = startTime;
@@ -48,8 +50,9 @@ namespace databaseConnector
             location = null;
             notes = null;
         }
-        public Event(string eventName, bool shared, string startTime, string endTime, day d, string location, string notes)
+        public Event(int userID, string eventName, bool shared, string startTime, string endTime, day d, string location, string notes)
         {
+            this.ID = userID;
             this.eventName = eventName;
             this.shared = shared;
             this.startTime = startTime;
@@ -79,9 +82,15 @@ namespace databaseConnector
         private string database;
         private string uid;
         private string password;
+        private List<string> takenNames;
+        private List<User> friendarray;
+        private List<Event> events;
         public Backend()
         {
             Initialize();
+            takenNames = new List<string>();
+            friendarray = new List<User>();
+            events = new List<Event>();
             UID = 0;
         }
         #region Database setup, and connection Statments adapted from some online tutorial.
@@ -159,6 +168,9 @@ namespace databaseConnector
         public bool IsUsernameAvalible(string username)
         {
             bool Avalible;
+            if (takenNames.Contains(username))
+                return false;
+
             string query = "SELECT EXISTS(select * FROM `users` WHERE `Name` = '"+username+"') AS `Exists`";
             if (this.OpenConnection() == true)
             {
@@ -172,6 +184,7 @@ namespace databaseConnector
                 if(int.Parse(dataReader["Exists"]+"") == 1)
                 {
                     Avalible = false;
+                    takenNames.Add(username);
                 }
                 else
                 {
@@ -308,7 +321,22 @@ namespace databaseConnector
         /// <returns>OK if all good, Error if blocked, already a friend, or the user dosen't exist</returns>
         public Response RequestFriend(User user)
         {
-            return new Response(statuscode.OK, "Dummy response");
+            if (IsLoggedIn())
+            {
+                if (!IsUsernameAvalible(user.username))
+                {
+
+                    return new Response(statuscode.OK, "Dummy response");
+                }
+                else
+                {
+                    return new Response(statuscode.OK, "Dummy response");
+                }
+            }
+            else
+            {
+                return new Response(statuscode.OK, "Dummy response");
+            }
         }
 
         /// <summary>
