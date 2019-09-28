@@ -159,6 +159,9 @@
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
       <Version>17.2.0.51</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox">
+      <Version>17.2.0.51</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfPicker">
       <Version>17.2.0.51</Version>
     </PackageReference>
@@ -174,5 +177,8 @@
       <Project>{404D5590-CCC0-4D6A-BDAF-F47DD5D8FB67}</Project>
       <Name>TimetableTalkShell</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon.png" />
   </ItemGroup>
 </Project>

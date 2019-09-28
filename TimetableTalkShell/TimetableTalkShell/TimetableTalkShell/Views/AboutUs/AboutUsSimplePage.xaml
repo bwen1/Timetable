@@ -2,10 +2,11 @@
 <ContentPage
     x:Class="TimetableTalkShell.Views.AboutUs.AboutUsSimplePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.AboutUs"
     Title="About"
-    BackgroundColor="{DynamicResource Gray-Black}"
+    BackgroundColor="#2b2b2b"
     NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False">
     <ContentPage.Resources>
@@ -28,29 +29,19 @@
                         <viewModel:AboutUsViewModel />
                     </StackLayout.BindingContext>
 
-                    <!--  Product image  -->
-                    <Image HeightRequest="110" WidthRequest="124">
-                        <Image.Source>
-                            <UriImageSource
-                                CacheValidity="14"
-                                CachingEnabled="true"
-                                Uri="{Binding ProductIcon}" />
-                        </Image.Source>
-                    </Image>
+                    <!--  Icon -->
 
-                    <!--  Product version  -->
-                    <Label
-                        Margin="0,8.7,0,0"
-                        HorizontalOptions="CenterAndExpand"
-                        Style="{StaticResource VersionLabelStyle}"
-                        TextColor="{DynamicResource Gray-White}"
-                        Text="{Binding ProductVersion, StringFormat='Version {0}'}" />
 
-                    <!--  Product title  -->
+                    <Image Source="icon.png" />
+
+
+
+                    <!--  Title  -->
                     <Label
                         FontFamily="{StaticResource Montserrat-SemiBold}"
                         HorizontalOptions="CenterAndExpand"
                         Style="{StaticResource HeaderLabelStyle}"
+                        FontSize="25"
                         TextColor="{DynamicResource Gray-White}"
                         Text="Time Table Talk">
                         <Label.Margin>
@@ -61,14 +52,30 @@
                         </Label.Margin>
                     </Label>
 
-                    <!--  Product description  -->
+                    <!--  Version  -->
+                    <Label
+                        Margin="0,5,0,16"
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource VersionLabelStyle}"
+                        TextColor="{DynamicResource Gray-White}"
+                        Text="{Binding ProductVersion, StringFormat='Version {0}'}" />
+
+                    <!--  Description  -->
                     <Label
                         Margin="15,0,15,0"
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource DescriptionLabelStyle}"
                         TextColor="{DynamicResource Gray-White}"
-                        Text="Test" />
+                        FontSize="16"
+                        Text="Behind Time Table Talk are four students who strive to solve a common problem among uni students. Students have trouble managing their own time table and everyone else's time table's at the same time. We solve that problem by putting everyone's timetables into one accessible app and allow you to compare them with ease." />
+
+                    <!--  Back Button  -->
+                    <button:SfButton 
+                        Text="Back"
+                        FontSize="18"
+                        Margin="50,60,50,0"/>
+
                 </StackLayout>
             </ScrollView>
         </Grid>
