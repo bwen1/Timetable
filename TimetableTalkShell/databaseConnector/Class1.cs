@@ -316,7 +316,7 @@ namespace databaseConnector
 
         }
 
-
+        #region New Untested / unimplemented
         public Response ChangeUsername(string newUsername)
         {
             return new Response(statuscode.ERROR, "dummy message");
@@ -402,8 +402,10 @@ namespace databaseConnector
                 {
                     if (fri.ID == friendID)
                     {
+                        if (newStatus == friends.NO)
+                            return RemoveFriend(friendID);
 
-                        string query = "update `friends` SET `status`='" + (newStatus == friends.YES ? "friend" : "blocked") + "' WHERE " + (to ? "`ID2`" : "`ID1`") + " = " + friendID + " ";
+                        string query = "update `friends` SET `status`='" + (newStatus == friends.YES ? "friend":"blocked") + "' WHERE " + (to ? "`ID2`" : "`ID1`") + " = " + friendID + " ";
                         if (this.OpenConnection() == true)
                         {
                             //create command and assign the query and connection from the constructor
@@ -434,7 +436,21 @@ namespace databaseConnector
         /// <returns> if the acceptance was sucessful</returns>
         public Response AcceptFriend(int friendID)
         {
-            return new Response(statuscode.ERROR, "dummy message");
+            foreach(User user in friendarray)
+            {
+                if(user.ID == friendID)
+                {
+                    if(user.friend == friends.PENDING_TO)
+                    {
+                        return UpdateFriendRequestStatus(friends.YES, friendID, true);
+                    }
+                    else if (user.friend == friends.PENDING_FROM)
+                    {
+                        return new Response(statuscode.ERROR, "Can only accept recived non-blocked friends");
+                    }
+                }
+            }
+            return new Response(statuscode.NOT_THESE_DROIDS, "no friend with that ID, try refreshing the data with UpdateFriends()");
         }
 
         /// <summary>
@@ -442,10 +458,37 @@ namespace databaseConnector
         /// </summary>
         /// <param name="friendID">The user to block</param>
         /// <returns>The sadness in you heart</returns>
-        public Response DenyFriend(int friendID)
+        public Response RemoveFriend(int friendID)
         {
-            return new Response(statuscode.OK, "Dummy response");
+            foreach (User user in friendarray)
+            {
+                if (user.ID == friendID)
+                {
+                    if (!(user.friend == friends.NO))
+                    {
+                        string query = "DELETE FROM `friends` WHERE (`ID1` = "+friendID+" AND `ID2` = "+UID+ ") OR (`ID2` = " + friendID + " AND `ID1` = " + UID + ")";
+                        if (this.OpenConnection() == true)
+                        {
+                            //create command and assign the query and connection from the constructor
+                            MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                            //Execute command
+                            cmd.ExecuteNonQuery();
+
+                            //close connection
+                            this.CloseConnection();
+                            friendarray.Remove(user);
+
+                            return new Response(statuscode.OK, "Friend removed");
+                        }
+                        return new Response(statuscode.ERROR, "Could not open database");
+                    }
+                }
+            }
+            return new Response(statuscode.NOT_THESE_DROIDS, "no friend with that ID, try refreshing the data with UpdateFriends()");
         }
+
+        #endregion
 
         /// <summary>
         /// Adds an event to the current users scedual.
