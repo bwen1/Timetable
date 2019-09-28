@@ -22,7 +22,7 @@ xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Butto
     <ContentPage.BindingContext> 
         <vm:BillViewModel />
     </ContentPage.BindingContext>
-   
+  
     -->
 
 
