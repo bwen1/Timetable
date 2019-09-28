@@ -19,6 +19,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="17.2.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="17.2.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.2.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="17.2.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="17.2.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="17.2.0.51" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />  
@@ -38,6 +39,12 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Views\BillPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings Page\ProfilePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings Page\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ThomasPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
