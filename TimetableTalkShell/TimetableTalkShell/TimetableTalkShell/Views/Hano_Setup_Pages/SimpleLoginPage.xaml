@@ -116,7 +116,7 @@
                         Grid.Row="5"
                         Margin="0,16"
                         FontFamily="{StaticResource Montserrat-SemiBold}"
-                        FontSize="12"
+                        FontSize="16"
                         HorizontalOptions="End"
                         Text="FORGOT PASSWORD?"
                         TextColor="{DynamicResource Gray-White}">
@@ -130,9 +130,11 @@
                         Grid.Row="6"
                         Margin="0,16"
                         Command="{Binding LoginCommand}"
-                        Style="{StaticResource SfButtonStyle}"
-                        CornerRadius="20"
-                        Text="LOG IN" />
+                        Text="LOG IN" 
+                        FontSize="18"
+                        BorderColor="LightGray"
+                        BorderWidth="0.5"
+                        />
 
                 </Grid>
 

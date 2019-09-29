@@ -22,7 +22,7 @@ xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Button
             <ScrollView HorizontalOptions="Center" VerticalOptions="Center">
                 <StackLayout
                     HorizontalOptions="Center"
-                    Spacing="0"
+                    Spacing="10"
                     VerticalOptions="Center">
 
                     <StackLayout.BindingContext>
@@ -34,7 +34,9 @@ xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Button
 
                     <Image 
                         Source="icon.png" 
-
+                        WidthRequest="250"
+                        VerticalOptions="Top"
+                        Margin="0,0,0,0"
                        />
 
 
@@ -73,10 +75,13 @@ xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Button
 
                     <!--  Back Button  -->
                     <button:SfButton 
-                        VerticalOptions="End"
+                        VerticalOptions="EndAndExpand"
                         Text="Back"
                         FontSize="18"
-                        Margin="0,0,0,15"/>
+                        Margin="0,40,0,0"
+                        BackgroundColor="#2b2b2b"
+                BorderColor="LightGray"
+                BorderWidth="0.5"/>
 
                 </StackLayout>
             </ScrollView>

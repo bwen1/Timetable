@@ -53,6 +53,7 @@ xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Butto
             <buttons:SfButton 
                 Text="Back"
                 Margin="0, 275, 0, 15"
+                BackgroundColor="#2b2b2b"
                 BorderColor="LightGray"
                 BorderWidth="0.5"/>
             <buttons:SfButton 
