@@ -10,7 +10,7 @@
     xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
     xmlns:local="clr-namespace:TimetableTalkShell.Views.Hano_Setup_Pages"
     xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.Hano_Setup_Pages"
-    BackgroundColor="{DynamicResource Gray-Black}"
+    BackgroundColor="{DynamicResource Gray-Chosen}"
     NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False">
 
@@ -81,11 +81,23 @@
                         TextColor="{DynamicResource Gray-White}" />
 
                     <!--  Entry to get email ID from user  -->
-                    <local:SimpleEmailEntry Grid.Row="2" Padding="0,24" />
+                    <local:SimpleEmailEntry Grid.Row="2" Margin="0,8"
+                           BackgroundColor="{DynamicResource Gray-White}"
+                        BorderColor="{Binding Source={x:Reference PasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource SfBorderStyle}">
+                        <control:BorderlessEntry
+                            x:Name="EmailEntry"
+                            IsPassword="true"
+                            Placeholder="Email"
+                            PlaceholderColor="{DynamicResource Gray-700}"
+                            Style="{StaticResource EntryStyle}"
+                            Text="{Binding Password}"
+                            TextColor="{DynamicResource Gray-900}" />
+                    </local:SimpleEmailEntry>
 
                     <!--  Entry to get password from user  -->
                     <border:SfBorder
-                        Grid.Row="3"
+                        Grid.Row="4"
                         BackgroundColor="{DynamicResource Gray-White}"
                         BorderColor="{Binding Source={x:Reference PasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
                         Style="{StaticResource SfBorderStyle}">
@@ -102,7 +114,7 @@
                     <!--  Forgot password link  -->
                     <Label
                         x:Name="ForgotPasswordLabel"
-                        Grid.Row="4"
+                        Grid.Row="5"
                         Margin="0,16"
                         FontFamily="{StaticResource Montserrat-SemiBold}"
                         FontSize="12"
@@ -116,10 +128,11 @@
 
                     <!--  Login button  -->
                     <buttons:SfButton
-                        Grid.Row="5"
+                        Grid.Row="6"
                         Margin="0,16"
                         Command="{Binding LoginCommand}"
                         Style="{StaticResource SfButtonStyle}"
+                        CornerRadius="20"
                         Text="LOG IN" />
 
                 </Grid>
@@ -137,14 +150,22 @@
                             Phone="0" />
                     </StackLayout.Padding>
 
-                    <Label
+                   
+                        
+
+                    <AbsoluteLayout>
+                        <Label
                         FontFamily="{StaticResource Montserrat-Medium}"
                         HorizontalOptions="CenterAndExpand"
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource LabelStyle}"
                         Text="Don't have an account?"
                         TextColor="{DynamicResource Gray-White}"
-                        VerticalTextAlignment="Center" />
+                        VerticalTextAlignment="Center" 
+                        AbsoluteLayout.LayoutBounds="70, -90"/>
+
+                    </AbsoluteLayout>
+
 
                     <!--  Sign-up button  -->
                     <buttons:SfButton

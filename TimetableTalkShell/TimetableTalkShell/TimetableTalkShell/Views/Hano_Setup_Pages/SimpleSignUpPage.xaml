@@ -11,7 +11,7 @@
     xmlns:local="clr-namespace:TimetableTalkShell.Views.Hano_Setup_Pages"
     xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.Hano_Setup_Pages"
     Title="Sign Up"
-    BackgroundColor="{DynamicResource Gray-Black}"
+    BackgroundColor="{DynamicResource Gray-Chosen}"
     NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False">
 
@@ -87,7 +87,19 @@
                     </border:SfBorder>
 
                     <!--  Entry to get email ID from user  -->
-                    <local:SimpleEmailEntry />
+                    <local:SimpleEmailEntry
+                        BackgroundColor="{DynamicResource Gray-White}"
+                        BorderColor="{Binding Source={x:Reference PasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource SfBorderStyle}">
+                        <control:BorderlessEntry
+                            x:Name="EmailEntry"
+                            IsPassword="true"
+                            Placeholder="Email"
+                            PlaceholderColor="{DynamicResource Gray-700}"
+                            Style="{StaticResource EntryStyle}"
+                            Text="{Binding Password}"
+                            TextColor="{DynamicResource Gray-900}" />
+                    </local:SimpleEmailEntry>
 
                     <!--  Entry to get password from user  -->
                     <border:SfBorder
@@ -141,20 +153,29 @@
                             Phone="0" />
                     </StackLayout.Padding>
 
-                    <Label
+
+
+                    <AbsoluteLayout>
+                        <Label
                         FontFamily="{StaticResource Montserrat-Medium}"
-                        HorizontalOptions="CenterAndExpand"
-                        HorizontalTextAlignment="Center"
                         Style="{StaticResource LabelStyle}"
                         Text="Already have an account?"
                         TextColor="{DynamicResource Gray-White}"
-                        VerticalTextAlignment="Center" />
+                        AbsoluteLayout.LayoutBounds="60, -40"/>
+
+                    </AbsoluteLayout>
+
 
                     <buttons:SfButton
                         Command="{Binding LoginCommand}"
-                        CornerRadius="4"
                         Style="{StaticResource SfFlatButtonStyle}"
-                        Text="Log In" />
+                        Text="Log In"
+                        TextColor="{DynamicResource Gray-White}"
+                        CornerRadius="5"
+                        VerticalTextAlignment="Center"/>
+
+
+
 
                 </StackLayout>
             </StackLayout>
