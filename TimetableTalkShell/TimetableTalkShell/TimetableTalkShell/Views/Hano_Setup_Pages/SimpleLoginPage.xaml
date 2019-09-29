@@ -83,8 +83,7 @@
                     <!--  Entry to get email ID from user  -->
                     <local:SimpleEmailEntry Grid.Row="2" Margin="0,8"
                            BackgroundColor="{DynamicResource Gray-White}"
-                        BorderColor="{Binding Source={x:Reference PasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
-                        Style="{StaticResource SfBorderStyle}">
+                                                Style="{StaticResource SfBorderStyle}">
                         <control:BorderlessEntry
                             x:Name="EmailEntry"
                             IsPassword="true"
@@ -143,13 +142,7 @@
                     Spacing="1"
                     VerticalOptions="End">
 
-                    <StackLayout.Padding>
-                        <OnIdiom
-                            x:DataType="Thickness"
-                            Default="0, 48, 0, 0"
-                            Phone="0" />
-                    </StackLayout.Padding>
-
+                  
                    
                         
 
