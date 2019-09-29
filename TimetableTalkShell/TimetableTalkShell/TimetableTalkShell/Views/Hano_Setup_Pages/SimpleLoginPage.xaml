@@ -64,7 +64,7 @@
                     <!--  Label to display the title of this page  -->
                     <Label
                         FontFamily="{StaticResource Montserrat-SemiBold}"
-                        FontSize="20"
+                        FontSize="25"
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource LabelStyle}"
                         Text="Log In"
@@ -78,6 +78,7 @@
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource LabelStyle}"
                         Text="Your Timetable is waiting for you :)"
+                        FontSize="18"
                         TextColor="{DynamicResource Gray-White}" />
 
                     <!--  Entry to get email ID from user  -->
@@ -90,7 +91,8 @@
                             Placeholder="Email"
                             PlaceholderColor="{DynamicResource Gray-700}"
                             Style="{StaticResource EntryStyle}"
-                            Text="{Binding Password}"
+                            Text="{Binding Email}"
+                            FontSize="16"
                             TextColor="{DynamicResource Gray-900}" />
                     </local:SimpleEmailEntry>
 
@@ -107,6 +109,7 @@
                             PlaceholderColor="{DynamicResource Gray-700}"
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Password}"
+                            FontSize="16"
                             TextColor="{DynamicResource Gray-900}" />
                     </border:SfBorder>
 
@@ -134,6 +137,7 @@
                         FontSize="18"
                         BorderColor="LightGray"
                         BorderWidth="0.5"
+                        CornerRadius="20"
                         />
 
                 </Grid>
@@ -155,6 +159,7 @@
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource LabelStyle}"
                         Text="Don't have an account?"
+                        FontSize="16"
                         TextColor="{DynamicResource Gray-White}"
                         VerticalTextAlignment="Center" 
                         AbsoluteLayout.LayoutBounds="70, -90"/>
@@ -165,8 +170,11 @@
                     <!--  Sign-up button  -->
                     <buttons:SfButton
                         Command="{Binding SignUpCommand}"
-                        CornerRadius="4"
+                        CornerRadius="20"
+                        FontSize="16"
                         Style="{StaticResource SfFlatButtonStyle}"
+                        BorderColor="LightGray"
+                        BorderWidth="0.5"
                         Text="Sign Up" />
 
                 </StackLayout>
