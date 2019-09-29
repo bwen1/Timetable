@@ -93,12 +93,13 @@
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Email}"
                             FontSize="16"
-                            TextColor="{DynamicResource Gray-900}" />
+                            TextColor="LightGray" />
                     </local:SimpleEmailEntry>
 
                     <!--  Entry to get password from user  -->
                     <border:SfBorder
                         Grid.Row="4"
+                        Margin="0,8"
                         BackgroundColor="{DynamicResource Gray-White}"
                         BorderColor="{Binding Source={x:Reference PasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
                         Style="{StaticResource SfBorderStyle}">
@@ -110,7 +111,7 @@
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Password}"
                             FontSize="16"
-                            TextColor="{DynamicResource Gray-900}" />
+                            TextColor="LightGray" />
                     </border:SfBorder>
 
                     <!--  Forgot password link  -->

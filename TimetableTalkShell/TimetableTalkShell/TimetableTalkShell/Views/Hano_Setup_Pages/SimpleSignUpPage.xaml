@@ -84,7 +84,7 @@
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Name}"
                             FontSize="16"
-                            TextColor="{DynamicResource Gray-900}" />
+                            TextColor="LightGray" />
                     </border:SfBorder>
 
                     <!--  Entry to get email ID from user  -->
@@ -99,7 +99,7 @@
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Email}"
                             FontSize="16"
-                            TextColor="{DynamicResource Gray-900}" />
+                            TextColor="LightGray" />
                     </local:SimpleEmailEntry>
 
                     <!--  Entry to get password from user  -->
@@ -115,7 +115,7 @@
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Password}"
                             FontSize="16"
-                            TextColor="{DynamicResource Gray-900}" />
+                            TextColor="LightGray" />
                     </border:SfBorder>
 
                     <!--  Entry to get the confirm password from user  -->
@@ -131,7 +131,7 @@
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding ConfirmPassword}"
                             FontSize="16"
-                            TextColor="{DynamicResource Gray-900}" />
+                            TextColor="LightGray" />
                     </border:SfBorder>
 
                     <!--  Sign-up button  -->
