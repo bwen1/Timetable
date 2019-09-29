@@ -278,6 +278,8 @@ namespace databaseConnector
         public Response LogOut()
         {
             UID = 0;
+            friendarray = new List<User>();
+            events = new List<Event>();
             return new Response(statuscode.OK, "Nothing to see here!");
         }
 
@@ -338,7 +340,7 @@ namespace databaseConnector
             {
                 if (!IsUsernameAvalible(user.username))
                 {
-                    string query = "insert into `friends` values ( " + UID + ", " + user.ID + ", 'pending')";
+                    string query = "insert into `friends` values ( " + UID + ", " + user.ID + ", 'PENDING_TO')";
                     if (this.OpenConnection() == true)
                     {
                         //create command and assign the query and connection from the constructor
@@ -405,7 +407,7 @@ namespace databaseConnector
                         if (newStatus == friends.NO)
                             return RemoveFriend(friendID);
 
-                        string query = "update `friends` SET `status`='" + (newStatus == friends.YES ? "friend":"blocked") + "' WHERE " + (to ? "`ID2`" : "`ID1`") + " = " + friendID + " ";
+                        string query = "update `friends` SET `status`='" + newStatus.ToString() + "' WHERE " + (to ? "`ID2`" : "`ID1`") + " = " + friendID + " ";
                         if (this.OpenConnection() == true)
                         {
                             //create command and assign the query and connection from the constructor
@@ -464,8 +466,7 @@ namespace databaseConnector
             {
                 if (user.ID == friendID)
                 {
-                    if (!(user.friend == friends.NO))
-                    {
+                    
                         string query = "DELETE FROM `friends` WHERE (`ID1` = "+friendID+" AND `ID2` = "+UID+ ") OR (`ID2` = " + friendID + " AND `ID1` = " + UID + ")";
                         if (this.OpenConnection() == true)
                         {
@@ -482,7 +483,7 @@ namespace databaseConnector
                             return new Response(statuscode.OK, "Friend removed");
                         }
                         return new Response(statuscode.ERROR, "Could not open database");
-                    }
+                    
                 }
             }
             return new Response(statuscode.NOT_THESE_DROIDS, "no friend with that ID, try refreshing the data with UpdateFriends()");
@@ -530,6 +531,11 @@ namespace databaseConnector
             return new Event[] { };
         }
 
+        public Event[] UpdateEvents()
+        {
+            return new Event[] { };
+        }
+
         /// <summary>
         /// Gets an array of the current users events.
         /// </summary>
@@ -545,7 +551,100 @@ namespace databaseConnector
         /// <returns>the users friends and their status</returns>
         public User[] GetFriends()
         {
-            return new User[] { };
+            if (!IsLoggedIn())
+                return friendarray.ToArray();
+
+            if(friendarray.Count != 0)
+            {
+                return friendarray.ToArray();
+            }
+            else
+            {
+                return UpdateFriends();
+            }
+            
+        }
+
+        /// <summary>
+        /// BROKEN, recivers of friend requests see whrong status
+        /// </summary>
+        /// <returns></returns>
+        public User[] UpdateFriends()
+        {
+            string query = " SELECT `Name`, `ID`, `status` AS `!status` FROM (SELECT `Name`, `ID` FROM `users` WHERE `ID` IN (SELECT `ID1` FROM `friends` WHERE `ID2` = "+UID+")) AS T INNER JOIN `friends` ON `ID` = `ID1` group by `Name`";
+            //Create a list to store the result
+            List<User> list = new List<User>();
+            friendarray.Clear();
+            int ID;
+            string name;
+            friends status;
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    foreach (var item in dataReader)
+                    {
+                        Console.WriteLine(item.ToString());
+                    }
+                    ID = int.Parse(dataReader["ID"] + "");
+                    name = dataReader["Name"] + "";
+                    if ((dataReader["!status"] + "") == "PENDING_TO")
+                    {
+                        status = friends.PENDING_FROM;
+                    }
+                    if ((dataReader["!status"] + "") == "BLOCKED_TO")
+                    {
+                        status = friends.BLOCKED_FROM;
+                    }
+                    else
+                    {
+                        Enum.TryParse(dataReader["!status"] + "", out status);
+                        Console.WriteLine(dataReader["!status"]+"");
+                    }
+                    list.Add(new User(ID, name, status));
+                    friendarray.Add(new User(ID, name, status));
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                query = "SELECT `Name`, `ID`, `status`  FROM (SELECT `Name`, `ID` FROM `users` WHERE `ID` IN (SELECT `ID2` FROM `friends` WHERE `ID1` = "+UID+")) AS T INNER JOIN `friends` ON `ID` = `ID2` group by `Name` ";
+                //Create Command
+                cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    ID = int.Parse(dataReader["ID"] + "");
+                    name = dataReader["Name"] + "";
+                    Enum.TryParse(dataReader["status"] + "", out status);
+                    list.Add(new User(ID, name, status));
+                    friendarray.Add(new User(ID, name, status));
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+
+                //return list to be displayed
+                return list.ToArray();
+            }
+            else
+            {
+                return list.ToArray();
+            }
         }
 
         /// <summary>
@@ -571,12 +670,13 @@ namespace databaseConnector
                 //Read the data determine the result
                 if (dataReader.Read())
                 {
+                    int id = int.Parse(dataReader["ID"] + "");
                     //close Data Reader
                     dataReader.Close();
 
                     //close connection
                     this.CloseConnection();
-                    int id = int.Parse(dataReader["ID"] + "");
+                    
                     return new User(id, username, friends.NO);
                 }
                 else

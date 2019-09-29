@@ -42,13 +42,29 @@ namespace Backend_Tester
                 {
                     account_signup(bk);
                 }
+                else if (com == "request friend")
+                {
+                    request_friend(bk);
+                }
+                else if (com == "accept friend")
+                {
+                    accept_friend(bk);
+                }
+                else if (com == "remove friend")
+                {
+                    remove_friend(bk);
+                }
+                else if (com == "get friends")
+                {
+                    get_friends(bk);
+                }
                 else if (com == "quit")
                 {
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("invalid input, avalible: check login, check username, login, sign up, quit");
+                    Console.WriteLine("invalid input, avalible: check login, check username, login, sign up\nget friends, request friend, accept friend, remove friend, quit");
                 }
             }
 
@@ -91,6 +107,45 @@ namespace Backend_Tester
             Console.WriteLine("Createing account...");
             Response resp = bk.SignUp(usr, pas);
             Console.WriteLine("The response from the signup was\n\tCode: " + resp.status.ToString() + "\n\tMessage: " + resp.message);
+        }
+
+        static public void get_friends(Backend bk)
+        {
+            Console.WriteLine("Getting Users...");
+            User[] friends = bk.GetFriends();
+            foreach(User user in friends)
+            {
+                Console.WriteLine("\nUser: " + user.username);
+                Console.WriteLine("\tID: " + user.ID);
+                Console.WriteLine("\tStatus: " + user.friend);
+            }
+        }
+
+        static public void request_friend(Backend bk)
+        {
+            Console.Write("Now request a friend, Username: ");
+            string usr = Console.ReadLine();
+            Console.WriteLine("requesting friend...");
+            Response res = bk.RequestFriend(usr);
+            Console.WriteLine("The response from the friend request was\n\tCode: " + res.status.ToString() + "\n\tMessage: " + res.message);
+        }
+
+        public static void accept_friend(Backend bk)
+        {
+            Console.Write("Now accept a friend, FriendID: ");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("Accepting friend...");
+            Response res = bk.AcceptFriend(id);
+            Console.WriteLine("The response from the friend acceptance was\n\tCode: " + res.status.ToString() + "\n\tMessage: " + res.message);
+        }
+
+        public static void remove_friend(Backend bk)
+        {
+            Console.Write("Now remove a friend, FriendID: ");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("removing friend...");
+            Response res = bk.RemoveFriend(id);
+            Console.WriteLine("The response from the friend removal was\n\tCode: " + res.status.ToString() + "\n\tMessage: " + res.message);
         }
     }
 }
