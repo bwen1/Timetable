@@ -31,6 +31,7 @@ namespace databaseConnector
     public struct Event
     {
         public int ID { get; private set; }
+        public int eID { get; private set; }
         public bool shared { get; private set; }
         public string eventName { get; private set; }
         public string location { get; private set; }
@@ -39,9 +40,10 @@ namespace databaseConnector
         public day Day { get; private set; }
         public string notes { get; private set; }
 
-        public Event(int userID, string eventName, bool shared, string startTime, string endTime, day d)
+        public Event(int eventID, int userID, string eventName, bool shared, string startTime, string endTime, day d)
         {
             this.ID = userID;
+            this.eID = eventID;
             this.eventName = eventName;
             this.shared = shared;
             this.startTime = startTime;
@@ -50,9 +52,10 @@ namespace databaseConnector
             location = null;
             notes = null;
         }
-        public Event(int userID, string eventName, bool shared, string startTime, string endTime, day d, string location, string notes)
+        public Event(int eventID, int userID, string eventName, bool shared, string startTime, string endTime, day d, string location, string notes)
         {
             this.ID = userID;
+            this.eID = eventID;
             this.eventName = eventName;
             this.shared = shared;
             this.startTime = startTime;
@@ -85,6 +88,7 @@ namespace databaseConnector
         private List<string> takenNames;
         private List<User> friendarray;
         private List<Event> events;
+        private List<Event> myevents;
         public Backend()
         {
             Initialize();
@@ -92,6 +96,7 @@ namespace databaseConnector
             takenNames.Add("");
             friendarray = new List<User>();
             events = new List<Event>();
+            myevents = new List<Event>();
             UID = 0;
         }
 
@@ -280,6 +285,7 @@ namespace databaseConnector
             UID = 0;
             friendarray = new List<User>();
             events = new List<Event>();
+            myevents = new List<Event>();
             return new Response(statuscode.OK, "Nothing to see here!");
         }
 
@@ -318,7 +324,6 @@ namespace databaseConnector
 
         }
 
-        #region New Untested / unimplemented
         public Response ChangeUsername(string newUsername)
         {
             return new Response(statuscode.ERROR, "dummy message");
@@ -351,7 +356,7 @@ namespace databaseConnector
 
                         //close connection
                         this.CloseConnection();
-
+                        friendarray.Add(user);
                         return new Response(statuscode.OK, "Friend request sent sucessfully");
                     }
                     return new Response(statuscode.ERROR, "Could not open database");
@@ -489,7 +494,6 @@ namespace databaseConnector
             return new Response(statuscode.NOT_THESE_DROIDS, "no friend with that ID, try refreshing the data with UpdateFriends()");
         }
 
-        #endregion
 
         /// <summary>
         /// Adds an event to the current users scedual.
@@ -498,28 +502,92 @@ namespace databaseConnector
         /// <returns>If the event was sucessfully added</returns>
         public Response AddEvent(Event thing)
         {
-            return new Response(statuscode.OK, "Dummy response");
+            if (IsLoggedIn())
+            {
+                string query = "insert into `events` (`ID`, `shared`,`EventName`, `notes`, `Location`, `TimeStart`, `TimeEnd`, `Day`) values ( " + UID + ", "+thing.shared+", '" + thing.eventName + "', '" + thing.notes + "', '" + thing.location + "', " + thing.startTime + ", " + thing.endTime + ", '"+thing.Day.ToString()+"' )";
+                if (this.OpenConnection() == true)
+                {
+                    //create command and assign the query and connection from the constructor
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                    //Execute command
+                    cmd.ExecuteNonQuery();
+
+                    query = "select `EventID` from `events` where `ID` = " + UID + " AND eventName = '" + thing.eventName + "' AND TimeStart = " + thing.startTime + " LIMIT 1";
+                    cmd = new MySqlCommand(query, connection);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                    dataReader.Read();
+                    int id = int.Parse(dataReader["EventID"] + "");
+
+                    events.Add(new Event(id, UID, thing.eventName, thing.shared, thing.startTime, thing.endTime, thing.Day));
+                    //close connection
+                    this.CloseConnection();
+                    
+                    return new Response(statuscode.OK, "event added sucessfully");
+                }
+                return new Response(statuscode.ERROR, "Could not open database");
+            }
+            return new Response(statuscode.ERROR, "User not logged in");
         }
 
         /// <summary>
-        /// Replaces an old event with a new one.
+        /// Replaces an old event with a new one. (untested)
         /// </summary>
         /// <param name="oldEvent">the event pre-edit</param>
         /// <param name="newEvent">the event post-edit</param>
         /// <returns>If the event was sucessfully edited</returns>
         public Response EditEvent(Event oldEvent, Event newEvent)
         {
-            return new Response(statuscode.OK, "Dummy response");
+            if (IsLoggedIn())
+            {
+                string query = "UPDATE `events` SET  `ID` =" + UID + ", `shared`= " + newEvent.shared + ", `EventName`= '" + newEvent.eventName + "', `notes`= '" + newEvent.notes + "', `Location`= '" + newEvent.location + "', `TimeStart`= " + newEvent.startTime + ", `TimeEnd`= " + newEvent.endTime + ", `Day`= '" + newEvent.Day.ToString() + "' WHERE `EventID` = "+oldEvent.eID+"";
+                if (this.OpenConnection() == true)
+                {
+                    //create command and assign the query and connection from the constructor
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                    //Execute command
+                    cmd.ExecuteNonQuery();
+                    events.Remove(oldEvent);
+
+                    events.Add(new Event(oldEvent.eID, UID, newEvent.eventName, newEvent.shared, newEvent.startTime, newEvent.endTime, newEvent.Day));
+                    //close connection
+                    this.CloseConnection();
+
+                    return new Response(statuscode.OK, "event edited sucessfully");
+                }
+                return new Response(statuscode.ERROR, "Could not open database");
+            }
+            return new Response(statuscode.ERROR, "User not logged in");
         }
 
         /// <summary>
-        /// Removes the selected event from the current users schedual.
+        /// Removes the selected event from the current users schedual. (untested)
         /// </summary>
         /// <param name="thing">the event to remove, it not called 'event' because that's a keyword</param>
         /// <returns>If the event was 'taken out of the picture', if you know what I mean...</returns>
         public Response RemoveEvent(Event thing)
         {
-            return new Response(statuscode.OK, "Dummy response");
+            if (!events.Contains(thing))
+                return new Response(statuscode.ERROR, "That event could not be found, try running updateEvents()");
+
+            string query = "DELETE FROM `events` WHERE `EventID` = "+thing.eID+" ";
+            if (this.OpenConnection() == true)
+            {
+                //create command and assign the query and connection from the constructor
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                //Execute command
+                cmd.ExecuteNonQuery();
+
+                //close connection
+                this.CloseConnection();
+                events.Remove(thing);
+
+                return new Response(statuscode.OK, "Event removed");
+            }
+            return new Response(statuscode.ERROR, "Could not open database");
         }
 
         /// <summary>
@@ -528,21 +596,176 @@ namespace databaseConnector
         /// <returns>An array of events</returns>
         public Event[] GetEvents()
         {
-            return new Event[] { };
-        }
-
-        public Event[] UpdateEvents()
-        {
+            if (IsLoggedIn())
+            {
+                if (events.Count != 0)
+                {
+                    List<Event> e = new List<Event>();
+                    e.AddRange(events);
+                    e.AddRange(myevents);
+                    return e.ToArray();
+                    
+                }
+                return UpdateEvents();
+            }
             return new Event[] { };
         }
 
         /// <summary>
-        /// Gets an array of the current users events.
+        /// Updates the local copy of personal and shared events.
+        /// </summary>
+        /// <returns>all relevant events</returns>
+        public Event[] UpdateEvents()
+        {
+            events.Clear();
+            myevents.Clear();
+            string inquery;
+            if (friendarray.Count != 0)
+            {
+                inquery = "(" + friendarray[0].ID;
+                for (int i = 1; i < friendarray.Count; i++)
+                    inquery = inquery + ", " + friendarray[i].ID;
+                inquery = inquery + ")";
+            }
+            else
+            {
+                return new Event[] { };
+            }
+            string query = "SELECT * FROM `event` WHERE `ID` IN " + inquery + " AND `shared` = true";
+
+            //Create a list to store the result
+            List<Event> list = new List<Event>();
+
+            //get the users events
+            Event[] ev = GetMyEvents();
+            myevents.AddRange(ev);
+            list.AddRange(ev);
+            //events.AddRange(ev);
+
+            //then get their friends
+            int eID, ID;
+            bool s;
+            string name, notes, loc, st, et;
+            day d;
+
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    eID = int.Parse(dataReader["EventID"] + "");
+                    ID = int.Parse(dataReader["ID"] + "");
+                    s = bool.Parse(dataReader["shared"] + "");
+                    name = dataReader["EventName"] + "";
+                    notes = dataReader["notes"] + "";
+                    loc = dataReader["Location"] + "";
+                    st = convert_time(int.Parse(dataReader["TimeStart"] + ""));
+                    et = convert_time(int.Parse(dataReader["TimeEnd"] + ""));
+                    Enum.TryParse(dataReader["Day"] + "", out d);
+
+                    list.Add(new Event(eID, ID, name, s, st, et, d, loc, notes));
+                    events.Add(new Event(eID, ID, name, s, st, et, d, loc, notes));
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+
+                //return list to be displayed
+                return list.ToArray();
+            }
+            else
+            {
+                return list.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        private string convert_time(int time)
+        {
+            string t = time.ToString();
+
+            if(t.Length == 3)
+            {
+                return "0" + t[0] + ":" + t[1] + t[2];
+            }
+            else
+            {
+                return t[0] + t[1] + ":" + t[2] + t[3];
+            }
+        }
+
+        /// <summary>
+        /// Gets an array of the current users events. allways from database
         /// </summary>
         /// <returns>an array of the current users events</returns>
         public Event[] GetMyEvents()
         {
-            return new Event[] { };
+            if(myevents.Count != 0)
+            {
+                return myevents.ToArray();
+            }
+            string query = "SELECT * FROM `event` WHERE `ID` = " + UID + "";
+
+            //Create a list to store the result
+            List<Event> list = new List<Event>();
+            int eID, ID;
+            bool s;
+            string name, notes, loc,st, et;
+            day d;
+
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    eID = int.Parse(dataReader["EventID"] + "");
+                    ID = int.Parse(dataReader["ID"] + "");
+                    s = bool.Parse(dataReader["shared"] + "");
+                    name = dataReader["EventName"] + "";
+                    notes = dataReader["notes"] + "";
+                    loc = dataReader["Location"] + "";
+                    st = convert_time(int.Parse(dataReader["TimeStart"] + ""));
+                    et = convert_time(int.Parse(dataReader["TimeEnd"] + ""));
+                    Enum.TryParse(dataReader["Day"]+"", out d);
+
+                    list.Add(new Event(eID, ID, name, s, st, et, d, loc, notes));
+                    myevents.Add(new Event(eID, ID, name, s, st, et, d, loc, notes));
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+
+                //return list to be displayed
+                return list.ToArray();
+            }
+            else
+            {
+                return list.ToArray();
+            }
         }
 
         /// <summary>
@@ -566,9 +789,9 @@ namespace databaseConnector
         }
 
         /// <summary>
-        /// BROKEN, recivers of friend requests see whrong status
+        /// BROKEN, recivers of friend requests see whrong status, eveything else works
         /// </summary>
-        /// <returns></returns>
+        /// <returns>an array of the users friends</returns>
         public User[] UpdateFriends()
         {
             string query = " SELECT `Name`, `ID`, `status` AS `!status` FROM (SELECT `Name`, `ID` FROM `users` WHERE `ID` IN (SELECT `ID1` FROM `friends` WHERE `ID2` = "+UID+")) AS T INNER JOIN `friends` ON `ID` = `ID1` group by `Name`";
@@ -648,15 +871,20 @@ namespace databaseConnector
         }
 
         /// <summary>
-        /// Gets the public events of the specified user, (they have to be a friend for this to work)
+        /// (unused)Gets the public events of the specified user, (they have to be a friend for this to work) (UN implemented)
         /// </summary>
         /// <param name="user">the user to get events for</param>
         /// <returns>that users events</returns>
-        public Event[] GetUserEvents(User user)
+        private Event[] GetUserEvents(User user)
         {
             return new Event[] { };
         }
 
+        /// <summary>
+        /// Get the user object associated with a given username.
+        /// </summary>
+        /// <param name="username">the name to get</param>
+        /// <returns>the first user returned</returns>
         private User GetUser(string username)
         {
             string query = "select * FROM `users` WHERE `Name` = '" + username + "' LIMIT 1";
@@ -677,7 +905,7 @@ namespace databaseConnector
                     //close connection
                     this.CloseConnection();
                     
-                    return new User(id, username, friends.NO);
+                    return new User(id, username, friends.PENDING_TO);
                 }
                 else
                 {

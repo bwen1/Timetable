@@ -58,13 +58,25 @@ namespace Backend_Tester
                 {
                     get_friends(bk);
                 }
+                else if (com == "get events")
+                {
+                    get_events(bk);
+                }
+                else if (com == "update events")
+                {
+                    update_events(bk);
+                }
+                else if (com == "get my events")
+                {
+                    get_my_events(bk);
+                }
                 else if (com == "quit")
                 {
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("invalid input, avalible: check login, check username, login, sign up\nget friends, request friend, accept friend, remove friend, quit");
+                    Console.WriteLine("invalid input, avalible: check login, check username, login, sign up\nget friends, request friend, accept friend, remove friend,\nget events, update events, get my events, quit");
                 }
             }
 
@@ -146,6 +158,37 @@ namespace Backend_Tester
             Console.WriteLine("removing friend...");
             Response res = bk.RemoveFriend(id);
             Console.WriteLine("The response from the friend removal was\n\tCode: " + res.status.ToString() + "\n\tMessage: " + res.message);
+        }
+
+        public static void get_events(Backend bk)
+        {
+            Console.WriteLine("Getting all events...");
+            Event[] events = bk.GetEvents();
+            foreach(Event e in events)
+            {
+                Console.WriteLine("\nEvent, Name: " + e.eventName + "\n\tOwner: " + e.ID + "\n\tShared: " + (e.shared ? "yes" : "no") +"\n\tDay: "+e.Day.ToString()+"\n\tLocation: "+e.location+ "\n\tNotes: " + e.notes);
+            }
+        }
+        public static void get_my_events(Backend bk)
+        {
+            Console.WriteLine("Getting user events...");
+            Event[] events = bk.GetMyEvents();
+            foreach (Event e in events)
+            {
+                Console.WriteLine("\nEvent, Name: " + e.eventName + "\n\tOwner: " + e.ID + "\n\tShared: " + (e.shared ? "yes" : "no") + "\n\tDay: " + e.Day.ToString() + "\n\tLocation: " + e.location + "\n\tNotes: " + e.notes);
+            }
+        }
+        public static void update_events (Backend bk)
+        {
+            Console.WriteLine("Updating local copy of events...");
+            if(bk.UpdateEvents().Length != 0)
+            {
+                Console.WriteLine("done!");
+            }
+            else
+            {
+                Console.WriteLine("error");
+            }
         }
     }
 }
