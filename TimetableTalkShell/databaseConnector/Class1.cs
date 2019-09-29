@@ -80,6 +80,7 @@ namespace databaseConnector
     public class Backend
     {
         private int UID;
+        public string UserName { get; private set; }
         private MySqlConnection connection;
         private string server;
         private string database;
@@ -255,6 +256,7 @@ namespace databaseConnector
                     dataReader = cmd.ExecuteReader();
                     dataReader.Read();
                     UID = int.Parse(dataReader["ID"] + "");
+                    UserName = username;
                 }
                 else
                 {
@@ -283,6 +285,7 @@ namespace databaseConnector
         public Response LogOut()
         {
             UID = 0;
+            UserName = "";
             friendarray = new List<User>();
             events = new List<Event>();
             myevents = new List<Event>();
@@ -324,14 +327,71 @@ namespace databaseConnector
 
         }
 
+        /// <summary>
+        /// Changes the current users username, to an avalible username.
+        /// </summary>
+        /// <param name="newUsername">the new username to give</param>
+        /// <returns>a response</returns>
         public Response ChangeUsername(string newUsername)
         {
-            return new Response(statuscode.ERROR, "dummy message");
+            if (IsLoggedIn())
+            {
+                if (IsUsernameAvalible(newUsername))
+                {
+                    string query = "UPDATE `users` SET `Name` = '" + newUsername + "' WHERE `ID` = " + UID + "";
+                    if (this.OpenConnection() == true)
+                    {
+                        //create command and assign the query and connection from the constructor
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                        //Execute command
+                        cmd.ExecuteNonQuery();
+
+                        //close connection
+                        this.CloseConnection();
+                        this.UserName = newUsername;
+
+                        return new Response(statuscode.OK, "Username Updated");
+                    }
+                    return new Response(statuscode.ERROR, "Could not open database");
+                }
+                return new Response(statuscode.ERROR, "That username is not avalible");
+            }
+            return new Response(statuscode.ERROR, "user not logged in");
         }
 
-        public Response ChangePassword(string newPassword)
+        /// <summary>
+        /// Changes the current users password to a new one, requires the user to verify their password to do so.
+        /// </summary>
+        /// <param name="newPassword">the new password</param>
+        /// <param name="oldPassword">the old password</param>
+        /// <returns>a response displaying the result</returns>
+        public Response ChangePassword(string newPassword, string oldPassword)
         {
-            return new Response(statuscode.ERROR, "dummy message");
+            if (IsLoggedIn())
+            {
+                if (LogIn(UserName, oldPassword).status == statuscode.OK)
+                {
+                    string newHash = GetHashString(newPassword);
+                    string query = "UPDATE `users` SET `PasswordHash` = '" + newHash + "' WHERE `ID` = " + UID + "";
+                    if (this.OpenConnection() == true)
+                    {
+                        //create command and assign the query and connection from the constructor
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                        //Execute command
+                        cmd.ExecuteNonQuery();
+
+                        //close connection
+                        this.CloseConnection();
+
+                        return new Response(statuscode.OK, "Password Updated");
+                    }
+                    return new Response(statuscode.ERROR, "Could not open database");
+                }
+                return new Response(statuscode.NOT_THESE_DROIDS, "Invalid current password");
+            }
+            return new Response(statuscode.ERROR, "user not logged in");
         }
 
         /// <summary>
@@ -400,6 +460,13 @@ namespace databaseConnector
             return new Response(statuscode.ERROR, "User not logged in");
         }
 
+        /// <summary>
+        /// The back backend function which updates friend requests, not sure if it works properly...
+        /// </summary>
+        /// <param name="newStatus">the stats to set the friend to</param>
+        /// <param name="friendID">the friend in question</param>
+        /// <param name="to">which direction was the request sent?</param>
+        /// <returns>a response</returns>
         private Response UpdateFriendRequestStatus(friends newStatus, int friendID, bool to)
         {
             if (IsLoggedIn())
@@ -436,6 +503,7 @@ namespace databaseConnector
             }
             return new Response(statuscode.ERROR, "User not logged in");
         }
+
         /// <summary>
         /// Accepts a pending friend request.
         /// </summary>
@@ -443,11 +511,11 @@ namespace databaseConnector
         /// <returns> if the acceptance was sucessful</returns>
         public Response AcceptFriend(int friendID)
         {
-            foreach(User user in friendarray)
+            foreach (User user in friendarray)
             {
-                if(user.ID == friendID)
+                if (user.ID == friendID)
                 {
-                    if(user.friend == friends.PENDING_TO)
+                    if (user.friend == friends.PENDING_TO)
                     {
                         return UpdateFriendRequestStatus(friends.YES, friendID, true);
                     }
@@ -471,29 +539,28 @@ namespace databaseConnector
             {
                 if (user.ID == friendID)
                 {
-                    
-                        string query = "DELETE FROM `friends` WHERE (`ID1` = "+friendID+" AND `ID2` = "+UID+ ") OR (`ID2` = " + friendID + " AND `ID1` = " + UID + ")";
-                        if (this.OpenConnection() == true)
-                        {
-                            //create command and assign the query and connection from the constructor
-                            MySqlCommand cmd = new MySqlCommand(query, connection);
 
-                            //Execute command
-                            cmd.ExecuteNonQuery();
+                    string query = "DELETE FROM `friends` WHERE (`ID1` = " + friendID + " AND `ID2` = " + UID + ") OR (`ID2` = " + friendID + " AND `ID1` = " + UID + ")";
+                    if (this.OpenConnection() == true)
+                    {
+                        //create command and assign the query and connection from the constructor
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
 
-                            //close connection
-                            this.CloseConnection();
-                            friendarray.Remove(user);
+                        //Execute command
+                        cmd.ExecuteNonQuery();
 
-                            return new Response(statuscode.OK, "Friend removed");
-                        }
-                        return new Response(statuscode.ERROR, "Could not open database");
-                    
+                        //close connection
+                        this.CloseConnection();
+                        friendarray.Remove(user);
+
+                        return new Response(statuscode.OK, "Friend removed");
+                    }
+                    return new Response(statuscode.ERROR, "Could not open database");
+
                 }
             }
             return new Response(statuscode.NOT_THESE_DROIDS, "no friend with that ID, try refreshing the data with UpdateFriends()");
         }
-
 
         /// <summary>
         /// Adds an event to the current users scedual.
@@ -504,7 +571,7 @@ namespace databaseConnector
         {
             if (IsLoggedIn())
             {
-                string query = "insert into `events` (`ID`, `shared`,`EventName`, `notes`, `Location`, `TimeStart`, `TimeEnd`, `Day`) values ( " + UID + ", "+thing.shared+", '" + thing.eventName + "', '" + thing.notes + "', '" + thing.location + "', " + thing.startTime + ", " + thing.endTime + ", '"+thing.Day.ToString()+"' )";
+                string query = "insert into `events` (`ID`, `shared`,`EventName`, `notes`, `Location`, `TimeStart`, `TimeEnd`, `Day`) values ( " + UID + ", " + thing.shared + ", '" + thing.eventName + "', '" + thing.notes + "', '" + thing.location + "', " + thing.startTime + ", " + thing.endTime + ", '" + thing.Day.ToString() + "' )";
                 if (this.OpenConnection() == true)
                 {
                     //create command and assign the query and connection from the constructor
@@ -523,7 +590,7 @@ namespace databaseConnector
                     events.Add(new Event(id, UID, thing.eventName, thing.shared, thing.startTime, thing.endTime, thing.Day));
                     //close connection
                     this.CloseConnection();
-                    
+
                     return new Response(statuscode.OK, "event added sucessfully");
                 }
                 return new Response(statuscode.ERROR, "Could not open database");
@@ -541,7 +608,7 @@ namespace databaseConnector
         {
             if (IsLoggedIn())
             {
-                string query = "UPDATE `events` SET  `ID` =" + UID + ", `shared`= " + newEvent.shared + ", `EventName`= '" + newEvent.eventName + "', `notes`= '" + newEvent.notes + "', `Location`= '" + newEvent.location + "', `TimeStart`= " + newEvent.startTime + ", `TimeEnd`= " + newEvent.endTime + ", `Day`= '" + newEvent.Day.ToString() + "' WHERE `EventID` = "+oldEvent.eID+"";
+                string query = "UPDATE `events` SET  `ID` =" + UID + ", `shared`= " + newEvent.shared + ", `EventName`= '" + newEvent.eventName + "', `notes`= '" + newEvent.notes + "', `Location`= '" + newEvent.location + "', `TimeStart`= " + newEvent.startTime + ", `TimeEnd`= " + newEvent.endTime + ", `Day`= '" + newEvent.Day.ToString() + "' WHERE `EventID` = " + oldEvent.eID + "";
                 if (this.OpenConnection() == true)
                 {
                     //create command and assign the query and connection from the constructor
@@ -572,7 +639,7 @@ namespace databaseConnector
             if (!events.Contains(thing))
                 return new Response(statuscode.ERROR, "That event could not be found, try running updateEvents()");
 
-            string query = "DELETE FROM `events` WHERE `EventID` = "+thing.eID+" ";
+            string query = "DELETE FROM `events` WHERE `EventID` = " + thing.eID + " ";
             if (this.OpenConnection() == true)
             {
                 //create command and assign the query and connection from the constructor
@@ -604,7 +671,7 @@ namespace databaseConnector
                     e.AddRange(events);
                     e.AddRange(myevents);
                     return e.ToArray();
-                    
+
                 }
                 return UpdateEvents();
             }
@@ -690,31 +757,12 @@ namespace databaseConnector
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="time"></param>
-        /// <returns></returns>
-        private string convert_time(int time)
-        {
-            string t = time.ToString();
-
-            if(t.Length == 3)
-            {
-                return "0" + t[0] + ":" + t[1] + t[2];
-            }
-            else
-            {
-                return t[0] + t[1] + ":" + t[2] + t[3];
-            }
-        }
-
-        /// <summary>
         /// Gets an array of the current users events. allways from database
         /// </summary>
         /// <returns>an array of the current users events</returns>
         public Event[] GetMyEvents()
         {
-            if(myevents.Count != 0)
+            if (myevents.Count != 0)
             {
                 return myevents.ToArray();
             }
@@ -724,7 +772,7 @@ namespace databaseConnector
             List<Event> list = new List<Event>();
             int eID, ID;
             bool s;
-            string name, notes, loc,st, et;
+            string name, notes, loc, st, et;
             day d;
 
 
@@ -747,7 +795,7 @@ namespace databaseConnector
                     loc = dataReader["Location"] + "";
                     st = convert_time(int.Parse(dataReader["TimeStart"] + ""));
                     et = convert_time(int.Parse(dataReader["TimeEnd"] + ""));
-                    Enum.TryParse(dataReader["Day"]+"", out d);
+                    Enum.TryParse(dataReader["Day"] + "", out d);
 
                     list.Add(new Event(eID, ID, name, s, st, et, d, loc, notes));
                     myevents.Add(new Event(eID, ID, name, s, st, et, d, loc, notes));
@@ -777,7 +825,7 @@ namespace databaseConnector
             if (!IsLoggedIn())
                 return friendarray.ToArray();
 
-            if(friendarray.Count != 0)
+            if (friendarray.Count != 0)
             {
                 return friendarray.ToArray();
             }
@@ -785,7 +833,7 @@ namespace databaseConnector
             {
                 return UpdateFriends();
             }
-            
+
         }
 
         /// <summary>
@@ -794,7 +842,7 @@ namespace databaseConnector
         /// <returns>an array of the users friends</returns>
         public User[] UpdateFriends()
         {
-            string query = " SELECT `Name`, `ID`, `status` AS `!status` FROM (SELECT `Name`, `ID` FROM `users` WHERE `ID` IN (SELECT `ID1` FROM `friends` WHERE `ID2` = "+UID+")) AS T INNER JOIN `friends` ON `ID` = `ID1` group by `Name`";
+            string query = " SELECT `Name`, `ID`, `status` AS `!status` FROM (SELECT `Name`, `ID` FROM `users` WHERE `ID` IN (SELECT `ID1` FROM `friends` WHERE `ID2` = " + UID + ")) AS T INNER JOIN `friends` ON `ID` = `ID1` group by `Name`";
             //Create a list to store the result
             List<User> list = new List<User>();
             friendarray.Clear();
@@ -830,7 +878,7 @@ namespace databaseConnector
                     else
                     {
                         Enum.TryParse(dataReader["!status"] + "", out status);
-                        Console.WriteLine(dataReader["!status"]+"");
+                        Console.WriteLine(dataReader["!status"] + "");
                     }
                     list.Add(new User(ID, name, status));
                     friendarray.Add(new User(ID, name, status));
@@ -839,7 +887,7 @@ namespace databaseConnector
                 //close Data Reader
                 dataReader.Close();
 
-                query = "SELECT `Name`, `ID`, `status`  FROM (SELECT `Name`, `ID` FROM `users` WHERE `ID` IN (SELECT `ID2` FROM `friends` WHERE `ID1` = "+UID+")) AS T INNER JOIN `friends` ON `ID` = `ID2` group by `Name` ";
+                query = "SELECT `Name`, `ID`, `status`  FROM (SELECT `Name`, `ID` FROM `users` WHERE `ID` IN (SELECT `ID2` FROM `friends` WHERE `ID1` = " + UID + ")) AS T INNER JOIN `friends` ON `ID` = `ID2` group by `Name` ";
                 //Create Command
                 cmd = new MySqlCommand(query, connection);
                 //Create a data reader and Execute the command
@@ -904,7 +952,7 @@ namespace databaseConnector
 
                     //close connection
                     this.CloseConnection();
-                    
+
                     return new User(id, username, friends.PENDING_TO);
                 }
                 else
@@ -920,211 +968,23 @@ namespace databaseConnector
             return new User(0, "", friends.NO);
         }
 
-    }
-
-    public class Database
-    {
-        private MySqlConnection connection;
-        private string server;
-        private string database;
-        private string uid;
-        private string password;
-
-        //Constructor
-        public Database()
+        /// <summary>
+        /// Preforms whichcraft and wizardry
+        /// </summary>
+        /// <param name="time">an int wiht the time in 24hour format</param>
+        /// <returns>time in the format hh:mm</returns>
+        private string convert_time(int time)
         {
-            Initialize();
-        }
+            string t = time.ToString();
 
-        //Initialize values
-        private void Initialize()
-        {
-            server = "timetable.ctymoh38xb5w.us-east-1.rds.amazonaws.com";
-            database = "timetable_app";
-            uid = "app";
-            password = "appauth";
-            string connectionString;
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-
-            connection = new MySqlConnection(connectionString);
-        }
-
-        //open connection to database
-        private bool OpenConnection()
-        {
-            try
+            if (t.Length == 3)
             {
-                connection.Open();
-                return true;
-            }
-            catch (MySqlException ex)
-            {
-                //When handling errors, you can your application's response based 
-                //on the error number.
-                //The two most common error numbers when connecting are as follows:
-                //0: Cannot connect to server.
-                //1045: Invalid user name and/or password.
-                switch (ex.Number)
-                {
-                    case 0:
-                        Console.WriteLine("Cannot connect to server.  Contact administrator");
-                        break;
-
-                    case 1045:
-                        Console.WriteLine("Invalid username/password, please try again");
-                        break;
-                }
-                return false;
-            }
-        }
-
-        //Close connection
-        private bool CloseConnection()
-        {
-            try
-            {
-                connection.Close();
-                return true;
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-            }
-        }
-
-        //Insert statement
-        public void Insert(string table, string[] values)
-        {
-            string query = "INSERT INTO " + table + " VALUES('John Smith', '33')";
-
-            //open connection
-            if (this.OpenConnection() == true)
-            {
-                //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                //Execute command
-                cmd.ExecuteNonQuery();
-
-                //close connection
-                this.CloseConnection();
-            }
-        }
-
-        //Update statement
-        public void Update()
-        {
-            string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
-
-            //Open connection
-            if (this.OpenConnection() == true)
-            {
-                //create mysql command
-                MySqlCommand cmd = new MySqlCommand();
-                //Assign the query using CommandText
-                cmd.CommandText = query;
-                //Assign the connection using Connection
-                cmd.Connection = connection;
-
-                //Execute query
-                cmd.ExecuteNonQuery();
-
-                //close connection
-                this.CloseConnection();
-            }
-        }
-
-        //Delete statement
-        public void Delete()
-        {
-            string query = "DELETE FROM tableinfo WHERE name='John Smith'";
-
-            if (this.OpenConnection() == true)
-            {
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.ExecuteNonQuery();
-                this.CloseConnection();
-            }
-        }
-
-        //Select statement
-        public List<string>[] Select()
-        {
-            string query = "SELECT * FROM tableinfo";
-
-            //Create a list to store the result
-            List<string>[] list = new List<string>[3];
-            list[0] = new List<string>();
-            list[1] = new List<string>();
-            list[2] = new List<string>();
-
-            //Open connection
-            if (this.OpenConnection() == true)
-            {
-                //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-
-                //Read the data and store them in the list
-                while (dataReader.Read())
-                {
-                    list[0].Add(dataReader["id"] + "");
-                    list[1].Add(dataReader["name"] + "");
-                    list[2].Add(dataReader["age"] + "");
-                }
-
-                //close Data Reader
-                dataReader.Close();
-
-                //close Connection
-                this.CloseConnection();
-
-                //return list to be displayed
-                return list;
+                return "0" + t[0] + ":" + t[1] + t[2];
             }
             else
             {
-                return list;
+                return t[0] + t[1] + ":" + t[2] + t[3];
             }
-        }
-
-        //Count statement
-        public int Count()
-        {
-            string query = "SELECT Count(*) FROM tableinfo";
-            int Count = -1;
-
-            //Open Connection
-            if (this.OpenConnection() == true)
-            {
-                //Create Mysql Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                //ExecuteScalar will return one value
-                Count = int.Parse(cmd.ExecuteScalar() + "");
-
-                //close Connection
-                this.CloseConnection();
-
-                return Count;
-            }
-            else
-            {
-                return Count;
-            }
-        }
-
-        //Backup
-        public void Backup()
-        {
-        }
-
-        //Restore
-        public void Restore()
-        {
         }
     }
 }
