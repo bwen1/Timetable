@@ -31,9 +31,5 @@
         <Setter Property="LineHeight" Value="{OnPlatform Default=1.25}"/>
     </Style>
 
-    <!--  Style for Images  -->
-    <Style x:Key="AboutUsImageStyle" TargetType="Image">
-        <Setter Property="HeightRequest" Value="64" />
-        <Setter Property="WidthRequest" Value="64" />
-    </Style>
+
 </ResourceDictionary>
