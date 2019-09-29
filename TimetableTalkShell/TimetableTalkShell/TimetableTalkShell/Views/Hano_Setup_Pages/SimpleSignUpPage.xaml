@@ -28,7 +28,6 @@
     <ContentPage.BindingContext>
         <viewModel:SignUpPageViewModel />
     </ContentPage.BindingContext>
-
     <ContentPage.Content>
         <ScrollView HorizontalOptions="Center">
             <ScrollView.VerticalOptions>
@@ -56,7 +55,7 @@
                     <!--  Label to display the title of this page  -->
                     <Label
                         FontFamily="{StaticResource Montserrat-SemiBold}"
-                        FontSize="20"
+                        FontSize="25"
                         HorizontalOptions="Center"
                         Style="{StaticResource LabelStyle}"
                         Text="Be Evaluated"
@@ -67,9 +66,10 @@
                         x:Name="text"
                         Margin="0,-16,0,8"
                         FontFamily="{StaticResource Montserrat-Medium}"
+                        FontSize="18"
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource LabelStyle}"
-                        Text="To begin tell us about yourself :)"
+                        Text="To begin, tell us about yourself :)"
                         TextColor="{DynamicResource Gray-White}" />
 
                     <!--  Entry to get username from user  -->
@@ -83,7 +83,8 @@
                             PlaceholderColor="{DynamicResource Gray-700}"
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Name}"
-                            TextColor="{DynamicResource Gray-900}" />
+                            FontSize="16"
+                            TextColor="LightGray" />
                     </border:SfBorder>
 
                     <!--  Entry to get email ID from user  -->
@@ -96,8 +97,9 @@
                             Placeholder="Email"
                             PlaceholderColor="{DynamicResource Gray-700}"
                             Style="{StaticResource EntryStyle}"
-                            Text="{Binding Password}"
-                            TextColor="{DynamicResource Gray-900}" />
+                            Text="{Binding Email}"
+                            FontSize="16"
+                            TextColor="LightGray" />
                     </local:SimpleEmailEntry>
 
                     <!--  Entry to get password from user  -->
@@ -112,7 +114,8 @@
                             PlaceholderColor="{DynamicResource Gray-700}"
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Password}"
-                            TextColor="{DynamicResource Gray-900}" />
+                            FontSize="16"
+                            TextColor="LightGray" />
                     </border:SfBorder>
 
                     <!--  Entry to get the confirm password from user  -->
@@ -127,7 +130,8 @@
                             PlaceholderColor="{DynamicResource Gray-700}"
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding ConfirmPassword}"
-                            TextColor="{DynamicResource Gray-900}" />
+                            FontSize="16"
+                            TextColor="LightGray" />
                     </border:SfBorder>
 
                     <!--  Sign-up button  -->
@@ -136,6 +140,9 @@
                         CornerRadius="20"
                         FontFamily="{StaticResource Montserrat-SemiBold}"
                         Style="{StaticResource SfButtonStyle}"
+                        FontSize="16"
+                        BorderColor="LightGray"
+                        BorderWidth="0.5"
                         Text="REGISTER" />
                 </StackLayout>
 
@@ -153,6 +160,7 @@
                         FontFamily="{StaticResource Montserrat-Medium}"
                         Style="{StaticResource LabelStyle}"
                         Text="Already have an account?"
+                        FontSize="16"
                         TextColor="{DynamicResource Gray-White}"
                         AbsoluteLayout.LayoutBounds="60, -40"/>
 
@@ -163,8 +171,11 @@
                         Command="{Binding LoginCommand}"
                         Style="{StaticResource SfFlatButtonStyle}"
                         Text="Log In"
+                        FontSize="16"
                         TextColor="{DynamicResource Gray-White}"
-                        CornerRadius="5"
+                        CornerRadius="20"
+                        BorderColor="LightGray"
+                        BorderWidth="0.5"
                         VerticalTextAlignment="Center"/>
 
 
