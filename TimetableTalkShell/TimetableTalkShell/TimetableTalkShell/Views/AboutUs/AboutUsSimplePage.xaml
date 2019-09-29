@@ -32,7 +32,10 @@ xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Button
                     <!--  Icon -->
 
 
-                    <Image Source="icon.png" />
+                    <Image 
+                        Source="icon.png" 
+
+                       />
 
 
 
@@ -43,14 +46,11 @@ xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Button
                         Style="{StaticResource HeaderLabelStyle}"
                         FontSize="25"
                         TextColor="{DynamicResource Gray-White}"
-                        Text="Time Table Talk">
-                        <Label.Margin>
-                            <OnIdiom
-                                x:TypeArguments="Thickness"
-                                Default="0, 32, 0, 8"
-                                Phone="0, 16, 0, 16" />
-                        </Label.Margin>
-                    </Label>
+                        Text="Time Table Talk"
+                        Margin="0,0,0,0"/>
+
+
+
 
                     <!--  Version  -->
                     <Label
@@ -58,6 +58,7 @@ xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Button
                         HorizontalOptions="CenterAndExpand"
                         Style="{StaticResource VersionLabelStyle}"
                         TextColor="{DynamicResource Gray-White}"
+                        FontSize="16"
                         Text="{Binding ProductVersion, StringFormat='Version {0}'}" />
 
                     <!--  Description  -->
@@ -72,9 +73,10 @@ xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Button
 
                     <!--  Back Button  -->
                     <button:SfButton 
+                        VerticalOptions="End"
                         Text="Back"
                         FontSize="18"
-                        Margin="50,60,50,0"/>
+                        Margin="0,0,0,15"/>
 
                 </StackLayout>
             </ScrollView>
