@@ -137,7 +137,6 @@
                     <!--  Sign-up button  -->
                     <buttons:SfButton
                         Command="{Binding SignUpCommand}"
-                        CornerRadius="20"
                         FontFamily="{StaticResource Montserrat-SemiBold}"
                         Style="{StaticResource SfButtonStyle}"
                         FontSize="16"
@@ -173,7 +172,6 @@
                         Text="Log In"
                         FontSize="16"
                         TextColor="{DynamicResource Gray-White}"
-                        CornerRadius="20"
                         BorderColor="LightGray"
                         BorderWidth="0.5"
                         VerticalTextAlignment="Center"/>

@@ -138,7 +138,6 @@
                         FontSize="18"
                         BorderColor="LightGray"
                         BorderWidth="0.5"
-                        CornerRadius="20"
                         />
 
                 </Grid>
@@ -171,7 +170,6 @@
                     <!--  Sign-up button  -->
                     <buttons:SfButton
                         Command="{Binding SignUpCommand}"
-                        CornerRadius="20"
                         FontSize="16"
                         Style="{StaticResource SfFlatButtonStyle}"
                         BorderColor="LightGray"
