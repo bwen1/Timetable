@@ -72,20 +72,7 @@
                         Text="To begin, tell us about yourself :)"
                         TextColor="{DynamicResource Gray-White}" />
 
-                    <!--  Entry to get username from user  -->
-                    <border:SfBorder
-                        BackgroundColor="{DynamicResource Gray-White}"
-                        BorderColor="{Binding Source={x:Reference NameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
-                        Style="{StaticResource SfBorderStyle}">
-                        <control:BorderlessEntry
-                            x:Name="NameEntry"
-                            Placeholder="Name"
-                            PlaceholderColor="{DynamicResource Gray-700}"
-                            Style="{StaticResource EntryStyle}"
-                            Text="{Binding Name}"
-                            FontSize="16"
-                            TextColor="LightGray" />
-                    </border:SfBorder>
+                    
 
                     <!--  Entry to get email ID from user  -->
                     <local:SimpleEmailEntry

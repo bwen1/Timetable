@@ -68,7 +68,7 @@
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource LabelStyle}"
                         Text="Log In"
-                        TextColor="{DynamicResource Gray-White}" />
+                        TextColor="LightGray" />
 
                     <!--  Label to display the description of this page  -->
                     <Label
@@ -77,9 +77,9 @@
                         FontFamily="{StaticResource Montserrat-Medium}"
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource LabelStyle}"
-                        Text="Your Timetable is waiting for you :)"
+                        Text="{Binding InvalidMessage}"
                         FontSize="18"
-                        TextColor="{DynamicResource Gray-White}" />
+                        TextColor="LightGray" />
 
                     <!--  Entry to get email ID from user  -->
                     <local:SimpleEmailEntry Grid.Row="2" Margin="0,8"
@@ -89,7 +89,7 @@
                             x:Name="EmailEntry"
                             IsPassword="true"
                             Placeholder="Email"
-                            PlaceholderColor="{DynamicResource Gray-700}"
+                            PlaceholderColor="{Binding Subcolor}"
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Email}"
                             FontSize="16"
@@ -111,7 +111,7 @@
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Password}"
                             FontSize="16"
-                            TextColor="LightGray" />
+                            TextColor="{Binding Subcolor}" />
                     </border:SfBorder>
 
                     <!--  Forgot password link  -->
