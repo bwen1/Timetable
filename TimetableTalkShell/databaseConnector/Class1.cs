@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 namespace databaseConnector
 {
     public enum statuscode { OK, ERROR, NOT_THESE_DROIDS, INVALID_DATA }
-    public enum day { MONDAY, TUESDAY, WEDNSDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY }
+    public enum day { Mon, Tue, Wed, Thur, Fri, Sat, Sun }
     public enum friends { NO, PENDING_TO, PENDING_FROM, BLOCKED_TO, BLOCKED_FROM, YES }
     public struct Response
     {

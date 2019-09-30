@@ -35,7 +35,7 @@ xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Button
                     <Image 
                         Source="icon.png" 
                         WidthRequest="250"
-                        VerticalOptions="Top"
+                        VerticalOptions="Start"
                         Margin="0,0,0,0"
                        />
 

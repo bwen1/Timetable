@@ -183,7 +183,7 @@ xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib
                 
                 <!--  Back button  -->
                 <buttons:SfButton
-                    x:Name="SubmitButton"
+                    x:Name="SubmittButton"
                     Margin="0,8,0,24"
                     BorderWidth="0.5"
                     BorderColor="LightGray"
