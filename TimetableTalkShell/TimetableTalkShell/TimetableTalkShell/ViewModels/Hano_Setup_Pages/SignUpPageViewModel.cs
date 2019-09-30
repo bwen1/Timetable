@@ -16,6 +16,8 @@ namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
         private string password;
 
         private string confirmPassword;
+        private string color;
+        private string invalidmessage = "To begin, tell us about yourself :)";
 
         #endregion
 
@@ -34,27 +36,47 @@ namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
 
         #region Property
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the name from user in the Sign Up page.
-        /// </summary>
-        public string Name
+        
+
+        public string Subcolor
         {
             get
             {
-                return this.name;
+                return this.color;
             }
 
             set
             {
-                if (this.name == value)
+                if (this.color == value)
                 {
                     return;
                 }
 
-                this.name = value;
+                this.color = value;
                 this.OnPropertyChanged();
             }
         }
+
+        public string InvalidMessage
+        {
+            get
+            {
+                return this.invalidmessage;
+            }
+
+            set
+            {
+                if (this.invalidmessage == value)
+                {
+                    return;
+                }
+
+                this.invalidmessage = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+
 
         /// <summary>
         /// Gets or sets the property that bounds with an entry that gets the password from users in the Sign Up page.
@@ -132,6 +154,10 @@ namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
             else if (response.status == databaseConnector.statuscode.ERROR)
             {
                 //the signup failed, change text / color
+                this.Email = "";
+                this.Password = "";
+                this.Subcolor = "#FFD62F2F";
+                this.InvalidMessage = response.message;
             }
             // Do something
         }

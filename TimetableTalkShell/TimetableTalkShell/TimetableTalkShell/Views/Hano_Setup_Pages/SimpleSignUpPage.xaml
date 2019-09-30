@@ -69,7 +69,7 @@
                         FontSize="18"
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource LabelStyle}"
-                        Text="To begin, tell us about yourself :)"
+                        Text="{Binding InvalidMessage}"
                         TextColor="{DynamicResource Gray-White}" />
 
                     
@@ -86,7 +86,7 @@
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Email}"
                             FontSize="16"
-                            TextColor="LightGray" />
+                            TextColor="{Binding Subcolor}" />
                     </local:SimpleEmailEntry>
 
                     <!--  Entry to get password from user  -->
