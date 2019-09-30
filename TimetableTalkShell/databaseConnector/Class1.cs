@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 namespace databaseConnector
 {
     public enum statuscode { OK, ERROR, NOT_THESE_DROIDS, INVALID_DATA }
-    public enum day { MONDAY, TUESDAY, WEDNSDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY }
+    public enum day { Mon, Tue, Wed, Thur, Fri, Sat, Sun }
     public enum friends { NO, PENDING_TO, PENDING_FROM, BLOCKED_TO, BLOCKED_FROM, YES }
     public struct Response
     {
@@ -56,6 +56,19 @@ namespace databaseConnector
         {
             this.ID = userID;
             this.eID = eventID;
+            this.eventName = eventName;
+            this.shared = shared;
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.Day = d;
+            this.location = location;
+            this.notes = notes;
+        }
+
+        public Event(string eventName, bool shared, string startTime, string endTime, day d, string location, string notes = "")
+        {
+            this.ID = 0;
+            this.eID = 0;
             this.eventName = eventName;
             this.shared = shared;
             this.startTime = startTime;

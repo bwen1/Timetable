@@ -90,6 +90,17 @@ namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
         private void LoginClicked(object obj)
         {
             // Do something
+            databaseConnector.Response response = App.backend.LogIn(this.Email, this.password);
+            if (response.status == databaseConnector.statuscode.OK)
+            {
+                App.backend.GetFriends();
+                App.backend.GetEvents();
+                //navigate from here, to home
+            }
+            else if (response.status == databaseConnector.statuscode.ERROR)
+            {
+                //the signup failed, change text / color
+            }
         }
 
         /// <summary>
@@ -99,6 +110,15 @@ namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
         private void SignUpClicked(object obj)
         {
             // Do something
+            databaseConnector.Response response = App.backend.SignUp(this.Email, this.password);
+            if(response.status == databaseConnector.statuscode.OK)
+            {
+                //navigate from here, to login
+            }
+            else if(response.status == databaseConnector.statuscode.ERROR)
+            {
+                //the signup failed, change text / color
+            }
         }
 
         /// <summary>
@@ -111,6 +131,7 @@ namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
             label.BackgroundColor = Color.FromHex("#70FFFFFF");
             await Task.Delay(100);
             label.BackgroundColor = Color.Transparent;
+            
         }
 
         /// <summary>

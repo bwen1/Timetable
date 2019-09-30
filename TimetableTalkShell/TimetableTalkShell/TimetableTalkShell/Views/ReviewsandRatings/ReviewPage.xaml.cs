@@ -13,7 +13,7 @@ namespace TimetableTalkShell.Views.ReviewsandRatings
         public ReviewPage()
         {
             this.InitializeComponent();
-            this.ProductImage.Source = App.BaseImageUrl + "Image1.png";
+            //this.ProductImage.Source = App.BaseImageUrl + "Image1.png";
         }
     }
 }

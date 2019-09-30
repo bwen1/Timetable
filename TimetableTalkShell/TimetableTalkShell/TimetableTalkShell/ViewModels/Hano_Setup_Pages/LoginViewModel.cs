@@ -77,6 +77,7 @@ namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
 
         #region Method
 
+        
         /// <summary>
         /// The PropertyChanged event occurs when changing the value of property.
         /// </summary>

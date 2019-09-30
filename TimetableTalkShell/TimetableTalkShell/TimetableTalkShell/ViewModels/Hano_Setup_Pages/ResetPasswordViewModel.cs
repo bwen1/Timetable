@@ -121,6 +121,15 @@ namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
         private void SubmitClicked(object obj)
         {
             // Do something
+            databaseConnector.Response response = App.backend.ChangePassword(newPassword, confirmPassword);
+            if(response.status == databaseConnector.statuscode.OK)
+            {
+                //navigate or display to the user in some way, that the password has been changed.
+            }
+            else
+            {
+                //check the response.stats or response.message for details on the issue.
+            }
         }
 
         /// <summary>

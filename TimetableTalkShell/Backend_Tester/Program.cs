@@ -105,7 +105,7 @@ namespace Backend_Tester
             Console.Write("Now login to an account, Username: ");
             string loginntest = Console.ReadLine();
             Console.Write("Password: ");
-            string loginptest = Console.ReadLine();
+            string loginptest = Console.ReadLine(); 
             Response loginresp = bk.LogIn(loginntest, loginptest);
             Console.WriteLine("The response from the login was\n\tCode: " + loginresp.status.ToString() + "\n\tMessage: " + loginresp.message);
         }
@@ -189,6 +189,13 @@ namespace Backend_Tester
             {
                 Console.WriteLine("error");
             }
+        }
+
+        public static void create_event()
+        {
+            Console.WriteLine("Create event, event_name: ");
+            string en = Console.ReadLine();
+            Console.Write("\n\t");
         }
     }
 }
