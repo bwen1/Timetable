@@ -10,7 +10,8 @@
        xmlns:viewsReviews="clr-namespace:TimetableTalkShell.Views.ReviewsandRatings"
        xmlns:controls="clr-namespace:TimetableTalkShell.Controls"
        Title="TimetableTalkShell"
-       x:Class="TimetableTalkShell.AppShell">
+       x:Class="TimetableTalkShell.AppShell"
+       FlyoutHeaderBehavior="CollapseOnScroll">
 
     <!-- 
         Styles and Resources TESTING COMMIT
@@ -24,32 +25,40 @@
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
-                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                
             </Style>
             <Style TargetType="ShellItem" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
     </Shell.Resources>
-
+    <!--<Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+    <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+    <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+    <Setter Property="Shell.TabBarTitleColor" Value="White"/>-->
 
     <Shell.FlyoutHeader>
         <controls:FlyoutHeader />
     </Shell.FlyoutHeader>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="Timetable Page"
-                  ContentTemplate="{DataTemplate views:ItemsPage}" />
+                  ContentTemplate="{DataTemplate views:ItemsPage}"
+                      IsTabStop="False"/>
         <ShellContent Title="Signup Page"
                       ContentTemplate="{DataTemplate viewsHano:SimpleSignUpPage}" />
         <ShellContent Title="Log in Page"
-                      ContentTemplate="{DataTemplate viewsHano:SimpleLoginPage}" />
+                      ContentTemplate="{DataTemplate viewsHano:SimpleLoginPage}" 
+                      IsTabStop="False"/>
         <ShellContent Title="Reset Password Page"
-                      ContentTemplate="{DataTemplate viewsHano:SimpleResetPasswordPage}" />
+                      ContentTemplate="{DataTemplate viewsHano:SimpleResetPasswordPage}" 
+                      IsTabStop="False"/>
         <ShellContent Title="Review Page"
-                      ContentTemplate="{DataTemplate viewsReviews:ReviewPage}" />
+                      ContentTemplate="{DataTemplate viewsReviews:ReviewPage}" 
+                      IsTabStop="False"/>
         <ShellContent Title="About Page"
-                      ContentTemplate="{DataTemplate viewsAbout:AboutUsSimplePage}" />
+                      ContentTemplate="{DataTemplate viewsAbout:AboutUsSimplePage}" 
+                      IsTabStop="False"/>
+        <ShellContent Title="Settings Page"
+                      ContentTemplate="{DataTemplate views:BillPage}"
+                      IsTabStop="False"/>
     </FlyoutItem>
     
     <!-- Your Pages -->

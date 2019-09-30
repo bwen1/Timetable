@@ -10,7 +10,9 @@
     xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
     xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.AboutUs1"
     Title="Sign Up"
-    BackgroundColor="{DynamicResource Gray-Chosen}">
+    BackgroundColor="{DynamicResource Gray-Chosen}"
+    NavigationPage.HasNavigationBar="False"
+    Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
         <ResourceDictionary>

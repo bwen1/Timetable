@@ -10,6 +10,7 @@ namespace TimetableTalkShell
         public AppShell()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
         }
     }
 }

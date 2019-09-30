@@ -13,6 +13,8 @@ xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstand
     xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
     xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.ReviewsandRatings"
     BackgroundColor="#2b2b2b"
+    NavigationPage.HasNavigationBar="False"
+    Shell.NavBarIsVisible="False"
     >
     <!--NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False"-->

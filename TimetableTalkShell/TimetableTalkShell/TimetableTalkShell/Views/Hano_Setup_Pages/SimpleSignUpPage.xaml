@@ -11,6 +11,8 @@
     xmlns:local="clr-namespace:TimetableTalkShell.Views.Hano_Setup_Pages"
     xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.Hano_Setup_Pages"
     Title="Sign Up"
+    NavigationPage.HasNavigationBar="False"
+    Shell.NavBarIsVisible="False"
     BackgroundColor="{DynamicResource Gray-Chosen}" >
     <!--NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False">-->
