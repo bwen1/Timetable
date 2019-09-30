@@ -13,6 +13,6 @@
                 <themes:LightTheme />
             </ResourceDictionary.MergedDictionaries >
         </ResourceDictionary>
-        
+
     </Application.Resources>
 </Application>

@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="TimetableTalkShell.Views.AboutUs.AboutUsSimplePage"
+    x:Class="TimetableTalkShell.Views.AboutUsSimplePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.AboutUs"
+    xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels"
     Title="About"
     BackgroundColor="#2b2b2b"
-    NavigationPage.HasNavigationBar="False"
-    Shell.NavBarIsVisible="False">
+    >
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles.xaml" />
+                <ResourceDictionary Source="AboutUsStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
-
+    <!-- NavigationPage.HasNavigationBar="False"
+    Shell.NavBarIsVisible="False"-->
     <ContentPage.Content>
         <Grid ColumnSpacing="0" RowSpacing="0">
             <ScrollView HorizontalOptions="Center" VerticalOptions="Center">
@@ -35,7 +35,7 @@ xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Button
                     <Image 
                         Source="icon.png" 
                         WidthRequest="250"
-                        VerticalOptions="Top"
+                        VerticalOptions="Start"
                         Margin="0,0,0,0"
                        />
 

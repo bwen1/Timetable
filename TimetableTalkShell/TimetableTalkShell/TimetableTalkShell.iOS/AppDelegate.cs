@@ -6,7 +6,7 @@ using Syncfusion.XForms.iOS.ComboBox;
 using  Syncfusion.XForms.iOS.Graphics;
 using Syncfusion.XForms.iOS.Border;
 using Syncfusion.XForms.iOS.Buttons;
-using Syncfusion.SfBusyIndicator.XForms.iOS;
+using Syncfusion.SFBusyIndicator.XForms.iOS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +40,7 @@ SfRangeSliderRenderer.Init();
             SfGradientViewRenderer.Init();
             SfBorderRenderer.Init();
             SfButtonRenderer.Init();
-SfBusyIndicatorRenderer.Init();
+SFBusyIndicatorRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

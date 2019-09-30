@@ -1,4 +1,6 @@
-﻿using System;
+﻿/*
+
+using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Xamarin.Forms;
@@ -102,3 +104,5 @@ namespace TimetableTalkShell.Converters
         }
     }
 }
+
+*/

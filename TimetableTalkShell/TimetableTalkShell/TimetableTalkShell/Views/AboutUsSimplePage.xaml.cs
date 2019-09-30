@@ -1,7 +1,8 @@
-﻿using Xamarin.Forms.Internals;
+﻿
 using Xamarin.Forms.Xaml;
+using Xamarin.Forms.Internals;
 
-namespace TimetableTalkShell.Views.AboutUs
+namespace TimetableTalkShell.Views
 {
     /// <summary>
     /// About us simple page.
@@ -11,7 +12,7 @@ namespace TimetableTalkShell.Views.AboutUs
     public partial class AboutUsSimplePage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:TimetableTalkShell.Views.AboutUs.AboutUsSimplePage"/> class.
+        /// Initializes a new instance of the <see cref="T:TimetableTalkShell.Views.AboutUsSimplePage"/> class.
         /// </summary>
         public AboutUsSimplePage()
         {

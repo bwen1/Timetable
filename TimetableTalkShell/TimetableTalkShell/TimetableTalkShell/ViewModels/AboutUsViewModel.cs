@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
-using TimetableTalkShell.Models.AboutUs;
+using TimetableTalkShell.Models;
 
-namespace TimetableTalkShell.ViewModels.AboutUs
+namespace TimetableTalkShell.ViewModels
 {
     /// <summary>
     /// ViewModel of AboutUs templates.
@@ -15,7 +15,7 @@ namespace TimetableTalkShell.ViewModels.AboutUs
     {
         #region Fields
 
-       // private string productDescription;
+        // private string productDescription;
 
         private string productVersion;
 
@@ -28,7 +28,7 @@ namespace TimetableTalkShell.ViewModels.AboutUs
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance for the <see cref="T:TimetableTalkShell.ViewModels.AboutUs.AboutUsViewModel"/> class.
+        /// Initializes a new instance for the <see cref="T:TimetableTalkShell.ViewModels.AboutUsViewModel"/> class.
         /// </summary>
         public AboutUsViewModel()
         {
@@ -105,7 +105,6 @@ namespace TimetableTalkShell.ViewModels.AboutUs
         /*public string ProductDescription
         {
             get { return this.productDescription; }
-
             set
             {
                 this.productDescription = value;

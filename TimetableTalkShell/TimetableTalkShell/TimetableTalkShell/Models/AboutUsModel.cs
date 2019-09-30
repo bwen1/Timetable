@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Xamarin.Forms.Internals;
 
-namespace TimetableTalkShell.Models.AboutUs
+namespace TimetableTalkShell.Models
 {
     /// <summary>
     /// Model for About us templates.
