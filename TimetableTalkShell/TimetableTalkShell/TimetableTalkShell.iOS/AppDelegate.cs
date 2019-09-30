@@ -1,3 +1,5 @@
+using Syncfusion.SfRotator.XForms.iOS;
+using Syncfusion.XForms.iOS.Core;
 using Syncfusion.SfRangeSlider.XForms.iOS;
 using Syncfusion.SfRating.XForms.iOS;
 using Syncfusion.XForms.iOS.Graphics;
@@ -33,6 +35,7 @@ namespace TimetableTalkShell.iOS
         {
             global::Xamarin.Forms.Forms.SetFlags("Shell_Experimental", "Visual_Experimental", "CollectionView_Experimental", "FastRenderers_Experimental");
 global::Xamarin.Forms.Forms.Init();
+            SfRotatorRenderer.Init();
 SfRangeSliderRenderer.Init();
             SfRatingRenderer.Init();
             SfComboBoxRenderer.Init();
