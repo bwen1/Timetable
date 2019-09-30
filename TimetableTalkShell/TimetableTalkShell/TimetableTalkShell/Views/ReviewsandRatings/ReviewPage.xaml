@@ -6,16 +6,16 @@ xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Sync
 xmlns:dataform="clr-namespace:Syncfusion.XForms.DataForm;assembly=Syncfusion.SfDataForm.XForms"
 xmlns:rangeslider="clr-namespace:Syncfusion.SfRangeSlider.XForms;assembly=Syncfusion.SfRangeSlider.XForms"
 xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
-xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:control="clr-namespace:TimetableTalkShell.Controls"
     xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
     xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.ReviewsandRatings"
     BackgroundColor="#2b2b2b"
-    NavigationPage.HasNavigationBar="False"
-    Shell.NavBarIsVisible="False">
-
+    >
+    <!--NavigationPage.HasNavigationBar="False"
+    Shell.NavBarIsVisible="False"-->
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -200,7 +200,7 @@ xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib
 
                     <!--  Back button  -->
                     <buttons:SfButton
-                    x:Name="SubmitButton"
+                    x:Name="BacktButton"
                     Margin="0,8,0,24"
                     BorderWidth="0.5"
                     BorderColor="LightGray"

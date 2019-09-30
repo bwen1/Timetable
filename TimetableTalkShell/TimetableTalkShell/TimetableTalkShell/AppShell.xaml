@@ -5,6 +5,9 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        mc:Ignorable="d"
        xmlns:views="clr-namespace:TimetableTalkShell.Views"
+       xmlns:viewsAbout="clr-namespace:TimetableTalkShell.Views.AboutUs1"
+       xmlns:viewsHano="clr-namespace:TimetableTalkShell.Views.Hano_Setup_Pages"
+       xmlns:viewsReviews="clr-namespace:TimetableTalkShell.Views.ReviewsandRatings"
        xmlns:controls="clr-namespace:TimetableTalkShell.Controls"
        Title="TimetableTalkShell"
        x:Class="TimetableTalkShell.AppShell">
@@ -35,8 +38,18 @@
         <controls:FlyoutHeader />
     </Shell.FlyoutHeader>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Items Page"
+        <ShellContent Title="Timetable Page"
                   ContentTemplate="{DataTemplate views:ItemsPage}" />
+        <ShellContent Title="Signup Page"
+                      ContentTemplate="{DataTemplate viewsHano:SimpleSignUpPage}" />
+        <ShellContent Title="Log in Page"
+                      ContentTemplate="{DataTemplate viewsHano:SimpleLoginPage}" />
+        <ShellContent Title="Reset Password Page"
+                      ContentTemplate="{DataTemplate viewsHano:SimpleResetPasswordPage}" />
+        <ShellContent Title="Review Page"
+                      ContentTemplate="{DataTemplate viewsReviews:ReviewPage}" />
+        <ShellContent Title="About Page"
+                      ContentTemplate="{DataTemplate viewsAbout:AboutUsSimplePage}" />
     </FlyoutItem>
     
     <!-- Your Pages -->

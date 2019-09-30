@@ -11,9 +11,9 @@
     xmlns:local="clr-namespace:TimetableTalkShell.Views.Hano_Setup_Pages"
     xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.Hano_Setup_Pages"
     Title="Sign Up"
-    BackgroundColor="{DynamicResource Gray-Chosen}"
-    NavigationPage.HasNavigationBar="False"
-    Shell.NavBarIsVisible="False">
+    BackgroundColor="{DynamicResource Gray-Chosen}" >
+    <!--NavigationPage.HasNavigationBar="False"
+    Shell.NavBarIsVisible="False">-->
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -74,7 +74,7 @@
 
                     
 
-                    <!--  Entry to get email ID from user  -->
+                    <!--  Entry to get email ID from user  --><!--
                     <local:SimpleEmailEntry
                         BackgroundColor="{DynamicResource Gray-White}"
                         Style="{StaticResource SfBorderStyle}">
@@ -87,7 +87,7 @@
                             Text="{Binding Email}"
                             FontSize="16"
                             TextColor="{Binding Subcolor}" />
-                    </local:SimpleEmailEntry>
+                    </local:SimpleEmailEntry>-->
 
                     <!--  Entry to get password from user  -->
                     <border:SfBorder

@@ -82,7 +82,7 @@
                         TextColor="LightGray" />
 
                     <!--  Entry to get email ID from user  -->
-                    <local:SimpleEmailEntry Grid.Row="2" Margin="0,8"
+                    <!--<local:SimpleEmailEntry Grid.Row="2" Margin="0,8"
                            BackgroundColor="{DynamicResource Gray-White}"
                                                 Style="{StaticResource SfBorderStyle}">
                         <control:BorderlessEntry
@@ -94,7 +94,7 @@
                             Text="{Binding Email}"
                             FontSize="16"
                             TextColor="LightGray" />
-                    </local:SimpleEmailEntry>
+                    </local:SimpleEmailEntry>-->
 
                     <!--  Entry to get password from user  -->
                     <border:SfBorder
