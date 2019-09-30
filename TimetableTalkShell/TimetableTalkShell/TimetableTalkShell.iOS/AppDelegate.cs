@@ -1,3 +1,6 @@
+using Syncfusion.XForms.iOS.RichTextEditor;
+using Syncfusion.XForms.iOS.TextInputLayout;
+using Syncfusion.XForms.iOS.DataForm;
 using Syncfusion.SfRotator.XForms.iOS;
 using Syncfusion.XForms.iOS.Core;
 using Syncfusion.SfRangeSlider.XForms.iOS;
@@ -35,6 +38,10 @@ namespace TimetableTalkShell.iOS
         {
             global::Xamarin.Forms.Forms.SetFlags("Shell_Experimental", "Visual_Experimental", "CollectionView_Experimental", "FastRenderers_Experimental");
 global::Xamarin.Forms.Forms.Init();
+SfRichTextEditorIOS.Init();
+SfTextInputLayoutRenderer.Init();
+SfDataFormRenderer.Init();
+SfCheckBoxRenderer.Init();
             SfRotatorRenderer.Init();
 SfRangeSliderRenderer.Init();
             SfRatingRenderer.Init();

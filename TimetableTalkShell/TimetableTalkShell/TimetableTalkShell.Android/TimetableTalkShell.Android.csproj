@@ -80,6 +80,9 @@
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox">
       <Version>17.2.0.51</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfDataForm">
+      <Version>17.2.0.51</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfDataGrid">
       <Version>17.2.0.51</Version>
     </PackageReference>

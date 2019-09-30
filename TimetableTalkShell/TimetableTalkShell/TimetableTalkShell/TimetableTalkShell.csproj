@@ -19,6 +19,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.2.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="17.2.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="17.2.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.SfDataForm" Version="17.2.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="17.2.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.2.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="17.2.0.51" />

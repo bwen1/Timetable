@@ -2,6 +2,8 @@
 <ContentPage
     x:Class="TimetableTalkShell.Views.ReviewsandRatings.ReviewPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+xmlns:dataform="clr-namespace:Syncfusion.XForms.DataForm;assembly=Syncfusion.SfDataForm.XForms"
 xmlns:rangeslider="clr-namespace:Syncfusion.SfRangeSlider.XForms;assembly=Syncfusion.SfRangeSlider.XForms"
 xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
 xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib"
@@ -51,7 +53,7 @@ xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib
                     Margin="0,18,0,0"
                     Text="Select Day"
                     TextColor="LightGray" />
-                    
+
                     <combobox:SfComboBox HeightRequest="40" x:Name="day">
                         <combobox:SfComboBox.ComboBoxSource>
                             <ListCollection:List x:TypeArguments="x:String">
@@ -66,7 +68,7 @@ xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib
                 </StackLayout>
 
                 <!--  Combo Boxes  -->
-                
+
                 <StackLayout>
                     <Label
                     FontFamily="{StaticResource Montserrat-Medium}"
@@ -75,7 +77,7 @@ xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib
                     Margin="0,18,0,0"
                     Text="Select Start Time"
                     TextColor="LightGray" />
-                    
+
                     <combobox:SfComboBox HeightRequest="40" x:Name="start">
                         <combobox:SfComboBox.ComboBoxSource>
                             <ListCollection:List x:TypeArguments="x:String">
@@ -125,7 +127,7 @@ xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib
                     Margin="0,18,0,0"
                     Text="Select End Time"
                     TextColor="LightGray" />
-                    
+
                     <combobox:SfComboBox HeightRequest="40" x:Name="end">
                         <combobox:SfComboBox.ComboBoxSource>
                             <ListCollection:List x:TypeArguments="x:String">
@@ -166,9 +168,24 @@ xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib
                     </combobox:SfComboBox>
                 </StackLayout>
 
+                <!--  Private or public  -->
+                <buttons:SfCheckBox 
+                    x:Name="checkBox" 
+                    Text="Private"
+                    TextColor="LightGray"
+                    FontSize="16"/>
+
+                <!--  TextBox  -->
+
+                <inputLayout:SfTextInputLayout  
+                    Hint="Name"
+                    BackgroundColor="DarkGray">
+                    <Entry />
+                </inputLayout:SfTextInputLayout>
+
                 <StackLayout>
-                <!--  Add button  -->
-                <buttons:SfButton
+                    <!--  Add button  -->
+                    <buttons:SfButton
                     x:Name="SubmitButton"
                     Margin="0,24,0,18"
                     BorderWidth="0.5"
@@ -180,9 +197,9 @@ xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib
                     HeightRequest="40"
                     Text="Add"
                     WidthRequest="200" />
-                
-                <!--  Back button  -->
-                <buttons:SfButton
+
+                    <!--  Back button  -->
+                    <buttons:SfButton
                     x:Name="SubmitButton"
                     Margin="0,8,0,24"
                     BorderWidth="0.5"

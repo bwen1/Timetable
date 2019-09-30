@@ -84,11 +84,20 @@
     <Reference Include="Syncfusion.SfComboBox.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Xamarin.SfComboBox.17.2.0.51\lib\netstandard2.0\Syncfusion.SfComboBox.XForms.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.SfDataForm.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Xamarin.SfDataForm.17.2.0.51\lib\netstandard2.0\Syncfusion.SfDataForm.XForms.dll</HintPath>
+    </Reference>
     <Reference Include="Syncfusion.SfDataGrid.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Xamarin.SfDataGrid.17.2.0.51\lib\netstandard2.0\Syncfusion.SfDataGrid.XForms.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.SfMaskedEdit.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Xamarin.SfMaskedEdit.17.2.0.51\lib\netstandard2.0\Syncfusion.SfMaskedEdit.XForms.dll</HintPath>
+    </Reference>
     <Reference Include="Syncfusion.SfNumericTextBox.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Xamarin.SfNumericTextBox.17.2.0.51\lib\netstandard2.0\Syncfusion.SfNumericTextBox.XForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfNumericUpDown.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Xamarin.SfNumericUpDown.17.2.0.51\lib\netstandard2.0\Syncfusion.SfNumericUpDown.XForms.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.SfRangeSlider.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Xamarin.SfRangeSlider.17.2.0.51\lib\netstandard2.0\Syncfusion.SfRangeSlider.XForms.dll</HintPath>
