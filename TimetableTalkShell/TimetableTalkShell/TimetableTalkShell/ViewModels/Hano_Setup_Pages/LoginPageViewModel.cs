@@ -153,16 +153,8 @@ namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
         /// <param name="obj">The Object</param>
         private void SignUpClicked(object obj)
         {
-            // Do something
-            databaseConnector.Response response = App.backend.SignUp(this.Email, this.password);
-            if(response.status == databaseConnector.statuscode.OK)
-            {
-                //navigate from here, to login
-            }
-            else if(response.status == databaseConnector.statuscode.ERROR)
-            {
-                //the signup failed, change text / color
-            }
+            // navigate to signup page
+            
         }
 
         /// <summary>
