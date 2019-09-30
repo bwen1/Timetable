@@ -770,7 +770,7 @@ namespace databaseConnector
         }
 
         /// <summary>
-        /// Gets an array of the current users events. allways from database
+        /// Gets an array of the current users events. 
         /// </summary>
         /// <returns>an array of the current users events</returns>
         public Event[] GetMyEvents()
@@ -850,7 +850,7 @@ namespace databaseConnector
         }
 
         /// <summary>
-        /// BROKEN, recivers of friend requests see whrong status, eveything else works
+        /// updates the local copy of uesr friend objects, includes of all statuses
         /// </summary>
         /// <returns>an array of the users friends</returns>
         public User[] UpdateFriends()
@@ -929,16 +929,6 @@ namespace databaseConnector
             {
                 return list.ToArray();
             }
-        }
-
-        /// <summary>
-        /// (unused)Gets the public events of the specified user, (they have to be a friend for this to work) (UN implemented)
-        /// </summary>
-        /// <param name="user">the user to get events for</param>
-        /// <returns>that users events</returns>
-        private Event[] GetUserEvents(User user)
-        {
-            return new Event[] { };
         }
 
         /// <summary>
