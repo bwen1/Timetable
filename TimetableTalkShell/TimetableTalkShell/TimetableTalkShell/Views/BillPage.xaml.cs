@@ -12,12 +12,13 @@ namespace TimetableTalkShell.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BillPage : ContentPage
     {
-        
+
         public BillPage()
         {
             InitializeComponent();
         }
 
+       
         
     }
 }

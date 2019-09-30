@@ -3,13 +3,122 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TimetableTalkShell.ViewModels"
              mc:Ignorable="d"
              x:Class="TimetableTalkShell.Views.ThomasPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+    <ContentPage.BindingContext>
+        <vm:ThomasViewModel />
+    </ContentPage.BindingContext>
+
+<ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!--<Label Text="0.0" Grid.Row="0" Grid.Column="0" />-->
+
+            <Label Text="8am" Grid.Row="1" Grid.Column="0" />
+            <Label Text="9am" Grid.Row="2" Grid.Column="0"/>
+            <Label Text="10am" Grid.Row="3" Grid.Column="0"/>
+            <Label Text="11am" Grid.Row="4" Grid.Column="0"/>
+            <Label Text="12pm" Grid.Row="5" Grid.Column="0"/>
+            <Label Text="1pm" Grid.Row="6" Grid.Column="0" />
+            <Label Text="2pm" Grid.Row="7" Grid.Column="0" />
+            <Label Text="3pm" Grid.Row="8" Grid.Column="0" />
+            <Label Text="4pm" Grid.Row="9" Grid.Column="0" />
+            <Label Text="5pm" Grid.Row="10" Grid.Column="0" />
+            <Label Text="6pm" Grid.Row="11" Grid.Column="0" />
+            <Label Text="7pm" Grid.Row="12" Grid.Column="0" />
+            <Label Text="8pm" Grid.Row="13" Grid.Column="0" />
+            <Label Text="Monday" Grid.Row="0" Grid.Column="1" />
+            <Label Text="Tuesday" Grid.Row="0" Grid.Column="2" />
+            <Label Text="Wednesday" Grid.Row="0" Grid.Column="3" />
+            <Label Text="Thursday" Grid.Row="0" Grid.Column="4" />
+            <Label Text="Friday" Grid.Row="0" Grid.Column="5" />
+
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="1" Grid.Column="1" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="1" Grid.Column="2" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="1" Grid.Column="3" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="1" Grid.Column="4" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="1" Grid.Column="5" Clicked="OnTap"/>
+
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="2" Grid.Column="1" Clicked="OnTap" />
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="2" Grid.Column="2" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="2" Grid.Column="3" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="2" Grid.Column="4" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="2" Grid.Column="5" Clicked="OnTap"/>
+
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="3" Grid.Column="1" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="3" Grid.Column="2" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="3" Grid.Column="3" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="3" Grid.Column="4" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="3" Grid.Column="5" Clicked="OnTap"/>
+
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="4" Grid.Column="1" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="4" Grid.Column="2" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="4" Grid.Column="3" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="4" Grid.Column="4" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="4" Grid.Column="5" Clicked="OnTap"/>
+
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="5" Grid.Column="1" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="5" Grid.Column="2" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="5" Grid.Column="3" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="5" Grid.Column="4" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="5" Grid.Column="5" Clicked="OnTap"/>
+
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="6" Grid.Column="1" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="6" Grid.Column="2" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="6" Grid.Column="3" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="6" Grid.Column="4" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="6" Grid.Column="5" Clicked="OnTap"/>
+
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="7" Grid.Column="1" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="7" Grid.Column="2" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="7" Grid.Column="3" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="7" Grid.Column="4" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="7" Grid.Column="5" Clicked="OnTap"/>
+
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="8" Grid.Column="1" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="8" Grid.Column="2" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="8" Grid.Column="3" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="8" Grid.Column="4" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="8" Grid.Column="5" Clicked="OnTap"/>
+
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="9" Grid.Column="1" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="9" Grid.Column="2" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="9" Grid.Column="3" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="9" Grid.Column="4" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="9" Grid.Column="5" Clicked="OnTap"/>
+
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="10" Grid.Column="1" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="10" Grid.Column="2" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="10" Grid.Column="3" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="10" Grid.Column="4" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="10" Grid.Column="5" Clicked="OnTap"/>
+
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="11" Grid.Column="1" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="11" Grid.Column="2" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="11" Grid.Column="3" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="11" Grid.Column="4" Clicked="OnTap" />
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="11" Grid.Column="5" Clicked="OnTap"/>
+
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="12" Grid.Column="1" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="12" Grid.Column="2" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="12" Grid.Column="3" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="12" Grid.Column="4" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="12" Grid.Column="5" Clicked="OnTap"/>
+
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="13" Grid.Column="1" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="13" Grid.Column="2" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="13" Grid.Column="3" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="13" Grid.Column="4" Clicked="OnTap"/>
+            <Button BackgroundColor="Blue" BorderWidth="1" Grid.Row="13" Grid.Column="5" Clicked="OnTap"/>
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

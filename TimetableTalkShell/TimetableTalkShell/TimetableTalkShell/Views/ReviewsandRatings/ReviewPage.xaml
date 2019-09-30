@@ -198,7 +198,8 @@ xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstand
                     VerticalOptions="End"
                     HeightRequest="40"
                     Text="Add"
-                    WidthRequest="200" />
+                    WidthRequest="200"
+                     Clicked="ToTimetable"/>
 
                     <!--  Back button  -->
                     <buttons:SfButton
@@ -212,7 +213,8 @@ xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstand
                     VerticalOptions="End"
                     HeightRequest="40"
                     Text="Back"
-                    WidthRequest="200" />
+                    WidthRequest="200"
+                        Clicked="ToTimetable"/>
                 </StackLayout>
             </StackLayout>
 

@@ -59,6 +59,9 @@
         <ShellContent Title="Settings Page"
                       ContentTemplate="{DataTemplate views:BillPage}"
                       IsTabStop="False"/>
+        <ShellContent Title="Timetable Page"
+                      ContentTemplate="{DataTemplate views:ThomasPage}"
+                      IsTabStop="False" />
     </FlyoutItem>
     
     <!-- Your Pages -->
