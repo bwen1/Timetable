@@ -51,6 +51,18 @@
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
+    <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.1.68.0\lib\net45\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Extended, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.Extended.1.60.0\lib\netstandard2.0\SkiaSharp.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Extended.Svg, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.Svg.1.60.0\lib\netstandard2.0\SkiaSharp.Extended.Svg.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.Forms, Version=1.68.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.Views.Forms.1.68.0\lib\netstandard1.3\SkiaSharp.Views.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="Syncfusion.Buttons.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Xamarin.Buttons.17.2.0.51\lib\netstandard2.0\Syncfusion.Buttons.XForms.dll</HintPath>
     </Reference>
@@ -72,17 +84,29 @@
     <Reference Include="Syncfusion.SfComboBox.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Xamarin.SfComboBox.17.2.0.51\lib\netstandard2.0\Syncfusion.SfComboBox.XForms.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.SfDataForm.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Xamarin.SfDataForm.17.2.0.51\lib\netstandard2.0\Syncfusion.SfDataForm.XForms.dll</HintPath>
+    </Reference>
     <Reference Include="Syncfusion.SfDataGrid.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Xamarin.SfDataGrid.17.2.0.51\lib\netstandard2.0\Syncfusion.SfDataGrid.XForms.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.SfMaskedEdit.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Xamarin.SfMaskedEdit.17.2.0.51\lib\netstandard2.0\Syncfusion.SfMaskedEdit.XForms.dll</HintPath>
+    </Reference>
     <Reference Include="Syncfusion.SfNumericTextBox.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Xamarin.SfNumericTextBox.17.2.0.51\lib\netstandard2.0\Syncfusion.SfNumericTextBox.XForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfNumericUpDown.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Xamarin.SfNumericUpDown.17.2.0.51\lib\netstandard2.0\Syncfusion.SfNumericUpDown.XForms.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.SfRangeSlider.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Xamarin.SfRangeSlider.17.2.0.51\lib\netstandard2.0\Syncfusion.SfRangeSlider.XForms.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.SfRating.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Xamarin.SfRating.17.2.0.51\lib\netstandard2.0\Syncfusion.SfRating.XForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfRotator.XForms, Version=17.2451.0.51, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Xamarin.SfRotator.17.2.0.51\lib\netstandard2.0\Syncfusion.SfRotator.XForms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
@@ -134,6 +158,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Xamarin.Forms.4.2.0.815419\build\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.4.2.0.815419\build\Xamarin.Forms.props'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Forms.4.2.0.815419\build\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.4.2.0.815419\build\Xamarin.Forms.targets'))" />
+    <Error Condition="!Exists('..\packages\SkiaSharp.1.68.0\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.68.0\build\net45\SkiaSharp.targets'))" />
   </Target>
   <Import Project="..\packages\Xamarin.Forms.4.2.0.815419\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.4.2.0.815419\build\Xamarin.Forms.targets')" />
+  <Import Project="..\packages\SkiaSharp.1.68.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.68.0\build\net45\SkiaSharp.targets')" />
 </Project>
