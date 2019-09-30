@@ -51,6 +51,16 @@ namespace TimetableTalkShell.ViewModels.ReviewsandRatings
         private void OnSubmitTapped(object obj)
         {
             // Do something
+            databaseConnector.Response response = App.backend.AddEvent(new databaseConnector.Event());
+            // add the varibles from the page to the event object like Event(name, shared, start, end, day, location, [notes])
+            if(response.status == databaseConnector.statuscode.OK)
+            {
+                //navigate to whereever when sucess.
+            }
+            else
+            {
+                //find further info in response.stats, and response.message, then do things as appropriate.
+            }
         }
 
         #endregion

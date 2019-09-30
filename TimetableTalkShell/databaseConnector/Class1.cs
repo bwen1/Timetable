@@ -64,6 +64,19 @@ namespace databaseConnector
             this.location = location;
             this.notes = notes;
         }
+
+        public Event(string eventName, bool shared, string startTime, string endTime, day d, string location, string notes = "")
+        {
+            this.ID = 0;
+            this.eID = 0;
+            this.eventName = eventName;
+            this.shared = shared;
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.Day = d;
+            this.location = location;
+            this.notes = notes;
+        }
     }
     public struct User
     {
