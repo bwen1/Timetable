@@ -1,34 +1,58 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
-    x:Class="TimetableTalkShell.Views.AboutUs.AboutUsSimplePage"
+    x:Class="TimetableTalkShell.Views.Hano_Setup_Pages.SimpleSignUpPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.AboutUs"
-    Title="About"
-    BackgroundColor="#2b2b2b"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:control="clr-namespace:TimetableTalkShell.Controls"
+    xmlns:converter="clr-namespace:TimetableTalkShell.Converters"
+    xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+    xmlns:local="clr-namespace:TimetableTalkShell.Views.Hano_Setup_Pages"
+    xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.Hano_Setup_Pages"
+    Title="Sign Up"
+    BackgroundColor="{DynamicResource Gray-Chosen}"
     NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False">
+
     <ContentPage.Resources>
         <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <!--  Binding context for sign-up page  -->
+    <ContentPage.BindingContext>
+        <viewModel:SignUpPageViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid ColumnSpacing="0" RowSpacing="0">
-            <ScrollView HorizontalOptions="Center" VerticalOptions="Center">
+        <ScrollView HorizontalOptions="Center">
+            <ScrollView.VerticalOptions>
+                <OnIdiom
+                    x:TypeArguments="LayoutOptions"
+                    Default="CenterAndExpand"
+                    Phone="FillAndExpand" />
+            </ScrollView.VerticalOptions>
+
+            <StackLayout
+                Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32',
+                                                             PhoneLandscape='150,32',
+                                                             TabletPortrait='200,50',
+                                                             TabletLandscape='300,50',
+                                                             Desktop='30'}"
+                Spacing="0"
+                VerticalOptions="FillAndExpand"
+                WidthRequest="{OnPlatform Default='-1',
+                                          UWP='350'}">
                 <StackLayout
                     HorizontalOptions="Center"
-                    Spacing="10"
-                    VerticalOptions="Center">
+                    Spacing="24"
+                    VerticalOptions="CenterAndExpand">
 
-                    <StackLayout.BindingContext>
-                        <viewModel:AboutUsViewModel />
-                    </StackLayout.BindingContext>
-
+                   
                     <!--  Icon -->
 
 
@@ -51,9 +75,6 @@ xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Button
                         Text="Time Table Talk"
                         Margin="0,0,0,0"/>
 
-
-
-
                     <!--  Version  -->
                     <Label
                         Margin="0,5,0,16"
@@ -63,9 +84,10 @@ xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Button
                         FontSize="16"
                         Text="{Binding ProductVersion, StringFormat='Version {0}'}" />
 
+                    
                     <!--  Description  -->
                     <Label
-                        Margin="15,0,15,0"
+                        
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource DescriptionLabelStyle}"
@@ -73,18 +95,24 @@ xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Button
                         FontSize="16"
                         Text="Behind Time Table Talk are four students who strive to solve a common problem among uni students. Students have trouble managing their own time table and everyone else's time table's at the same time. We solve that problem by putting everyone's timetables into one accessible app and allow you to compare them with ease." />
 
+
                     <!--  Back Button  -->
-                    <button:SfButton 
-                        VerticalOptions="EndAndExpand"
+                    <buttons:SfButton 
+                        Style="{StaticResource SfFlatButtonStyle}"
+                        VerticalOptions="Center"
                         Text="Back"
                         FontSize="18"
                         Margin="0,40,0,0"
                         BackgroundColor="#2b2b2b"
-                BorderColor="LightGray"
-                BorderWidth="0.5"/>
+                        BorderColor="LightGray"
+                        BorderWidth="0.5"/>
+                       
+                    
 
                 </StackLayout>
-            </ScrollView>
-        </Grid>
+
+                
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

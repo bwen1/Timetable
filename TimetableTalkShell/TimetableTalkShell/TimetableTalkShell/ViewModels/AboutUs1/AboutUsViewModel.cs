@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
-using TimetableTalkShell.Models.AboutUs;
+using TimetableTalkShell.Models.AboutUs1;
 
-namespace TimetableTalkShell.ViewModels.AboutUs
+namespace TimetableTalkShell.ViewModels.AboutUs1
 {
     /// <summary>
     /// ViewModel of AboutUs templates.
@@ -15,7 +15,7 @@ namespace TimetableTalkShell.ViewModels.AboutUs
     {
         #region Fields
 
-       // private string productDescription;
+        private string productDescription;
 
         private string productVersion;
 
@@ -28,42 +28,90 @@ namespace TimetableTalkShell.ViewModels.AboutUs
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance for the <see cref="T:TimetableTalkShell.ViewModels.AboutUs.AboutUsViewModel"/> class.
+        /// Initializes a new instance for the <see cref="T:TimetableTalkShell.ViewModels.AboutUs1.AboutUsViewModel"/> class.
         /// </summary>
         public AboutUsViewModel()
         {
-            //this.productDescription = "Test product description";
+            this.productDescription =
+                "Situated in the heart of Smith-town, Acme Products, Inc., has a long-standing tradition of selling the best products while providing the fastest service on the market. Since 1952, we’ve helped our customers identify their needs, understand their wants, and capture their dreams.";
             this.productIcon = App.BaseImageUrl + "Icon.png";
-            this.productVersion = "1.0 Beta";
+            this.productVersion = "1.0";
             this.cardsTopImage = App.BaseImageUrl + "Mask.png";
 
             this.EmployeeDetails = new ObservableCollection<AboutUsModel>
             {
                 new AboutUsModel
                 {
-                    EmployeeName = "Thomas",
+                    EmployeeName = "Alice",
                     Image = App.BaseImageUrl + "ProfileImage15.png",
-                    Designation = "Developer"
+                    Designation = "Project Manager"
                 },
                 new AboutUsModel
                 {
-                    EmployeeName = "Jacob",
+                    EmployeeName = "Jessica Park",
                     Image = App.BaseImageUrl + "ProfileImage10.png",
-                    Designation = "Developer"
+                    Designation = "Senior Manager"
                 },
                 new AboutUsModel
                 {
-                    EmployeeName = "Hano",
+                    EmployeeName = "Lisa",
                     Image = App.BaseImageUrl + "ProfileImage11.png",
-                    Designation = "Developer"
+                    Designation = "Senior Developer"
                 },
                 new AboutUsModel
                 {
-                    EmployeeName = "Bill",
+                    EmployeeName = "Rebecca",
                     Image = App.BaseImageUrl + "ProfileImage12.png",
-                    Designation = "Developer"
+                    Designation = "Senior Designer"
                 },
-
+                new AboutUsModel
+                {
+                    EmployeeName = "Alexander",
+                    Image = App.BaseImageUrl + "ProfileImage3.png",
+                    Designation = "Senior Manager"
+                },
+                new AboutUsModel
+                {
+                    EmployeeName = "Anthony",
+                    Image = App.BaseImageUrl + "ProfileImage1.png",
+                    Designation = "Senior Developer"
+                },
+                new AboutUsModel
+                {
+                    EmployeeName = "Julia Grant",
+                    Image = App.BaseImageUrl + "ProfileImage2.png",
+                    Designation = "Project Manager"
+                },
+                new AboutUsModel
+                {
+                    EmployeeName = "John",
+                    Image = App.BaseImageUrl + "ProfileImage4.png",
+                    Designation = "Senior Manager"
+                },
+                new AboutUsModel
+                {
+                    EmployeeName = "Danielle",
+                    Image = App.BaseImageUrl + "ProfileImage5.png",
+                    Designation = "Lead Developer"
+                },
+                new AboutUsModel
+                {
+                    EmployeeName = "Kyle Greene",
+                    Image = App.BaseImageUrl + "ProfileImage6.png",
+                    Designation = "Senior Designer"
+                },
+                new AboutUsModel
+                {
+                    EmployeeName = "Navya Sharma",
+                    Image = App.BaseImageUrl + "ProfileImage7.png",
+                    Designation = "Senior Manager"
+                },
+                new AboutUsModel
+                {
+                    EmployeeName = "Jazmine",
+                    Image = App.BaseImageUrl + "ProfileImage8.png",
+                    Designation = "Project Manager"
+                }
             };
 
 
@@ -102,7 +150,7 @@ namespace TimetableTalkShell.ViewModels.AboutUs
         /// Gets or sets the description of a product or a company.
         /// </summary>
         /// <value>The product description.</value>
-        /*public string ProductDescription
+        public string ProductDescription
         {
             get { return this.productDescription; }
 
@@ -111,7 +159,7 @@ namespace TimetableTalkShell.ViewModels.AboutUs
                 this.productDescription = value;
                 this.OnPropertyChanged();
             }
-        }*/
+        }
 
         /// <summary>
         /// Gets or sets the product icon.
@@ -128,8 +176,6 @@ namespace TimetableTalkShell.ViewModels.AboutUs
             }
         }
 
-
-
         /// <summary>
         /// Gets or sets the product version.
         /// </summary>
@@ -143,9 +189,7 @@ namespace TimetableTalkShell.ViewModels.AboutUs
                 this.productVersion = value;
                 this.OnPropertyChanged();
             }
-
         }
-
 
         /// <summary>
         /// Gets or sets the employee details.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary
-    x:Class="TimetableTalkShell.Views.AboutUs.Styles"
+    x:Class="TimetableTalkShell.Views.AboutUs1.Styles"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
@@ -31,5 +31,9 @@
         <Setter Property="LineHeight" Value="{OnPlatform Default=1.25}"/>
     </Style>
 
-
+    <!--  Style for Images  -->
+    <Style x:Key="AboutUsImageStyle" TargetType="Image">
+        <Setter Property="HeightRequest" Value="64" />
+        <Setter Property="WidthRequest" Value="64" />
+    </Style>
 </ResourceDictionary>

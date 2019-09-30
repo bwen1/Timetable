@@ -39,10 +39,10 @@
     <EmbeddedResource Update="Controls\FlyoutHeader.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AboutUs\AboutUsSimplePage.xaml">
+    <EmbeddedResource Update="Views\AboutUs1\AboutUsSimplePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AboutUs\Styles.xaml">
+    <EmbeddedResource Update="Views\AboutUs1\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\BillPage.xaml">
