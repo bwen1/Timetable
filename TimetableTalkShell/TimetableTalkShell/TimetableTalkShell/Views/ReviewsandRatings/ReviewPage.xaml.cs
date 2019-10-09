@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
+using System;
 
 namespace TimetableTalkShell.Views.ReviewsandRatings
 {
@@ -14,6 +15,10 @@ namespace TimetableTalkShell.Views.ReviewsandRatings
         {
             this.InitializeComponent();
             //this.ProductImage.Source = App.BaseImageUrl + "Image1.png";
+        }
+        private async void ToTimetable(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
     }
 }

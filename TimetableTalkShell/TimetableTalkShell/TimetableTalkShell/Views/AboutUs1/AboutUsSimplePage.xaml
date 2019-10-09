@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
-    x:Class="TimetableTalkShell.Views.Hano_Setup_Pages.SimpleSignUpPage"
+    x:Class="TimetableTalkShell.Views.AboutUs1.AboutUsSimplePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
@@ -8,8 +8,7 @@
     xmlns:control="clr-namespace:TimetableTalkShell.Controls"
     xmlns:converter="clr-namespace:TimetableTalkShell.Converters"
     xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
-    xmlns:local="clr-namespace:TimetableTalkShell.Views.Hano_Setup_Pages"
-    xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.Hano_Setup_Pages"
+    xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.AboutUs1"
     Title="Sign Up"
     BackgroundColor="{DynamicResource Gray-Chosen}"
     NavigationPage.HasNavigationBar="False"
@@ -24,9 +23,9 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <!--  Binding context for sign-up page  -->
+    <!--  Binding context for about us page  -->
     <ContentPage.BindingContext>
-        <viewModel:SignUpPageViewModel />
+        <viewModel:AboutUsViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView HorizontalOptions="Center">

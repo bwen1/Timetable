@@ -13,6 +13,8 @@ namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
         #region Fields
 
         private string password;
+        private string color;
+        private string invalidmessage = "Your Timetable is waiting for you :)";
 
         #endregion
 
@@ -51,6 +53,44 @@ namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
                 }
 
                 this.password = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public string Subcolor
+        {
+            get
+            {
+                return this.color;
+            }
+
+            set
+            {
+                if (this.color == value)
+                {
+                    return;
+                }
+
+                this.color = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public string InvalidMessage
+        {
+            get
+            {
+                return this.invalidmessage;
+            }
+
+            set
+            {
+                if (this.invalidmessage == value)
+                {
+                    return;
+                }
+
+                this.invalidmessage = value;
                 this.OnPropertyChanged();
             }
         }
@@ -100,6 +140,10 @@ namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
             else if (response.status == databaseConnector.statuscode.ERROR)
             {
                 //the signup failed, change text / color
+                this.Email = "";
+                this.Password = "";
+                this.Subcolor = "#FFD62F2F";
+                this.InvalidMessage = "Invalid Email or Password!";
             }
         }
 
