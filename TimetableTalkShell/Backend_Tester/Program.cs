@@ -14,7 +14,7 @@ namespace Backend_Tester
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Console based backend tester V0.01");
             Console.WriteLine("Initilising Backend");
-            Backend bk = new Backend();
+            Backendtest bk = new Backendtest();
             Console.WriteLine("done");
             string com = "";
             while (true)
@@ -88,19 +88,19 @@ namespace Backend_Tester
 
         }
 
-        static public void check_login(Backend bk)
+        static public void check_login(Backendtest bk)
         {
             Console.WriteLine("checking to see if the user is logged in...");
             Console.WriteLine("It appears that the user is " + (bk.IsLoggedIn() ? "Currently logged in" : "Not loged in"));
         }
 
-        static public void check_username_avalibility(Backend bk)
+        static public void check_username_avalibility(Backendtest bk)
         {
             Console.Write("Enter a username to check avalibility: ");
             string nametest = Console.ReadLine();
             Console.WriteLine("The username appears to be " + (bk.IsUsernameAvalible(nametest) ? "Avalible" : "in use"));
         }
-        static public void account_login(Backend bk)
+        static public void account_login(Backendtest bk)
         {
             Console.Write("Now login to an account, Username: ");
             string loginntest = Console.ReadLine();
@@ -110,7 +110,7 @@ namespace Backend_Tester
             Console.WriteLine("The response from the login was\n\tCode: " + loginresp.status.ToString() + "\n\tMessage: " + loginresp.message);
         }
 
-        static public void account_signup(Backend bk)
+        static public void account_signup(Backendtest bk)
         {
             Console.Write("Now create an account, Username: ");
             string usr = Console.ReadLine();
@@ -121,7 +121,7 @@ namespace Backend_Tester
             Console.WriteLine("The response from the signup was\n\tCode: " + resp.status.ToString() + "\n\tMessage: " + resp.message);
         }
 
-        static public void get_friends(Backend bk)
+        static public void get_friends(Backendtest bk)
         {
             Console.WriteLine("Getting Users...");
             User[] friends = bk.GetFriends();
@@ -133,7 +133,7 @@ namespace Backend_Tester
             }
         }
 
-        static public void request_friend(Backend bk)
+        static public void request_friend(Backendtest bk)
         {
             Console.Write("Now request a friend, Username: ");
             string usr = Console.ReadLine();
@@ -142,7 +142,7 @@ namespace Backend_Tester
             Console.WriteLine("The response from the friend request was\n\tCode: " + res.status.ToString() + "\n\tMessage: " + res.message);
         }
 
-        public static void accept_friend(Backend bk)
+        public static void accept_friend(Backendtest bk)
         {
             Console.Write("Now accept a friend, FriendID: ");
             int id = int.Parse(Console.ReadLine());
@@ -151,7 +151,7 @@ namespace Backend_Tester
             Console.WriteLine("The response from the friend acceptance was\n\tCode: " + res.status.ToString() + "\n\tMessage: " + res.message);
         }
 
-        public static void remove_friend(Backend bk)
+        public static void remove_friend(Backendtest bk)
         {
             Console.Write("Now remove a friend, FriendID: ");
             int id = int.Parse(Console.ReadLine());
@@ -160,7 +160,7 @@ namespace Backend_Tester
             Console.WriteLine("The response from the friend removal was\n\tCode: " + res.status.ToString() + "\n\tMessage: " + res.message);
         }
 
-        public static void get_events(Backend bk)
+        public static void get_events(Backendtest bk)
         {
             Console.WriteLine("Getting all events...");
             Event[] events = bk.GetEvents();
@@ -169,7 +169,7 @@ namespace Backend_Tester
                 Console.WriteLine("\nEvent, Name: " + e.eventName + "\n\tOwner: " + e.ID + "\n\tShared: " + (e.shared ? "yes" : "no") +"\n\tDay: "+e.Day.ToString()+"\n\tLocation: "+e.location+ "\n\tNotes: " + e.notes);
             }
         }
-        public static void get_my_events(Backend bk)
+        public static void get_my_events(Backendtest bk)
         {
             Console.WriteLine("Getting user events...");
             Event[] events = bk.GetMyEvents();
@@ -178,7 +178,7 @@ namespace Backend_Tester
                 Console.WriteLine("\nEvent, Name: " + e.eventName + "\n\tOwner: " + e.ID + "\n\tShared: " + (e.shared ? "yes" : "no") + "\n\tDay: " + e.Day.ToString() + "\n\tLocation: " + e.location + "\n\tNotes: " + e.notes);
             }
         }
-        public static void update_events (Backend bk)
+        public static void update_events (Backendtest bk)
         {
             Console.WriteLine("Updating local copy of events...");
             if(bk.UpdateEvents().Length != 0)
@@ -188,7 +188,13 @@ namespace Backend_Tester
             else
             {
                 Console.WriteLine("error");
+                Event[] events = bk.UpdateEvents();
+                foreach (Event e in events)
+                {
+                    Console.WriteLine("\nEvent, Name: " + e.eventName + "\n\tOwner: " + e.ID + "\n\tShared: " + (e.shared ? "yes" : "no") + "\n\tDay: " + e.Day.ToString() + "\n\tLocation: " + e.location + "\n\tNotes: " + e.notes);
+                }
             }
+
         }
 
         public static void create_event()
