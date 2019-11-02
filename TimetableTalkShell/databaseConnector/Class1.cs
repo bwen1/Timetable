@@ -492,7 +492,7 @@ namespace databaseConnector
                         if (newStatus == friends.NO)
                             return RemoveFriend(friendID);
 
-                        string query = "update `friends` SET `status`='" + newStatus.ToString() + "' WHERE " + (to ? "`ID2`" : "`ID1`") + " = " + friendID + " ";
+                        string query = "update `friends` SET `status`='" + newStatus.ToString() + "' WHERE " + (to ? "`ID2`" : "`ID1`") + " = " + friendID + " AND " + (to ? "`ID1`" : "`ID2`") + " = " + UID + " ";
                         if (this.OpenConnection() == true)
                         {
                             //create command and assign the query and connection from the constructor
@@ -649,7 +649,7 @@ namespace databaseConnector
         /// <returns>If the event was 'taken out of the picture', if you know what I mean...</returns>
         public Response RemoveEvent(Event thing)
         {
-            if (!events.Contains(thing))
+            if (!myevents.Contains(thing))
                 return new Response(statuscode.ERROR, "That event could not be found, try running updateEvents()");
 
             string query = "DELETE FROM `events` WHERE `EventID` = " + thing.eID + " ";
