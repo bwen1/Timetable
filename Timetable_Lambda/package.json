@@ -1,0 +1,22 @@
+{
+  "name": "timetable_lambda",
+  "version": "1.0.0",
+  "description": "The serverless labbda things for the timetable talk app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bwen1/Timetable.git"
+  },
+  "author": "Jacob Mckenzie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bwen1/Timetable/issues"
+  },
+  "homepage": "https://github.com/bwen1/Timetable#readme",
+  "dependencies": {
+    "serverless": "^1.56.1"
+  }
+}
