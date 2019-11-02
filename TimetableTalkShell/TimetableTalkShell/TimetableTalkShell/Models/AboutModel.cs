@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel;
 using Xamarin.Forms.Internals;
 
-namespace TimetableTalkShell.Models.AboutUs1
+namespace TimetableTalkShell.Models
 {
     /// <summary>
     /// Model for About us templates.
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class AboutUsModel : INotifyPropertyChanged
+    public class AboutModel : INotifyPropertyChanged
     {
         #region Fields
 

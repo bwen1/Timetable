@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="TimetableTalkShell.Views.Hano_Setup_Pages.SimpleResetPasswordPage"
+    x:Class="TimetableTalkShell.Views.LoginPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
@@ -8,26 +8,23 @@
     xmlns:control="clr-namespace:TimetableTalkShell.Controls"
     xmlns:converter="clr-namespace:TimetableTalkShell.Converters"
     xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
-    xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.Hano_Setup_Pages"
-    Title="Reset Password"
+    xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels"
     BackgroundColor="{DynamicResource Gray-Chosen}"
     NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False">
-    <!--NavigationPage.HasNavigationBar="False"
-    Shell.NavBarIsVisible="False">-->
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:BooleanToColorConverter x:Key="ColorConverter" />
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles.xaml" />
+                <ResourceDictionary Source="AccountStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <!--  Binding context for reset password page  -->
+    <!--  Binding context for login page  -->
     <ContentPage.BindingContext>
-        <viewModel:ResetPasswordViewModel />
+        <viewModel:LoginViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
@@ -50,9 +47,12 @@
                 WidthRequest="{OnPlatform Default='-1',
                                           UWP='350'}">
 
-                <Grid RowSpacing="24" VerticalOptions="CenterAndExpand">
+                <Grid RowSpacing="0" VerticalOptions="CenterAndExpand">
 
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -62,69 +62,82 @@
 
                     <!--  Label to display the title of this page  -->
                     <Label
-                        Grid.Row="0"
                         FontFamily="{StaticResource Montserrat-SemiBold}"
                         FontSize="25"
-                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
                         Style="{StaticResource LabelStyle}"
-                        Text="Reset Password"
-                        TextColor="{DynamicResource Gray-White}"
-                        VerticalOptions="Center" />
+                        Text="Log In"
+                        TextColor="LightGray" />
 
                     <!--  Label to display the description of this page  -->
                     <Label
                         Grid.Row="1"
-                        Margin="0,-16,0,8"
+                        Margin="0,8"
                         FontFamily="{StaticResource Montserrat-Medium}"
                         HorizontalTextAlignment="Center"
                         Style="{StaticResource LabelStyle}"
-                        Text="Enter your new password to reset the old password"
+                        Text="{Binding InvalidMessage}"
                         FontSize="18"
-                        TextColor="{DynamicResource Gray-White}" />
+                        TextColor="LightGray" />
 
-                    <!--  Entry to get new password from user  -->
-                    <border:SfBorder
-                        Grid.Row="2"
-                        BackgroundColor="{DynamicResource Gray-White}"
-                        BorderColor="{Binding Source={x:Reference NewPasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
-                        Style="{StaticResource SfBorderStyle}">
+                    <!--  Entry to get email ID from user  -->
+                    <!--<local:SimpleEmailEntry Grid.Row="2" Margin="0,8"
+                           BackgroundColor="{DynamicResource Gray-White}"
+                                                Style="{StaticResource SfBorderStyle}">
                         <control:BorderlessEntry
-                            x:Name="NewPasswordEntry"
-                            IsPassword="True"
-                            Placeholder="Old Password"
-                            PlaceholderColor="{DynamicResource Gray-700}"
+                            x:Name="EmailEntry"
+                            IsPassword="true"
+                            Placeholder="Email"
+                            PlaceholderColor="{Binding Subcolor}"
                             Style="{StaticResource EntryStyle}"
-                            Text="{Binding OldPassword}"
+                            Text="{Binding Email}"
                             FontSize="16"
                             TextColor="LightGray" />
-                    </border:SfBorder>
+                    </local:SimpleEmailEntry>-->
 
-                    <!--  Entry to get confirm password from user  -->
+                    <!--  Entry to get password from user  -->
                     <border:SfBorder
-                        Grid.Row="3"
-                        BackgroundColor="{DynamicResource Gray-White}"
-                        BorderColor="{Binding Source={x:Reference ConfirmNewPasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
-                        Style="{StaticResource SfBorderStyle}">
-                        <control:BorderlessEntry
-                            x:Name="ConfirmNewPasswordEntry"
-                            IsPassword="True"
-                            Placeholder="New Password"
-                            PlaceholderColor="{DynamicResource Gray-700}"
-                            Style="{StaticResource EntryStyle}"
-                            Text="{Binding NewPassword}"
-                            FontSize="16"
-                            TextColor="LightGray" />
-                    </border:SfBorder>
-
-                    <!--  Submit button  -->
-                    <buttons:SfButton
                         Grid.Row="4"
-                        Command="{Binding SubmitCommand}"
+                        Margin="0,8"
+                        BackgroundColor="{DynamicResource Gray-White}"
+                        BorderColor="{Binding Source={x:Reference PasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource SfBorderStyle}">
+                        <control:BorderlessEntry
+                            x:Name="PasswordEntry"
+                            IsPassword="True"
+                            Placeholder="Password"
+                            PlaceholderColor="{DynamicResource Gray-700}"
+                            Style="{StaticResource EntryStyle}"
+                            Text="{Binding Password}"
+                            FontSize="16"
+                            TextColor="{Binding Subcolor}" />
+                    </border:SfBorder>
+
+                    <!--  Forgot password link  -->
+                    <Label
+                        x:Name="ForgotPasswordLabel"
+                        Grid.Row="5"
+                        Margin="0,16"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
                         FontSize="16"
-                        Style="{StaticResource SfButtonStyle}"
+                        HorizontalOptions="End"
+                        Text="FORGOT PASSWORD?"
+                        TextColor="{DynamicResource Gray-White}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" CommandParameter="{x:Reference ForgotPasswordLabel}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <!--  Login button  -->
+                    <buttons:SfButton
+                        Grid.Row="6"
+                        Margin="0,16"
+                        Command="{Binding LoginCommand}"
+                        Text="LOG IN" 
+                        FontSize="18"
                         BorderColor="LightGray"
                         BorderWidth="0.5"
-                        Text="SUBMIT" />
+                        />
 
                 </Grid>
 
@@ -133,9 +146,39 @@
                     Orientation="Horizontal"
                     Spacing="1"
                     VerticalOptions="End">
- 
+
+                  
+                   
+                        
+
+                    <AbsoluteLayout>
+                        <Label
+                        FontFamily="{StaticResource Montserrat-Medium}"
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Don't have an account?"
+                        FontSize="16"
+                        TextColor="{DynamicResource Gray-White}"
+                        VerticalTextAlignment="Center" 
+                        AbsoluteLayout.LayoutBounds="70, -90"/>
+
+                    </AbsoluteLayout>
+
+
+                    <!--  Sign-up button  -->
+                    <buttons:SfButton
+                        Command="{Binding SignUpCommand}"
+                        FontSize="16"
+                        Style="{StaticResource SfFlatButtonStyle}"
+                        BorderColor="LightGray"
+                        BorderWidth="0.5"
+                        Text="Sign Up" />
+
                 </StackLayout>
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
+
 </ContentPage>

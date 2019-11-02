@@ -1,17 +1,17 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace TimetableTalkShell.ViewModels.ReviewsandRatings
+namespace TimetableTalkShell.ViewModels
 {
     /// <summary>
     /// ViewModel for review page.
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class ReviewPageViewModel
+    public class ReviewViewModel
     {
         #region Constructor
 
-        public ReviewPageViewModel()
+        public ReviewViewModel()
         {
             this.UploadCommand = new Command<object>(this.OnUploadTapped);
             this.SubmitCommand = new Command<object>(this.OnSubmitTapped);

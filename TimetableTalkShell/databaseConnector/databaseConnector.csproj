@@ -5,22 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.Data" Version="8.0.17" />
+    <PackageReference Include="MySql.Data" Version="8.0.18" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.3.0" />
-    <PackageReference Include="Syncfusion.Licensing" Version="17.2.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.2.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.Core" Version="17.2.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="17.2.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.GridCommon" Version="17.2.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.2.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="17.2.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="17.2.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="17.2.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.2.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="17.2.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="17.2.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="17.2.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="17.2.0.51" />
+    <PackageReference Include="Syncfusion.Licensing" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.GridCommon" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="17.3.0.21" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="17.3.0.21" />
   </ItemGroup>
 
 </Project>

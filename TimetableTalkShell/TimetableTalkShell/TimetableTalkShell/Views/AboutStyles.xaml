@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary
-    x:Class="TimetableTalkShell.Views.AboutUs1.Styles"
+    x:Class="TimetableTalkShell.Views.AboutStyles"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <Style x:Key="LabelFormatted" TargetType="Label">
+        <Setter Property="TextColor" Value="LightGray" />
+        <Setter Property="FontFamily" Value="{StaticResource Montserrat-Medium}" />
+    </Style>
+    
+    
+    <!-- 
+    
+    {DynamicResource Gray-600}
+    
+    -->
+    
     <!--  Style for version label  -->
     <Style x:Key="VersionLabelStyle" TargetType="Label">
-        <Setter Property="TextColor" Value="{DynamicResource Gray-700}" />
+        <Setter Property="TextColor" Value="LightGray" />
         <Setter Property="FontFamily" Value="{StaticResource Montserrat-Medium}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="LineHeight" Value="{OnPlatform Default=1.25, iOS=-1}"/>
@@ -14,7 +26,7 @@
 
     <!--  Style for header label  -->
     <Style x:Key="HeaderLabelStyle" TargetType="Label">
-        <Setter Property="TextColor" Value="{DynamicResource Gray-900}" />
+        <Setter Property="TextColor" Value="LightGray" />
         <Setter Property="FontFamily" Value="{StaticResource Montserrat-SemiBold}" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
@@ -24,7 +36,7 @@
 
     <!--  Style for description label  -->
     <Style x:Key="DescriptionLabelStyle" TargetType="Label">
-        <Setter Property="TextColor" Value="{DynamicResource Gray-700}" />
+        <Setter Property="TextColor" Value="LightGray" />
         <Setter Property="FontFamily" Value="{StaticResource Montserrat-Medium}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />

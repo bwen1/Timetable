@@ -1,11 +1,11 @@
 ﻿using Xamarin.Forms.Internals;
 
-namespace TimetableTalkShell.Views.AboutUs1
+namespace TimetableTalkShell.Views
 {
     [Preserve(AllMembers = true)]
-    public partial class Styles
+    public partial class AboutStyles
     {
-        public Styles()
+        public AboutStyles()
         {
             this.InitializeComponent();
         }

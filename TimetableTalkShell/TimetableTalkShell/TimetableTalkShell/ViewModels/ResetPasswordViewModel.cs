@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
+namespace TimetableTalkShell.ViewModels
 {
     /// <summary>
     /// ViewModel for reset password page.

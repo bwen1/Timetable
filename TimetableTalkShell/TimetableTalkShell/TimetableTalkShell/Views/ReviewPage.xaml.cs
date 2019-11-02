@@ -2,7 +2,7 @@
 using Xamarin.Forms.Xaml;
 using System;
 
-namespace TimetableTalkShell.Views.ReviewsandRatings
+namespace TimetableTalkShell.Views
 {
     /// <summary>
     /// Page to get review from customer

@@ -1,19 +1,19 @@
 ﻿using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
-namespace TimetableTalkShell.Views.Hano_Setup_Pages
+namespace TimetableTalkShell.Views
 {
     /// <summary>
-    /// Page to reset old password
+    /// Class helps to reduce repetitive markup and allows to change the appearance of apps more easily.
     /// </summary>
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SimpleResetPasswordPage
+    public partial class ReviewStyles
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SimpleResetPasswordPage" /> class.
+        /// Initializes a new instance of the <see cref="ReviewStyles" /> class.
         /// </summary>
-        public SimpleResetPasswordPage()
+        public ReviewStyles()
         {
             this.InitializeComponent();
         }

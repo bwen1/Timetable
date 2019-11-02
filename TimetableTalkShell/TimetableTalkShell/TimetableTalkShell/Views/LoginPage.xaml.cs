@@ -1,19 +1,19 @@
 ﻿using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
-namespace TimetableTalkShell.Views.Hano_Setup_Pages
+namespace TimetableTalkShell.Views
 {
     /// <summary>
     /// Page to login with user name and password
     /// </summary>
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SimpleLoginPage
+    public partial class LoginPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SimpleLoginPage" /> class.
+        /// Initializes a new instance of the <see cref="LoginPage" /> class.
         /// </summary>
-        public SimpleLoginPage()
+        public LoginPage()
         {
             this.InitializeComponent();
         }

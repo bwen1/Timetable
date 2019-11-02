@@ -1,19 +1,20 @@
 ﻿using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
-namespace TimetableTalkShell.Views.Hano_Setup_Pages
+namespace TimetableTalkShell.Views
 {
+
     /// <summary>
-    /// Page to sign in with user details.
+    /// Page to reset old password
     /// </summary>
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SimpleSignUpPage
+    public partial class ResetPasswordPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SimpleSignUpPage" /> class.
+        /// Initializes a new instance of the <see cref="ResetPasswordPage" /> class.
         /// </summary>
-        public SimpleSignUpPage()
+        public ResetPasswordPage()
         {
             this.InitializeComponent();
         }

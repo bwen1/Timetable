@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
-    x:Class="TimetableTalkShell.Views.Hano_Setup_Pages.SimpleSignUpPage"
+    x:Class="TimetableTalkShell.Views.SignUpPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
@@ -8,8 +8,7 @@
     xmlns:control="clr-namespace:TimetableTalkShell.Controls"
     xmlns:converter="clr-namespace:TimetableTalkShell.Converters"
     xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
-    xmlns:local="clr-namespace:TimetableTalkShell.Views.Hano_Setup_Pages"
-    xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.Hano_Setup_Pages"
+    xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels"
     Title="Sign Up"
     NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False"
@@ -21,14 +20,14 @@
         <ResourceDictionary>
             <converter:BooleanToColorConverter x:Key="ColorConverter" />
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles.xaml" />
+                <ResourceDictionary Source="AccountStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <!--  Binding context for sign-up page  -->
     <ContentPage.BindingContext>
-        <viewModel:SignUpPageViewModel />
+        <viewModel:SignUpViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView HorizontalOptions="Center">

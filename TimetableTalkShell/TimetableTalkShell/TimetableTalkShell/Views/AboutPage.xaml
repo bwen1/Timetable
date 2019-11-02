@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
-    x:Class="TimetableTalkShell.Views.AboutUs1.AboutUsSimplePage"
+    x:Class="TimetableTalkShell.Views.AboutPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
@@ -8,7 +8,7 @@
     xmlns:control="clr-namespace:TimetableTalkShell.Controls"
     xmlns:converter="clr-namespace:TimetableTalkShell.Converters"
     xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
-    xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels.AboutUs1"
+    xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels"
     Title="Sign Up"
     BackgroundColor="{DynamicResource Gray-Chosen}"
     NavigationPage.HasNavigationBar="False"
@@ -18,16 +18,74 @@
         <ResourceDictionary>
             <converter:BooleanToColorConverter x:Key="ColorConverter" />
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles.xaml" />
+                <ResourceDictionary Source="AboutStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <!--  Binding context for about us page  -->
     <ContentPage.BindingContext>
-        <viewModel:AboutUsViewModel />
+        <viewModel:AboutViewModel />
     </ContentPage.BindingContext>
-    <ContentPage.Content>
+
+
+    <ScrollView BackgroundColor="#2b2b2b">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout VerticalOptions="FillAndExpand"
+                         HorizontalOptions="Fill">
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+                    <ContentView Padding="0,40,0,40"
+                                 VerticalOptions="FillAndExpand">
+                        <Image Source="icon.png"
+                               VerticalOptions="Center" />
+                    </ContentView>
+                </StackLayout>
+            </StackLayout>
+            <ScrollView Grid.Row="1">
+                <StackLayout Orientation="Vertical"
+                             Padding="16,40,16,40"
+                             Spacing="10">
+                    <Label FontSize="22"
+                           Style="{StaticResource LabelFormatted}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="Timetable Talk      v1.0"
+                                          FontAttributes="Bold"
+                                          FontSize="30" />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Style="{StaticResource LabelFormatted}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="This application is written in XAML and C# with the "
+                                          FontAttributes="Bold"
+                                          FontSize="20" />
+                                    <Span Text="Xamarin Platform."
+                                          TextDecorations="Underline" 
+                                          FontAttributes="Bold"
+                                          FontSize="20"/>
+                                    <Span Text="&#x0a; &#x0a;&#x0a;The developers on this project are Thomas Crilly, "/>
+                                    <Span Text="Bill Wen, Hanosiyan Ravinthirakumaran, and Jacob McKenzie."/>
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ScrollView>
+    
+    <!--<ContentPage.Content>
         <ScrollView HorizontalOptions="Center">
             <ScrollView.VerticalOptions>
                 <OnIdiom
@@ -52,7 +110,7 @@
                     VerticalOptions="CenterAndExpand">
 
                    
-                    <!--  Icon -->
+                    --><!--  Icon --><!--
 
 
                     <Image 
@@ -64,7 +122,7 @@
 
 
 
-                    <!--  Title  -->
+                    --><!--  Title  --><!--
                     <Label
                         FontFamily="{StaticResource Montserrat-SemiBold}"
                         HorizontalOptions="CenterAndExpand"
@@ -74,7 +132,7 @@
                         Text="Time Table Talk"
                         Margin="0,0,0,0"/>
 
-                    <!--  Version  -->
+                    --><!--  Version  --><!--
                     <Label
                         Margin="0,5,0,16"
                         HorizontalOptions="CenterAndExpand"
@@ -84,7 +142,7 @@
                         Text="{Binding ProductVersion, StringFormat='Version {0}'}" />
 
                     
-                    <!--  Description  -->
+                    --><!--  Description  --><!--
                     <Label
                         
                         HorizontalOptions="Center"
@@ -95,7 +153,7 @@
                         Text="Behind Time Table Talk are four students who strive to solve a common problem among uni students. Students have trouble managing their own time table and everyone else's time table's at the same time. We solve that problem by putting everyone's timetables into one accessible app and allow you to compare them with ease." />
 
 
-                    <!--  Back Button  -->
+                    --><!--  Back Button  --><!--
                     <buttons:SfButton 
                         Style="{StaticResource SfFlatButtonStyle}"
                         VerticalOptions="Center"
@@ -113,5 +171,5 @@
                 
             </StackLayout>
         </ScrollView>
-    </ContentPage.Content>
+    </ContentPage.Content>-->
 </ContentPage>

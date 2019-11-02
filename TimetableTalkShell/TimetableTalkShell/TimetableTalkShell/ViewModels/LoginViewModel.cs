@@ -2,13 +2,13 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
+namespace TimetableTalkShell.ViewModels
 {
     /// <summary>
     /// ViewModel for login page.
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class LoginPageViewModel : LoginViewModel
+    public class LoginViewModel : LoginBaseViewModel
     {
         #region Fields
 
@@ -21,9 +21,9 @@ namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance for the <see cref="LoginPageViewModel" /> class.
+        /// Initializes a new instance for the <see cref="LoginViewModel" /> class.
         /// </summary>
-        public LoginPageViewModel()
+        public LoginViewModel()
         {
             this.LoginCommand = new Command(this.LoginClicked);
             this.SignUpCommand = new Command(this.SignUpClicked);

@@ -1,19 +1,19 @@
 ﻿using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
-namespace TimetableTalkShell.Views.Hano_Setup_Pages
+namespace TimetableTalkShell.Views
 {
     /// <summary>
     /// Class helps to reduce repetitive markup, and allows an apps appearance to be more easily changed.
     /// </summary>
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Styles
+    public partial class AccountStyles
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Styles" /> class.
+        /// Initializes a new instance of the <see cref="AccountStyles" /> class.
         /// </summary>
-        public Styles()
+        public AccountStyles()
         {
             this.InitializeComponent();
         }

@@ -5,13 +5,12 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        mc:Ignorable="d"
        xmlns:views="clr-namespace:TimetableTalkShell.Views"
-       xmlns:viewsAbout="clr-namespace:TimetableTalkShell.Views.AboutUs1"
-       xmlns:viewsHano="clr-namespace:TimetableTalkShell.Views.Hano_Setup_Pages"
-       xmlns:viewsReviews="clr-namespace:TimetableTalkShell.Views.ReviewsandRatings"
        xmlns:controls="clr-namespace:TimetableTalkShell.Controls"
        Title="TimetableTalkShell"
        x:Class="TimetableTalkShell.AppShell"
-       FlyoutHeaderBehavior="CollapseOnScroll">
+       FlyoutHeaderBehavior="CollapseOnScroll"
+       Navigating="OnNavigating"
+       Navigated="OnNavigated">
 
     <!-- 
         Styles and Resources TESTING COMMIT
@@ -39,27 +38,35 @@
         <controls:FlyoutHeader />
     </Shell.FlyoutHeader>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Timetable Page"
-                  ContentTemplate="{DataTemplate views:ItemsPage}"
+        <ShellContent Route="items"
+                      Title="Timetable Page"
+                      ContentTemplate="{DataTemplate views:ItemsPage}"
                       IsTabStop="False"/>
-        <ShellContent Title="Signup Page"
-                      ContentTemplate="{DataTemplate viewsHano:SimpleSignUpPage}" />
-        <ShellContent Title="Log in Page"
-                      ContentTemplate="{DataTemplate viewsHano:SimpleLoginPage}" 
+        <ShellContent Route="signup"
+                      Title="Signup Page"
+                      ContentTemplate="{DataTemplate views:SignUpPage}" />
+        <ShellContent Route="login"
+                      Title="Log in Page"
+                      ContentTemplate="{DataTemplate views:LoginPage}" 
                       IsTabStop="False"/>
-        <ShellContent Title="Reset Password Page"
-                      ContentTemplate="{DataTemplate viewsHano:SimpleResetPasswordPage}" 
+        <ShellContent Route="resetpassword"
+                      Title="Reset Password Page"
+                      ContentTemplate="{DataTemplate views:ResetPasswordPage}" 
                       IsTabStop="False"/>
-        <ShellContent Title="Review Page"
-                      ContentTemplate="{DataTemplate viewsReviews:ReviewPage}" 
+        <ShellContent Route="review"
+                      Title="Review Page"
+                      ContentTemplate="{DataTemplate views:ReviewPage}" 
                       IsTabStop="False"/>
-        <ShellContent Title="About Page"
-                      ContentTemplate="{DataTemplate viewsAbout:AboutUsSimplePage}" 
+        <ShellContent Route="about"
+                      Title="About Page"
+                      ContentTemplate="{DataTemplate views:AboutPage}" 
                       IsTabStop="False"/>
-        <ShellContent Title="Settings Page"
+        <ShellContent Route="bill"
+                      Title="Settings Page"
                       ContentTemplate="{DataTemplate views:BillPage}"
                       IsTabStop="False"/>
-        <ShellContent Title="Timetable Page"
+        <ShellContent Route="thomas"
+                      Title="Timetable Page"
                       ContentTemplate="{DataTemplate views:ThomasPage}"
                       IsTabStop="False" />
     </FlyoutItem>

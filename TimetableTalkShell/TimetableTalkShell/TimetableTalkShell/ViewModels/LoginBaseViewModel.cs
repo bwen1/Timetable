@@ -2,13 +2,13 @@
 using System.Runtime.CompilerServices;
 using Xamarin.Forms.Internals;
 
-namespace TimetableTalkShell.ViewModels.Hano_Setup_Pages
+namespace TimetableTalkShell.ViewModels
 {
     /// <summary>
     /// ViewModel for login page.
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class LoginViewModel : INotifyPropertyChanged
+    public class LoginBaseViewModel : INotifyPropertyChanged
     {
         #region Fields
 

@@ -1,19 +1,19 @@
 ﻿using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
-namespace TimetableTalkShell.Views.ReviewsandRatings
+namespace TimetableTalkShell.Views
 {
     /// <summary>
-    /// Class helps to reduce repetitive markup and allows to change the appearance of apps more easily.
+    /// Page to sign in with user details.
     /// </summary>
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Styles
+    public partial class SignUpPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Styles" /> class.
+        /// Initializes a new instance of the <see cref="SignUpPage" /> class.
         /// </summary>
-        public Styles()
+        public SignUpPage()
         {
             this.InitializeComponent();
         }
