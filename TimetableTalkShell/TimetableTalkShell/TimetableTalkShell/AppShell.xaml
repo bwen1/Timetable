@@ -47,34 +47,27 @@
     </FlyoutItem>
 
     <ShellContent Route="items"
-                      Title="Timetable Page"
+                      
                       ContentTemplate="{DataTemplate views:ItemsPage}"
                       IsTabStop="False"/>
     <ShellContent Route="signup"
-                      Title="Signup Page"
                       ContentTemplate="{DataTemplate views:SignUpPage}" />
     <ShellContent Route="login"
-                      Title="Log in Page"
                       ContentTemplate="{DataTemplate views:LoginPage}" 
                       IsTabStop="False"/>
     <ShellContent Route="resetpassword"
-                      Title="Reset Password Page"
                       ContentTemplate="{DataTemplate views:ResetPasswordPage}" 
                       IsTabStop="False"/>
     <ShellContent Route="review"
-                      Title="Review Page"
                       ContentTemplate="{DataTemplate views:ReviewPage}" 
                       IsTabStop="False"/>
     <ShellContent Route="about"
-                      Title="About Page"
                       ContentTemplate="{DataTemplate views:AboutPage}" 
                       IsTabStop="False"/>
     <ShellContent Route="bill"
-                      Title="Settings Page"
                       ContentTemplate="{DataTemplate views:BillPage}"
                       IsTabStop="False"/>
     <ShellContent Route="thomas"
-                      Title="Timetable Page"
                       ContentTemplate="{DataTemplate views:ThomasPage}"
                       IsTabStop="False" />
 
