@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TimetableTalkShell.Views.AppPagesPage"
+             Title="{Binding Title}">
+
+    
+    
+    
+
+    <StackLayout>
+        <Button Text="Signup Page" Clicked="OnSignup" /> 
+        <Button Text="Reset Password Page" Clicked="OnResetPassword" />
+        <Button Text="Review Page" Clicked="OnReview" />
+        <Button Text="About Page" Clicked="OnAbout" />
+        <Button Text="Bill Page" Clicked="OnBill" />
+        <Button Text="Thomas Page" Clicked="OnThomas"/>
+    </StackLayout>
+    
+    
+    
+</ContentPage>
