@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\databaseConnector\databaseConnector.csproj" />
-    <ProjectReference Include="..\TimetableTalkShell\TimetableTalkShell.Android\TimetableTalkShell.Android.csproj" />
     <ProjectReference Include="..\TimetableTalkShell\TimetableTalkShell\TimetableTalkShell.csproj" />
   </ItemGroup>
 

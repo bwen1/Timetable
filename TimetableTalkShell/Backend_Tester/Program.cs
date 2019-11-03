@@ -133,30 +133,30 @@ namespace Backend_Tester
             }
         }
 
-        static public void request_friend(Backend bk)
+        static public async void request_friend(Backend bk)
         {
             Console.Write("Now request a friend, Username: ");
             string usr = Console.ReadLine();
             Console.WriteLine("requesting friend...");
-            Response res = bk.RequestFriend(usr);
+            Response res = await bk.RequestFriend(usr);
             Console.WriteLine("The response from the friend request was\n\tCode: " + res.status.ToString() + "\n\tMessage: " + res.message);
         }
 
-        public static void accept_friend(Backend bk)
+        public static async void accept_friend(Backend bk)
         {
             Console.Write("Now accept a friend, FriendID: ");
             int id = int.Parse(Console.ReadLine());
             Console.WriteLine("Accepting friend...");
-            Response res = bk.AcceptFriend(id);
+            Response res = await bk.AcceptFriend(id);
             Console.WriteLine("The response from the friend acceptance was\n\tCode: " + res.status.ToString() + "\n\tMessage: " + res.message);
         }
 
-        public static void remove_friend(Backend bk)
+        public static async void remove_friend(Backend bk)
         {
             Console.Write("Now remove a friend, FriendID: ");
             int id = int.Parse(Console.ReadLine());
             Console.WriteLine("removing friend...");
-            Response res = bk.RemoveFriend(id);
+            Response res = await bk.RemoveFriend(id);
             Console.WriteLine("The response from the friend removal was\n\tCode: " + res.status.ToString() + "\n\tMessage: " + res.message);
         }
 

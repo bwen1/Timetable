@@ -552,47 +552,43 @@ namespace databaseConnector
         /// </summary>
         /// <param name="thing"> the event to add, it not called 'event' because that's a keyword</param>
         /// <returns>If the event was sucessfully added</returns>
-        //public async Task<Response> AddEvent(Event thing)
-        //{
-        //    if (IsLoggedIn())
-        //    {
-        //        var values = new Dictionary<string, string>
-        //    {
-        //        { "id", UID.ToString() },
-        //        { "friendid", friendID.ToString() }
-        //    };
+        public async Task<Response> AddEvent(Event thing)
+        {
+            if (IsLoggedIn())
+            {
+                var values = new Dictionary<string, string>
+            {
+                { "id", UID.ToString() },
+                { "shared", thing.shared.ToString() },
+                { "eventname", thing.eventName },
+                { "notes", thing.notes },
+                { "location", thing.location },
+                { "timestart", thing.startTime },
+                { "timeend", thing.endTime },
+                { "day", thing.Day.ToString() }
+            };
 
-        //        var content = new FormUrlEncodedContent(values);
+                var content = new FormUrlEncodedContent(values);
 
-        //        var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/friends/removefriend", content);
+                var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/events/addevent", content);
 
-        //        var responseString = await response.Content.ReadAsStringAsync();
-                
-        //        if (this.OpenConnection() == true)
-        //        {
-        //            //create command and assign the query and connection from the constructor
-        //            MySqlCommand cmd = new MySqlCommand(query, connection);
+                var responseString = await response.Content.ReadAsStringAsync();
+                dynamic obj = JsonConvert.DeserializeObject(responseString);
 
-        //            //Execute command
-        //            cmd.ExecuteNonQuery();
+                if (!obj.Error)
+                {
+                    int id = int.Parse(obj.EventID);
 
-        //            query = "select `EventID` from `events` where `ID` = " + UID + " AND eventName = '" + thing.eventName + "' AND TimeStart = " + thing.startTime + " LIMIT 1";
-        //            cmd = new MySqlCommand(query, connection);
-        //            MySqlDataReader dataReader = cmd.ExecuteReader();
+                    events.Add(new Event(id, UID, thing.eventName, thing.shared, thing.startTime, thing.endTime, thing.Day));
+                    //close connection
+                    this.CloseConnection();
 
-        //            dataReader.Read();
-        //            int id = int.Parse(dataReader["EventID"] + "");
-
-        //            events.Add(new Event(id, UID, thing.eventName, thing.shared, thing.startTime, thing.endTime, thing.Day));
-        //            //close connection
-        //            this.CloseConnection();
-
-        //            return new Response(statuscode.OK, "event added sucessfully");
-        //        }
-        //        return new Response(statuscode.ERROR, "Could not open database");
-        //    }
-        //    return new Response(statuscode.ERROR, "User not logged in");
-        //}
+                    return new Response(statuscode.OK, "event added sucessfully");
+                }
+                return new Response(statuscode.ERROR, "Could not open database");
+            }
+            return new Response(statuscode.ERROR, "User not logged in");
+        }
 
         /// <summary>
         /// Replaces an old event with a new one. (untested)
@@ -600,23 +596,34 @@ namespace databaseConnector
         /// <param name="oldEvent">the event pre-edit</param>
         /// <param name="newEvent">the event post-edit</param>
         /// <returns>If the event was sucessfully edited</returns>
-        public Response EditEvent(Event oldEvent, Event newEvent)
+        public async Task<Response> EditEvent(Event oldEvent, Event newEvent)
         {
             if (IsLoggedIn())
             {
-                string query = "UPDATE `events` SET  `ID` =" + UID + ", `shared`= " + newEvent.shared + ", `EventName`= '" + newEvent.eventName + "', `notes`= '" + newEvent.notes + "', `Location`= '" + newEvent.location + "', `TimeStart`= " + newEvent.startTime + ", `TimeEnd`= " + newEvent.endTime + ", `Day`= '" + newEvent.Day.ToString() + "' WHERE `EventID` = " + oldEvent.eID + "";
-                if (this.OpenConnection() == true)
-                {
-                    //create command and assign the query and connection from the constructor
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                var values = new Dictionary<string, string>
+            {
+                { "id", UID.ToString() },
+                { "eventid", oldEvent.eID.ToString() },
+                { "shared", newEvent.shared.ToString() },
+                { "eventname", newEvent.eventName },
+                { "notes", newEvent.notes },
+                { "location", newEvent.location },
+                { "timestart", newEvent.startTime },
+                { "timeend", newEvent.endTime },
+                { "day", newEvent.Day.ToString() }
+            };
 
-                    //Execute command
-                    cmd.ExecuteNonQuery();
+                var content = new FormUrlEncodedContent(values);
+
+                var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/events/editevent", content);
+
+                var responseString = await response.Content.ReadAsStringAsync();
+                dynamic obj = JsonConvert.DeserializeObject(responseString);
+                if (!obj.Error)
+                {
                     events.Remove(oldEvent);
 
                     events.Add(new Event(oldEvent.eID, UID, newEvent.eventName, newEvent.shared, newEvent.startTime, newEvent.endTime, newEvent.Day));
-                    //close connection
-                    this.CloseConnection();
 
                     return new Response(statuscode.OK, "event edited sucessfully");
                 }

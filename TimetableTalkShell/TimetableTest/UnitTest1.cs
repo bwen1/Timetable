@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TimetableTalkShell.ViewModels;
 
-
 namespace TimetableTest
 {
     [TestClass]
@@ -18,10 +17,16 @@ namespace TimetableTest
 
             //Act
             vm.LoginCommand.Execute(null);
-
+            
             //Assert
-            Assert.IsTrue(vm.Email == "", "Email is Invalid");// Wrong Email
+            Assert.IsTrue(vm.GetType().Name == "SignUpViewModel", "viewmodel");// Wrong Email
             Assert.IsTrue(vm.Password == "", "Password is Invalid");// Wrong Password
+        }
+
+        [TestMethod]
+        public void TestNavigation()
+        {
+            
         }
     }
 }

@@ -171,7 +171,7 @@ namespace TimetableTalkShell.ViewModels
         /// <param name="obj">The Object</param>
         private async void SignUpClicked(object obj)
         {
-            databaseConnector.Response response = App.backend.LogIn("Bob", password);
+            databaseConnector.Response response = App.backend.SignUp("Bob", password);
             if (response.status == databaseConnector.statuscode.OK)
             {
                 await Shell.Current.GoToAsync("//login");
