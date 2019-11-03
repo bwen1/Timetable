@@ -997,10 +997,10 @@ namespace databaseConnector
         private int idcounter = 0;
         private int UID;
         public string UserName { get; private set; }
-        private string server;
-        private string database;
-        private string uid;
-        private string password;
+        //private string server;
+        //private string database;
+        //private string uid;
+        //private string password;
         private List<string> takenNames;
         private List<User> friendarray;
         private List<Event> events;
