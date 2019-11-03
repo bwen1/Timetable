@@ -14,7 +14,6 @@
     <PackageReference Include="SkiaSharp" Version="1.68.0" />
     <PackageReference Include="SkiaSharp.Extended" Version="1.60.0" />
     <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
-    <PackageReference Include="SkiaSharp.Views" Version="1.68.0" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
     <PackageReference Include="Syncfusion.Licensing" Version="17.3.0.21" />
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.3.0.21" />
@@ -41,22 +40,46 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\AboutStyles.xaml.cs">
+      <DependentUpon>AboutStyles.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AccountStyles.xaml.cs">
+      <DependentUpon>AccountStyles.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ResetPasswordPage.xaml.cs">
+      <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ReviewStyles.xaml.cs">
+      <DependentUpon>ReviewStyles.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Controls\FlyoutHeader.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AboutUs1\AboutUsSimplePage.xaml">
+    <EmbeddedResource Update="Views\AboutPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AboutUs1\Styles.xaml">
+    <EmbeddedResource Update="Views\AboutStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\BillPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ReviewsandRatings\ReviewPage.xaml">
+    <EmbeddedResource Update="Views\ReviewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ReviewsandRatings\Styles.xaml">
+    <EmbeddedResource Update="Views\ReviewStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ThomasPage.xaml">

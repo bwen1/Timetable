@@ -10,11 +10,11 @@ namespace TimetableTalkShell
     public partial class App : Application
     {
         public static string BaseImageUrl { get; } = "https://cdn.syncfusion.com/essential-ui-kit-for-xamarin.forms/common/uikitimages/";
-        public static Backend backend { get; private set; } 
+        public static Backendtest backend { get; private set; } 
         public App()
         {
             InitializeComponent();
-            backend = new Backend();
+            backend = new Backendtest();
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }

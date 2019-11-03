@@ -7,7 +7,10 @@
        xmlns:views="clr-namespace:TimetableTalkShell.Views"
        xmlns:controls="clr-namespace:TimetableTalkShell.Controls"
        Title="TimetableTalkShell"
-       x:Class="TimetableTalkShell.AppShell">
+       x:Class="TimetableTalkShell.AppShell"
+       FlyoutHeaderBehavior="CollapseOnScroll"
+       Navigating="OnNavigating"
+       Navigated="OnNavigated">
 
     <!-- 
         Styles and Resources TESTING COMMIT
@@ -21,22 +24,51 @@
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
-                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                
             </Style>
             <Style TargetType="ShellItem" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
     </Shell.Resources>
-
+    <!--<Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+    <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+    <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+    <Setter Property="Shell.TabBarTitleColor" Value="White"/>-->
 
     <Shell.FlyoutHeader>
         <controls:FlyoutHeader />
     </Shell.FlyoutHeader>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Items Page"
-                  ContentTemplate="{DataTemplate views:ItemsPage}" />
+        <ShellContent Route="items"
+                      Title="Timetable Page"
+                      ContentTemplate="{DataTemplate views:ItemsPage}"
+                      IsTabStop="False"/>
+        <ShellContent Route="signup"
+                      Title="Signup Page"
+                      ContentTemplate="{DataTemplate views:SignUpPage}" />
+        <ShellContent Route="login"
+                      Title="Log in Page"
+                      ContentTemplate="{DataTemplate views:LoginPage}" 
+                      IsTabStop="False"/>
+        <ShellContent Route="resetpassword"
+                      Title="Reset Password Page"
+                      ContentTemplate="{DataTemplate views:ResetPasswordPage}" 
+                      IsTabStop="False"/>
+        <ShellContent Route="review"
+                      Title="Review Page"
+                      ContentTemplate="{DataTemplate views:ReviewPage}" 
+                      IsTabStop="False"/>
+        <ShellContent Route="about"
+                      Title="About Page"
+                      ContentTemplate="{DataTemplate views:AboutPage}" 
+                      IsTabStop="False"/>
+        <ShellContent Route="bill"
+                      Title="Settings Page"
+                      ContentTemplate="{DataTemplate views:BillPage}"
+                      IsTabStop="False"/>
+        <ShellContent Route="thomas"
+                      Title="Timetable Page"
+                      ContentTemplate="{DataTemplate views:ThomasPage}"
+                      IsTabStop="False" />
     </FlyoutItem>
     
     <!-- Your Pages -->

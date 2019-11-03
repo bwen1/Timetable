@@ -7,24 +7,23 @@ A multiplatform mobile application for creating and sharing your timetable with 
  
 ### Features
 - Easely find when you can meet up with friends / associates.
-- see your schedule at a glance
+- Sync your profile across multiple devices.
 - lead a better and more mindful life
 
-### Notes about Grading
+### Notes about Grading (Assignment 3)
 
-##### No group member can have done more than 25% of the work.
+#### Objectives
+- Implement tutor / user feedback from a2
+- Ensure that app has all stated functions, running free from error...
 
-##### All group members **MUST** contribute in some way to at least one page. (so in the view or viewmodel)
-
-##### All group members **MUST** contribute in a major way to at least one interview. (So; questions, transcript, summary)
+##### No group member can have done more than 30 marks of the work.
 
 #### Marks breakdown
-- **17%** The trello and communication.
-- **33%** Going and interviewing people on the app.
-- **33%** The code, in frount and behind the app, and its functionality.
-- **17%** The style guide, (This is a group effort).
-
+- **28%** Unit testing
+- **28%** Going and interviewing people on the app. then noticably implementing the sugested changes.
+- **43%** The code, in frount and behind the app, and its functionality.
 
 ### To-do
 - [x] Push code that actually compiles
+- [ ] Do midleware.
 - [ ] Everything.
