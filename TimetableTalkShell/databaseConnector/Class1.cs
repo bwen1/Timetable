@@ -117,6 +117,15 @@ namespace databaseConnector
             UID = 0;
         }
 
+        public bool OpenConnection()
+        {
+            return true;
+        }
+        public bool CloseConnection()
+        {
+            return true;
+        }
+
         /// <summary>
         /// Is a user currently logged in, does not refer to database connectivity.
         /// </summary>
@@ -410,7 +419,7 @@ namespace databaseConnector
         {
             if (IsLoggedIn())
             {
-                return await RequestFriend(await GetUser(username));
+                return await RequestFriend(GetUser(username));
             }
             return new Response(statuscode.ERROR, "User not logged in");
         }
@@ -543,47 +552,47 @@ namespace databaseConnector
         /// </summary>
         /// <param name="thing"> the event to add, it not called 'event' because that's a keyword</param>
         /// <returns>If the event was sucessfully added</returns>
-        public Response AddEvent(Event thing)
-        {
-            if (IsLoggedIn())
-            {
-                var values = new Dictionary<string, string>
-            {
-                { "id", UID.ToString() },
-                { "friendid", friendID.ToString() }
-            };
+        //public async Task<Response> AddEvent(Event thing)
+        //{
+        //    if (IsLoggedIn())
+        //    {
+        //        var values = new Dictionary<string, string>
+        //    {
+        //        { "id", UID.ToString() },
+        //        { "friendid", friendID.ToString() }
+        //    };
 
-                var content = new FormUrlEncodedContent(values);
+        //        var content = new FormUrlEncodedContent(values);
 
-                var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/friends/removefriend", content);
+        //        var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/friends/removefriend", content);
 
-                var responseString = await response.Content.ReadAsStringAsync();
+        //        var responseString = await response.Content.ReadAsStringAsync();
                 
-                if (this.OpenConnection() == true)
-                {
-                    //create command and assign the query and connection from the constructor
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
+        //        if (this.OpenConnection() == true)
+        //        {
+        //            //create command and assign the query and connection from the constructor
+        //            MySqlCommand cmd = new MySqlCommand(query, connection);
 
-                    //Execute command
-                    cmd.ExecuteNonQuery();
+        //            //Execute command
+        //            cmd.ExecuteNonQuery();
 
-                    query = "select `EventID` from `events` where `ID` = " + UID + " AND eventName = '" + thing.eventName + "' AND TimeStart = " + thing.startTime + " LIMIT 1";
-                    cmd = new MySqlCommand(query, connection);
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
+        //            query = "select `EventID` from `events` where `ID` = " + UID + " AND eventName = '" + thing.eventName + "' AND TimeStart = " + thing.startTime + " LIMIT 1";
+        //            cmd = new MySqlCommand(query, connection);
+        //            MySqlDataReader dataReader = cmd.ExecuteReader();
 
-                    dataReader.Read();
-                    int id = int.Parse(dataReader["EventID"] + "");
+        //            dataReader.Read();
+        //            int id = int.Parse(dataReader["EventID"] + "");
 
-                    events.Add(new Event(id, UID, thing.eventName, thing.shared, thing.startTime, thing.endTime, thing.Day));
-                    //close connection
-                    this.CloseConnection();
+        //            events.Add(new Event(id, UID, thing.eventName, thing.shared, thing.startTime, thing.endTime, thing.Day));
+        //            //close connection
+        //            this.CloseConnection();
 
-                    return new Response(statuscode.OK, "event added sucessfully");
-                }
-                return new Response(statuscode.ERROR, "Could not open database");
-            }
-            return new Response(statuscode.ERROR, "User not logged in");
-        }
+        //            return new Response(statuscode.OK, "event added sucessfully");
+        //        }
+        //        return new Response(statuscode.ERROR, "Could not open database");
+        //    }
+        //    return new Response(statuscode.ERROR, "User not logged in");
+        //}
 
         /// <summary>
         /// Replaces an old event with a new one. (untested)
