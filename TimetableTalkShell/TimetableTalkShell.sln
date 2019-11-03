@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "databaseConnector", "databa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend_Tester", "Backend_Tester\Backend_Tester.csproj", "{D1C1AE25-79EC-4A0B-BC27-5BD1AE576E5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimetableTest", "TimetableTest\TimetableTest.csproj", "{D5075A9F-7556-4E7D-80A1-5F780D2F4508}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,18 @@ Global
 		{D1C1AE25-79EC-4A0B-BC27-5BD1AE576E5F}.Release|iPhone.Build.0 = Release|Any CPU
 		{D1C1AE25-79EC-4A0B-BC27-5BD1AE576E5F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{D1C1AE25-79EC-4A0B-BC27-5BD1AE576E5F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{D5075A9F-7556-4E7D-80A1-5F780D2F4508}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5075A9F-7556-4E7D-80A1-5F780D2F4508}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5075A9F-7556-4E7D-80A1-5F780D2F4508}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{D5075A9F-7556-4E7D-80A1-5F780D2F4508}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{D5075A9F-7556-4E7D-80A1-5F780D2F4508}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{D5075A9F-7556-4E7D-80A1-5F780D2F4508}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{D5075A9F-7556-4E7D-80A1-5F780D2F4508}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5075A9F-7556-4E7D-80A1-5F780D2F4508}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5075A9F-7556-4E7D-80A1-5F780D2F4508}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{D5075A9F-7556-4E7D-80A1-5F780D2F4508}.Release|iPhone.Build.0 = Release|Any CPU
+		{D5075A9F-7556-4E7D-80A1-5F780D2F4508}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D5075A9F-7556-4E7D-80A1-5F780D2F4508}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
