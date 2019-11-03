@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using SkiaSharp.Extended;
 using SkiaSharp.Views.Forms;
 using System;
 using System.IO;

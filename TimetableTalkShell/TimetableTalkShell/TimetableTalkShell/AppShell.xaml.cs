@@ -29,6 +29,7 @@ namespace TimetableTalkShell
             routes.Add("about", typeof(AboutPage));
             routes.Add("bill", typeof(BillPage));
             routes.Add("thomas", typeof(ThomasPage));
+            routes.Add("apppages", typeof(AppPagesPage));
 
             foreach (var item in routes)
             {

@@ -37,11 +37,52 @@
     <Shell.FlyoutHeader>
         <controls:FlyoutHeader />
     </Shell.FlyoutHeader>
+
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        
+        <ShellContent Route="apppages"
+                      Title="Application Pages"
+                      ContentTemplate="{DataTemplate views:AppPagesPage}"
+                      IsTabStop="False" />
+    </FlyoutItem>
+
+    <ShellContent Route="items"
+                      
+                      ContentTemplate="{DataTemplate views:ItemsPage}"
+                      IsTabStop="False"/>
+    <ShellContent Route="signup"
+                      ContentTemplate="{DataTemplate views:SignUpPage}" />
+    <ShellContent Route="login"
+                      ContentTemplate="{DataTemplate views:LoginPage}" 
+                      IsTabStop="False"/>
+    <ShellContent Route="resetpassword"
+                      ContentTemplate="{DataTemplate views:ResetPasswordPage}" 
+                      IsTabStop="False"/>
+    <ShellContent Route="review"
+                      ContentTemplate="{DataTemplate views:ReviewPage}" 
+                      IsTabStop="False"/>
+    <ShellContent Route="about"
+                      ContentTemplate="{DataTemplate views:AboutPage}" 
+                      IsTabStop="False"/>
+    <ShellContent Route="bill"
+                      ContentTemplate="{DataTemplate views:BillPage}"
+                      IsTabStop="False"/>
+    <ShellContent Route="thomas"
+                      ContentTemplate="{DataTemplate views:ThomasPage}"
+                      IsTabStop="False" />
+
+
+
+
+
+
+
+    <!--<FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Route="items"
                       Title="Timetable Page"
                       ContentTemplate="{DataTemplate views:ItemsPage}"
-                      IsTabStop="False"/>
+                      IsTabStop="False"
+                      IsEnabled="False"/>
         <ShellContent Route="signup"
                       Title="Signup Page"
                       ContentTemplate="{DataTemplate views:SignUpPage}" />
@@ -69,7 +110,11 @@
                       Title="Timetable Page"
                       ContentTemplate="{DataTemplate views:ThomasPage}"
                       IsTabStop="False" />
-    </FlyoutItem>
+        <ShellContent Route="apppages"
+                      Title="Application Pages"
+                      ContentTemplate="{DataTemplate views:AppPagesPage}"
+                      IsTabStop="False" />
+    </FlyoutItem>-->
     
     <!-- Your Pages -->
     <!--<TabBar>
