@@ -17,5 +17,7 @@ namespace TimetableTalkShell.Views
         {
             this.InitializeComponent();
         }
+
+
     }
 }

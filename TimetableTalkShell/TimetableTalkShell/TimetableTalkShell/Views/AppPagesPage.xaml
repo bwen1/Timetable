@@ -12,6 +12,7 @@
     
 
     <StackLayout>
+        <Button Text="Login Page" Clicked="OnLogin" />
         <Button Text="Signup Page" Clicked="OnSignup" /> 
         <Button Text="Reset Password Page" Clicked="OnResetPassword" />
         <Button Text="Review Page" Clicked="OnReview" />

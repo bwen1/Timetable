@@ -16,6 +16,7 @@ namespace TimetableTalkShell
         public AppShell()
         {
             InitializeComponent();
+            
             Shell.SetTabBarIsVisible(this, false);
         }
 
@@ -30,6 +31,7 @@ namespace TimetableTalkShell
             routes.Add("bill", typeof(BillPage));
             routes.Add("thomas", typeof(ThomasPage));
             routes.Add("apppages", typeof(AppPagesPage));
+            routes.Add("timetable", typeof(TimetablePage));
 
             foreach (var item in routes)
             {

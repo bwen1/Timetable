@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:TimetableTalkShell.ViewModels"
              mc:Ignorable="d"
-             x:Class="TimetableTalkShell.Views.ThomasPage">
+             x:Class="TimetableTalkShell.Views.ThomasPage"
+             x:Name="thomaspage">
     <ContentPage.BindingContext>
         <vm:ThomasViewModel />
     </ContentPage.BindingContext>

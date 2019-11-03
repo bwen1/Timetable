@@ -144,21 +144,24 @@ namespace TimetableTalkShell.ViewModels
         /// Invoked when the Log in button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void LoginClicked(object obj)
+        private async void LoginClicked(object obj)
         {
-            databaseConnector.Response response = App.backend.SignUp(this.Email, this.password);
-            if (response.status == databaseConnector.statuscode.OK)
-            {
-                //navigate from here, to login
-            }
-            else if (response.status == databaseConnector.statuscode.ERROR)
-            {
-                //the signup failed, change text / color
-                this.Email = "";
-                this.Password = "";
-                this.Subcolor = "#FFD62F2F";
-                this.InvalidMessage = response.message;
-            }
+
+            await Shell.Current.GoToAsync("//login");
+
+            //databaseConnector.Response response = App.backend.SignUp(this.Email, this.password);
+            //if (response.status == databaseConnector.statuscode.OK)
+            //{
+            //    //navigate from here, to login
+            //}
+            //else if (response.status == databaseConnector.statuscode.ERROR)
+            //{
+            //    //the signup failed, change text / color
+            //    this.Email = "";
+            //    this.Password = "";
+            //    this.Subcolor = "#FFD62F2F";
+            //    this.InvalidMessage = response.message;
+            //}
             // Do something
         }
 
@@ -166,9 +169,14 @@ namespace TimetableTalkShell.ViewModels
         /// Invoked when the Sign Up button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void SignUpClicked(object obj)
+        private async void SignUpClicked(object obj)
         {
-            // naviget to login page
+            databaseConnector.Response response = App.backend.LogIn("Bob", password);
+            if (response.status == databaseConnector.statuscode.OK)
+            {
+                await Shell.Current.GoToAsync("//login");
+
+            }
         }
 
         #endregion

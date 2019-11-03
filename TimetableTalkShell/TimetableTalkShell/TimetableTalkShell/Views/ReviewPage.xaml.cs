@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
+using Xamarin.Forms;
 using System;
 
 namespace TimetableTalkShell.Views
@@ -18,7 +19,7 @@ namespace TimetableTalkShell.Views
         }
         private async void ToTimetable(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            await Shell.Current.GoToAsync("//timetable");
         }
     }
 }
