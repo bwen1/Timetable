@@ -20,7 +20,7 @@ namespace TimetableTalkShell.Views
         private async void OnTap(object sender, EventArgs e)
         {
             (sender as Button).BackgroundColor = Color.FromHex("#009688");
-            await Navigation.PushAsync(new ReviewPage());
+            await Navigation.PushAsync(new AddEventPage());
         }
 
     }

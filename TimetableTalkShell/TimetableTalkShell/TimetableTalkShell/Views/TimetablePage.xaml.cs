@@ -19,7 +19,7 @@ namespace TimetableTalkShell.Views
 
         private async void OnTap(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//review");
+            await Shell.Current.GoToAsync("//addevent");
         }
 
     }

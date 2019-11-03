@@ -26,7 +26,7 @@ namespace TimetableTalkShell
             routes.Add("signup", typeof(SignUpPage));
             routes.Add("login", typeof(LoginPage));
             routes.Add("resetpassword", typeof(ResetPasswordPage));
-            routes.Add("review", typeof(ReviewPage));
+            routes.Add("addevent", typeof(AddEventPage));
             routes.Add("about", typeof(AboutPage));
             routes.Add("bill", typeof(BillPage));
             routes.Add("thomas", typeof(ThomasPage));

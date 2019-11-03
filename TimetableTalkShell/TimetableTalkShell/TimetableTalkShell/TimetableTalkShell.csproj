@@ -52,14 +52,17 @@
     <Compile Update="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\AddEventPage.xaml.cs">
+      <DependentUpon>AddEventPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\ResetPasswordPage.xaml.cs">
       <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ReviewStyles.xaml.cs">
-      <DependentUpon>ReviewStyles.xaml</DependentUpon>
+    <Compile Update="Views\AddEventStyles.xaml.cs">
+      <DependentUpon>AddEventStyles.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -79,10 +82,10 @@
     <EmbeddedResource Update="Views\BillPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ReviewPage.xaml">
+    <EmbeddedResource Update="Views\AddEventPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ReviewStyles.xaml">
+    <EmbeddedResource Update="Views\AddEventStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ThomasPage.xaml">

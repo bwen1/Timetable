@@ -10,9 +10,9 @@ namespace TimetableTalkShell.Views
     /// </summary>
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ReviewPage
+    public partial class AddEventPage
     {
-        public ReviewPage()
+        public AddEventPage()
         {
             this.InitializeComponent();
             //this.ProductImage.Source = App.BaseImageUrl + "Image1.png";
