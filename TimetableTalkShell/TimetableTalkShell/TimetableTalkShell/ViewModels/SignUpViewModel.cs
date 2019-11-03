@@ -11,7 +11,7 @@ namespace TimetableTalkShell.ViewModels
     {
         #region Fields
 
-        private string name;
+        
 
         private string password;
 
