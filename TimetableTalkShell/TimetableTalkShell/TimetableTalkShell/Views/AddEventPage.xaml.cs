@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
+using Xamarin.Forms;
 using System;
 
 namespace TimetableTalkShell.Views
@@ -9,16 +10,16 @@ namespace TimetableTalkShell.Views
     /// </summary>
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ReviewPage
+    public partial class AddEventPage
     {
-        public ReviewPage()
+        public AddEventPage()
         {
             this.InitializeComponent();
             //this.ProductImage.Source = App.BaseImageUrl + "Image1.png";
         }
         private async void ToTimetable(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            await Shell.Current.GoToAsync("//timetable");
         }
     }
 }

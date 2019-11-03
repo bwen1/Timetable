@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:vm="clr-namespace:TimetableTalkShell.ViewModels"
+             x:Class="TimetableTalkShell.Views.TimetablePage"
+             Title="{Binding Title}"
+             NavigationPage.HasNavigationBar="False"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <vm:TimetableViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary Source="TimetableStyles.xaml" />
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid Style="{StaticResource ContentPageStyle}"
+              ColumnSpacing="2"
+              RowSpacing="2">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="   8am" Grid.Row="1" Grid.Column="0" Style="{StaticResource TimesStyle}"/>
+            <Label Text="   9am" Grid.Row="2" Grid.Column="0" Style="{StaticResource TimesStyle}"/>
+            <Label Text="   10am" Grid.Row="3" Grid.Column="0" Style="{StaticResource TimesStyle}"/>
+            <Label Text="   11am" Grid.Row="4" Grid.Column="0" Style="{StaticResource TimesStyle}"/>
+            <Label Text="   12pm" Grid.Row="5" Grid.Column="0" Style="{StaticResource TimesStyle}"/>
+            <Label Text="   1pm" Grid.Row="6" Grid.Column="0" Style="{StaticResource TimesStyle}"/>
+            <Label Text="   2pm" Grid.Row="7" Grid.Column="0" Style="{StaticResource TimesStyle}"/>
+            <Label Text="   3pm" Grid.Row="8" Grid.Column="0" Style="{StaticResource TimesStyle}"/>
+            <Label Text="   4pm" Grid.Row="9" Grid.Column="0" Style="{StaticResource TimesStyle}"/>
+            <Label Text="   5pm" Grid.Row="10" Grid.Column="0" Style="{StaticResource TimesStyle}"/>
+            <Label Text="   6pm" Grid.Row="11" Grid.Column="0" Style="{StaticResource TimesStyle}"/>
+            <Label Text="   7pm" Grid.Row="12" Grid.Column="0" Style="{StaticResource TimesStyle}"/>
+            <Label Text="   8pm" Grid.Row="13" Grid.Column="0" Style="{StaticResource TimesStyle}"/>
+            
+            
+            <Label Text="Monday" Grid.Row="0" Grid.Column="1" Style="{StaticResource DaysStyle}"/>
+            <Label Text="Tuesday" Grid.Row="0" Grid.Column="3" Style="{StaticResource DaysStyle}"/>
+            <Label Text="Wednesday" Grid.Row="0" Grid.Column="5" Style="{StaticResource DaysStyle}"/>
+            <Label Text="Thursday" Grid.Row="0" Grid.Column="7" Style="{StaticResource DaysStyle}"/>
+            <Label Text="Friday" Grid.Row="0" Grid.Column="9" Style="{StaticResource DaysStyle}"   />
+
+
+            <Button  BorderWidth="1" Grid.Row="1" Grid.Column="1" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="1" Grid.Column="3" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="1" Grid.Column="5" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="1" Grid.Column="7" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="1" Grid.Column="9" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+
+            <Button  BorderWidth="1" Grid.Row="2" Grid.Column="1" Clicked="OnTap"  Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="2" Grid.Column="3" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="2" Grid.Column="5" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="2" Grid.Column="7" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="2" Grid.Column="9" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+
+            <Button  BorderWidth="1" Grid.Row="3" Grid.Column="1" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="3" Grid.Column="3" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="3" Grid.Column="5" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="3" Grid.Column="7" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="3" Grid.Column="9" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+
+            <Button  BorderWidth="1" Grid.Row="4" Grid.Column="1" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="4" Grid.Column="3" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="4" Grid.Column="5" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="4" Grid.Column="7" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="4" Grid.Column="9" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+
+            <Button  BorderWidth="1" Grid.Row="5" Grid.Column="1" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="5" Grid.Column="3" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="5" Grid.Column="5" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="5" Grid.Column="7" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="5" Grid.Column="9" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+
+            <Button  BorderWidth="1" Grid.Row="6" Grid.Column="1" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="6" Grid.Column="3" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="6" Grid.Column="5" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="6" Grid.Column="7" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="6" Grid.Column="9" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+
+            <Button  BorderWidth="1" Grid.Row="7" Grid.Column="1" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="7" Grid.Column="3" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="7" Grid.Column="5" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="7" Grid.Column="7" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="7" Grid.Column="9" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+
+            <Button  BorderWidth="1" Grid.Row="8" Grid.Column="1" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="8" Grid.Column="3" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="8" Grid.Column="5" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="8" Grid.Column="7" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="8" Grid.Column="9" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+
+            <Button  BorderWidth="1" Grid.Row="9" Grid.Column="1" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="9" Grid.Column="3" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="9" Grid.Column="5" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="9" Grid.Column="7" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="9" Grid.Column="9" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+
+            <Button  BorderWidth="1" Grid.Row="10" Grid.Column="1" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="10" Grid.Column="3" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="10" Grid.Column="5" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="10" Grid.Column="7" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="10" Grid.Column="9" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+
+            <Button  BorderWidth="1" Grid.Row="11" Grid.Column="1" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="11" Grid.Column="3" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="11" Grid.Column="5" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="11" Grid.Column="7" Clicked="OnTap"  Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="11" Grid.Column="9" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+
+            <Button  BorderWidth="1" Grid.Row="12" Grid.Column="1" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="12" Grid.Column="3" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="12" Grid.Column="5" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="12" Grid.Column="7" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="12" Grid.Column="9" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+
+            <Button  BorderWidth="1" Grid.Row="13" Grid.Column="1" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="13" Grid.Column="3" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="13" Grid.Column="5" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="13" Grid.Column="7" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+            <Button  BorderWidth="1" Grid.Row="13" Grid.Column="9" Clicked="OnTap" Style="{StaticResource ButtonStyle}"/>
+
+
+        </Grid>
+    </ContentPage.Content>
+    
+    
+</ContentPage>

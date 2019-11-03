@@ -127,34 +127,45 @@ namespace TimetableTalkShell.ViewModels
         /// Invoked when the Log In button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void LoginClicked(object obj)
+        private async void LoginClicked(object obj)
         {
-            // Do something
-            databaseConnector.Response response = App.backend.LogIn(this.Email, this.password);
+
+            databaseConnector.Response response = App.backend.LogIn("Bob", password);
             if (response.status == databaseConnector.statuscode.OK)
             {
-                App.backend.GetFriends();
-                App.backend.GetEvents();
-                //navigate from here, to home
+                Application.Current.MainPage = new AppShell();
+                await Shell.Current.GoToAsync("//timetable");
+                
             }
-            else if (response.status == databaseConnector.statuscode.ERROR)
-            {
-                //the signup failed, change text / color
-                this.Email = "";
-                this.Password = "";
-                this.Subcolor = "#FFD62F2F";
-                this.InvalidMessage = "Invalid Email or Password!";
-            }
+
+
+
+            // Do something
+            //databaseConnector.Response response = App.backend.LogIn(this.Email, this.password);
+            //if (response.status == databaseConnector.statuscode.OK)
+            //{
+            //    App.backend.GetFriends();
+            //    App.backend.GetEvents();
+            //    //navigate from here, to home
+            //}
+            //else if (response.status == databaseConnector.statuscode.ERROR)
+            //{
+            //    //the signup failed, change text / color
+            //    this.Email = "";
+            //    this.Password = "";
+            //    this.Subcolor = "#FFD62F2F";
+            //    this.InvalidMessage = "Invalid Email or Password!";
+            //}
         }
 
         /// <summary>
         /// Invoked when the Sign Up button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void SignUpClicked(object obj)
+        private async void SignUpClicked(object obj)
         {
             // navigate to signup page
-            
+            await Shell.Current.GoToAsync("//signup");
         }
 
         /// <summary>

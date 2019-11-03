@@ -10,17 +10,16 @@ using Xamarin.Forms.Xaml;
 namespace TimetableTalkShell.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ThomasPage : ContentPage
+    public partial class TimetablePage : ContentPage
     {
-        public ThomasPage()
+        public TimetablePage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private async void OnTap(object sender, EventArgs e)
         {
-            (sender as Button).BackgroundColor = Color.FromHex("#009688");
-            await Navigation.PushAsync(new AddEventPage());
+            await Shell.Current.GoToAsync("//addevent");
         }
 
     }

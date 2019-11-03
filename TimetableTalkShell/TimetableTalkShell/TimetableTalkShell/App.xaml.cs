@@ -16,7 +16,10 @@ namespace TimetableTalkShell
             InitializeComponent();
             backend = new Backendtest();
             DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+            MainPage = new LoginPage();
+            
+            
+            //MainPage = new AppShell();
         }
 
         protected override void OnStart()

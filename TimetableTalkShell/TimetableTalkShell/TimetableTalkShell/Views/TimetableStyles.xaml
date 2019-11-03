@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TimetableTalkShell.Views.TimetableStyles">
+
+    <Style x:Key="ContentPageStyle" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="#2b2b2b"/>
+    </Style>
+
+    <Style x:Key="TimesStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="TextColor" Value="LightGray"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="Grid.ColumnSpan" Value="1" />
+    </Style>
+
+    <Style x:Key="DaysStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="TextColor" Value="LightGray"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="Grid.ColumnSpan" Value="2" />
+    </Style>
+
+    <Style x:Key="ButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="DarkGray"/>
+        <Setter Property="TextColor" Value="LightGray"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+    </Style>
+    
+    
+
+</ResourceDictionary>
