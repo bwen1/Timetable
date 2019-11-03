@@ -69,4 +69,56 @@ router.post('/removefriend', function (req, res, next) {
       });
 });
 
+router.get('/friends/:user', function (req, res, next) {
+  const query = req.query;
+  const id = req.params.user;
+  var frids = [];
+  var fstatus = [];
+  var friend_list = [];
+    req.db.from('friends')
+      .select('*')
+      .where(function () {
+        this
+          .where('ID1', id)
+          .orWhere('ID2', id)
+      })
+      .then((rows) => {
+        console.log(rows);
+        rows.forEach(row => {
+          if(row.ID1 == id){
+            frids.push(row.ID2);
+          }
+          else if(row.ID2 == id){
+            frids.push(row.ID1);
+          }
+          fstatus.push(row.status);
+        });
+        console.log(frids);
+        req.db.from('users')
+        .select('Name', 'ID')
+        .whereIn('ID', frids)
+        .then((ros) =>{
+          console.log(ros);
+          for(var i = 0; i < ros.length; i++){
+            friend_list.push({
+              ID: ros[i].ID,
+              Name: ros[i].Name,
+              status: fstatus[i]
+            });
+          }
+          console.log(friend_list);
+          res.status(200).json({"Error": false, "Message": "Data retrived ", "data": friend_list})
+        })
+        .catch((e) =>{
+          res.status(400).json({"Error": true, "Message": "There was an error "})
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+        res.status(400).json({ "Error": true, "Message": "There was an error executing the sql query, " + e.message });
+      });
+  
+
+});
+
 module.exports = router;

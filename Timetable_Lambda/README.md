@@ -1,7 +1,9 @@
 # Timetable Lambda
 The new and improved backend for timetable talk.
 
- _**note:** requires serverless to be globally installed if you want to deploy, along with the /.aws/credettials file existing within your user directory_
+ **notes:** 
+ - _requires serverless to be globally installed if you want to deploy, along with the /.aws/credettials file existing within your user directory_
+ - _Might not have the bin/www file due to some gitnore issues, don't worry it's just the default express one_
  
 ### Features
 - http api/test

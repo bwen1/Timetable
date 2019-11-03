@@ -15,10 +15,10 @@ router.post('/addevent', function (req, res, next) {
   const timest = req.body.timestart;
   const timeed = req.body.timeend;
   const day = req.body.day;
-  req.db('events')
+  req.db('event')
     .insert({ ID: name, shared: share, EventName: evname, notes: note, Location: loc, TimeStart: timest, TimeEnd: timeed, Day: day })
     .then(() => {
-      req.db.from('events')
+      req.db.from('event')
         .select('EventID')
         .where({ ID: name, eventName: evname, TimeStart: timest })
         .limit(1)
@@ -46,11 +46,11 @@ router.post('/editevent', function (req, res, next) {
   const timest = req.body.timestart;
   const timeed = req.body.timeend;
   const day = req.body.day;
-  req.db('events')
+  req.db('event')
     .where({ EventID: evid })
     .update({ ID: name, shared: share, EventName: evname, notes: note, Location: loc, TimeStart: timest, TimeEnd: timeed, Day: day })
     .then(() => {
-      res.status(200).json({ "Error": false, "Message": "Event edited"});
+      res.status(200).json({ "Error": false, "Message": "Event edited" });
     })
     .catch((e) => {
       console.log(e);
@@ -60,16 +60,55 @@ router.post('/editevent', function (req, res, next) {
 
 router.post('/removeevent', function (req, res, next) {
   const id = req.body.eventid;
-  req.db('events')
-  .where({EventID: id})
-      .del()
-      .then(() => {
-          res.status(200).json({ "Error": false, "Message": "Event removed" });
+  req.db('event')
+    .where({ EventID: id })
+    .del()
+    .then(() => {
+      res.status(200).json({ "Error": false, "Message": "Event removed" });
+    })
+    .catch((e) => {
+      console.log(e);
+      res.status(400).json({ "Error": true, "Message": "There was an error executing the sql query, " + e.message });
+    });
+});
+
+router.get('/events', function (req, res, next) {
+  const query = req.query;
+  var friend_list;
+  if (!query.friends) {
+    res.status(400).json({ "Error": true, "Message": "Missing friend list" })
+  }
+  else {
+    friend_list = query.friends.split(',');
+    req.db.from('event')
+      .select('*')
+      .whereIn('ID', friend_list)
+      .where({ shared: true })
+      .then((rows) => {
+        res.status(200).json({ "Error": false, "Message": "events gathered", "Events": rows });
       })
       .catch((e) => {
-          console.log(e);
-          res.status(400).json({ "Error": true, "Message": "There was an error executing the sql query, " + e.message });
+        console.log(e);
+        res.status(400).json({ "Error": true, "Message": "There was an error executing the sql query, " + e.message });
       });
+  }
+
+});
+
+router.get('/myevents/:id', function (req, res, next) {
+  const id = req.params.id;
+    req.db.from('event')
+      .select('*')
+      .where("ID", id )
+      .then((rows) => {
+        res.status(200).json({ "Error": false, "Message": "my events gathered", "Events": rows });
+      })
+      .catch((e) => {
+        console.log(e);
+        res.status(400).json({ "Error": true, "Message": "There was an error executing the sql query, " + e.message });
+      });
+  
+
 });
 
 module.exports = router;
