@@ -177,6 +177,14 @@ namespace TimetableTalkShell.ViewModels
                 await Shell.Current.GoToAsync("//login");
 
             }
+            else if (response.status == databaseConnector.statuscode.ERROR)
+            {
+                //the signup failed, change text / color
+                this.Email = "";
+                this.Password = "";
+                this.Subcolor = "#FFD62F2F";
+                this.InvalidMessage = response.message;
+            }
         }
 
         #endregion
