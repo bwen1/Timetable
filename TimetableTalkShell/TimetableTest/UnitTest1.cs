@@ -1,10 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TimetableTalkShell.ViewModels;
-using TimetableTalkShell;
-using TimetableTalkShell.Views;
-using Xamarin.Forms;
-using Xamarin.Essentials;
-
 
 namespace TimetableTest
 {
@@ -16,17 +11,22 @@ namespace TimetableTest
         {
             //Arrange
             var vm = new SignUpViewModel();
-            
-            vm.Email = "hehehe@gmail.com";
+            vm.Email = "hanogy@gmail.com";
             vm.Password = "hobolobo456";
-            
-            //Act
-            vm.SignUpCommand.Execute(null);
 
+
+            //Act
+            vm.LoginCommand.Execute(null);
+            
             //Assert
-            //Assert.IsTrue();
-           // Assert.IsTrue(vm.Email == "", "Email is Invalid");// Wrong Email
-           // Assert.IsTrue(vm.Password == "", "Password is Invalid");// Wrong Password
+            Assert.IsTrue(vm.GetType().Name == "SignUpViewModel", "viewmodel");// Wrong Email
+            Assert.IsTrue(vm.Password == "", "Password is Invalid");// Wrong Password
+        }
+
+        [TestMethod]
+        public void TestNavigation()
+        {
+            
         }
     }
 }
