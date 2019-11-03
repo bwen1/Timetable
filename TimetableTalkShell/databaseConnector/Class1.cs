@@ -3,6 +3,9 @@ using System.Text;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using MySql.Data.MySqlClient;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace databaseConnector
 {
@@ -94,6 +97,7 @@ namespace databaseConnector
     {
         private int UID;
         public string UserName { get; private set; }
+        private static readonly HttpClient client = new HttpClient();
         private MySqlConnection connection;
         private string server;
         private string database;
@@ -105,7 +109,6 @@ namespace databaseConnector
         private List<Event> myevents;
         public Backend()
         {
-            Initialize();
             takenNames = new List<string>();
             takenNames.Add("");
             friendarray = new List<User>();
@@ -114,63 +117,14 @@ namespace databaseConnector
             UID = 0;
         }
 
-        #region Database setup, and connection Statments adapted from some online tutorial.
-        private void Initialize()
+        public bool OpenConnection()
         {
-            server = "timetable.ctymoh38xb5w.us-east-1.rds.amazonaws.com";
-            database = "timetable_app";
-            uid = "admin";
-            password = "CqEcjW7Pe8eDruMhzsiU";
-            string connectionString;
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-
-            connection = new MySqlConnection(connectionString);
+            return true;
         }
-
-        private bool OpenConnection()
+        public bool CloseConnection()
         {
-            try
-            {
-                connection.Open();
-                return true;
-            }
-            catch (MySqlException ex)
-            {
-                //When handling errors, you can your application's response based 
-                //on the error number.
-                //The two most common error numbers when connecting are as follows:
-                //0: Cannot connect to server.
-                //1045: Invalid user name and/or password.
-                switch (ex.Number)
-                {
-                    case 0:
-                        Console.WriteLine("Cannot connect to server.  Contact administrator");
-                        break;
-
-                    case 1045:
-                        Console.WriteLine("Invalid username/password, please try again");
-                        break;
-                }
-                return false;
-            }
+            return true;
         }
-
-        private bool CloseConnection()
-        {
-            try
-            {
-                connection.Close();
-                return true;
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-            }
-        }
-
-        #endregion
 
         /// <summary>
         /// Is a user currently logged in, does not refer to database connectivity.
@@ -186,23 +140,18 @@ namespace databaseConnector
         /// </summary>
         /// <param name="username">the username to search for</param>
         /// <returns>if the username is currently not in use</returns>
-        public bool IsUsernameAvalible(string username)
+        public async Task<bool> IsUsernameAvalible(string username)
         {
             bool Avalible;
             if (takenNames.Contains(username))
                 return false;
 
-            string query = "SELECT EXISTS(select * FROM `users` WHERE `Name` = '" + username + "') AS `Exists`";
-            if (this.OpenConnection() == true)
+            string responseString = await client.GetStringAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/users/avcheck/" + username);
+            //Read the data determine the result
+            dynamic obj = JsonConvert.DeserializeObject(responseString);
+            if (!obj.Error)
             {
-                //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                dataReader.Read();
-
-                //Read the data determine the result
-                if (int.Parse(dataReader["Exists"] + "") == 1)
+                if (obj.Message == "Name taken")
                 {
                     Avalible = false;
                     takenNames.Add(username);
@@ -211,16 +160,12 @@ namespace databaseConnector
                 {
                     Avalible = true;
                 }
-
-                //close Data Reader
-                dataReader.Close();
-
-                //close connection
-                this.CloseConnection();
-
-                return Avalible;
             }
-            return false;
+            else
+            {
+                Avalible = false;
+            }
+            return Avalible;
         }
 
         #region sha256 string generator, from https://stackoverflow.com/questions/3984138/hash-string-in-c-sharp
@@ -246,49 +191,43 @@ namespace databaseConnector
         /// <param name="username"> the users username</param>
         /// <param name="password"> the users password, this is not ever stored anyware</param>
         /// <returns> A response</returns>
-        public Response LogIn(string username, string password)
+        public async Task<Response> LogIn(string username, string password)
         {
             bool Avalible;
             string psh = GetHashString(password);
             Console.WriteLine(psh);
-            string query = "SELECT EXISTS(select * FROM `users` WHERE `Name` = '" + username + "' AND `passwordHash` = '" + psh + "') AS `Exists`";
-            if (this.OpenConnection() == true)
+            var values = new Dictionary<string, string>
             {
-                //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                { "username", username },
+                { "password", psh }
+            };
 
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                dataReader.Read();
+            var content = new FormUrlEncodedContent(values);
 
-                if (int.Parse(dataReader["Exists"] + "") == 1)
+            var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/users/login", content);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+            //Read the data determine the result
+            dynamic obj = JsonConvert.DeserializeObject(responseString);
+
+            if (!obj.Error)
+            {
+                if (obj.Message == "Login sucess")
                 {
-                    dataReader.Close();
                     Avalible = true;
-                    string newquery = "select `ID` FROM `users` WHERE `Name` = '" + username + "' AND `passwordHash` = '" + psh + "'";
-                    cmd = new MySqlCommand(newquery, connection);
-                    dataReader = cmd.ExecuteReader();
-                    dataReader.Read();
-                    UID = int.Parse(dataReader["ID"] + "");
+                    UID = obj.id;
                     UserName = username;
                 }
                 else
-                {
                     Avalible = false;
-                }
-
-                //close Data Reader
-                dataReader.Close();
-
-                //close connection
-                this.CloseConnection();
-                if (Avalible)
-                {
-                    return new Response(statuscode.OK, UID.ToString());
-                }
-                return new Response(statuscode.NOT_THESE_DROIDS, "Username or password was incorrect");
             }
-
-            return new Response(statuscode.ERROR, "Could not open sql database");
+            else
+                Avalible = false;
+            if (Avalible)
+                return new Response(statuscode.OK, UID.ToString());
+            if(obj.Error)
+                return new Response(statuscode.ERROR, "Could not open sql database");
+            return new Response(statuscode.NOT_THESE_DROIDS, "Username or password was incorrect");
         }
 
         /// <summary>
@@ -312,26 +251,41 @@ namespace databaseConnector
         /// <param name="username">the desired username</param>
         /// <param name="password">the desired password, (not stored)</param>
         /// <returns>OK if its all good, or error if the user already exists</returns>
-        public Response SignUp(string username, string password)
+        public async Task<Response> SignUp(string username, string password)
         {
-            if (IsUsernameAvalible(username))
+            if (await IsUsernameAvalible(username))
             {
-                string query = "insert into `users` (`Name`, `passwordHash`) values ( '" + username + "', '" + GetHashString(password) + "')";
-                //open connection
-                if (this.OpenConnection() == true)
+                bool Avalible;
+                string psh = GetHashString(password);
+                Console.WriteLine(psh);
+                var values = new Dictionary<string, string>
+            {
+                { "username", username },
+                { "password", psh }
+            };
+
+                var content = new FormUrlEncodedContent(values);
+
+                var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/users/signup", content);
+
+                var responseString = await response.Content.ReadAsStringAsync();
+                //Read the data determine the result
+                dynamic obj = JsonConvert.DeserializeObject(responseString);
+
+                if (!obj.Error)
                 {
-                    //create command and assign the query and connection from the constructor
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                    //Execute command
-                    cmd.ExecuteNonQuery();
-
-                    //close connection
-                    this.CloseConnection();
-
-                    return new Response(statuscode.OK, "User registered sucessfully");
+                    if (obj.Message == "User registered")
+                        Avalible = true;
+                    else
+                        Avalible = false;
                 }
-                return new Response(statuscode.ERROR, "Could not open database");
+                else
+                    Avalible = false;
+                if (Avalible)
+                    return new Response(statuscode.OK, "User registered sucessfully");
+                if (obj.Error)
+                    return new Response(statuscode.ERROR, "Could not open sql database");
+                return new Response(statuscode.NOT_THESE_DROIDS, "Username or password was unavalible");
             }
             else
             {
@@ -345,25 +299,28 @@ namespace databaseConnector
         /// </summary>
         /// <param name="newUsername">the new username to give</param>
         /// <returns>a response</returns>
-        public Response ChangeUsername(string newUsername)
+        public async Task<Response> ChangeUsername(string newUsername)
         {
             if (IsLoggedIn())
             {
-                if (IsUsernameAvalible(newUsername))
+                if (await IsUsernameAvalible(newUsername))
                 {
-                    string query = "UPDATE `users` SET `Name` = '" + newUsername + "' WHERE `ID` = " + UID + "";
-                    if (this.OpenConnection() == true)
+                    var values = new Dictionary<string, string>
+            {
+                { "id", UID.ToString() },
+                { "newname", newUsername }
+            };
+
+                    var content = new FormUrlEncodedContent(values);
+
+                    var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/users/changename", content);
+
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    //Read the data determine the result
+                    dynamic obj = JsonConvert.DeserializeObject(responseString);
+                    if (!obj.error)
                     {
-                        //create command and assign the query and connection from the constructor
-                        MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                        //Execute command
-                        cmd.ExecuteNonQuery();
-
-                        //close connection
-                        this.CloseConnection();
                         this.UserName = newUsername;
-
                         return new Response(statuscode.OK, "Username Updated");
                     }
                     return new Response(statuscode.ERROR, "Could not open database");
@@ -379,25 +336,29 @@ namespace databaseConnector
         /// <param name="newPassword">the new password</param>
         /// <param name="oldPassword">the old password</param>
         /// <returns>a response displaying the result</returns>
-        public Response ChangePassword(string newPassword, string oldPassword)
+        public async Task<Response> ChangePassword(string newPassword, string oldPassword)
         {
             if (IsLoggedIn())
             {
-                if (LogIn(UserName, oldPassword).status == statuscode.OK)
+                Response r = await LogIn(UserName, oldPassword);
+                if (r.status == statuscode.OK)
                 {
                     string newHash = GetHashString(newPassword);
-                    string query = "UPDATE `users` SET `PasswordHash` = '" + newHash + "' WHERE `ID` = " + UID + "";
-                    if (this.OpenConnection() == true)
+                    var values = new Dictionary<string, string>
+            {
+                { "id", UID.ToString() },
+                { "newpass", newPassword }
+            };
+
+                    var content = new FormUrlEncodedContent(values);
+
+                    var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/users/changepassword", content);
+
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    //Read the data determine the result
+                    dynamic obj = JsonConvert.DeserializeObject(responseString);
+                    if (!obj.Error)
                     {
-                        //create command and assign the query and connection from the constructor
-                        MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                        //Execute command
-                        cmd.ExecuteNonQuery();
-
-                        //close connection
-                        this.CloseConnection();
-
                         return new Response(statuscode.OK, "Password Updated");
                     }
                     return new Response(statuscode.ERROR, "Could not open database");
@@ -412,23 +373,27 @@ namespace databaseConnector
         /// </summary>
         /// <param name="user">the user to send to</param>
         /// <returns>OK if all good, Error if blocked, already a friend, or the user dosen't exist</returns>
-        public Response RequestFriend(User user)
+        public async Task<Response> RequestFriend(User user)
         {
             if (IsLoggedIn())
             {
-                if (!IsUsernameAvalible(user.username))
+                if (!await IsUsernameAvalible(user.username))
                 {
-                    string query = "insert into `friends` values ( " + UID + ", " + user.ID + ", 'PENDING_TO')";
-                    if (this.OpenConnection() == true)
+                    var values = new Dictionary<string, string>
+            {
+                { "id", UID.ToString() },
+                { "friendid", user.ID.ToString() }
+            };
+
+                    var content = new FormUrlEncodedContent(values);
+
+                    var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/friends/friendrequest", content);
+
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    //Read the data determine the result
+                    dynamic obj = JsonConvert.DeserializeObject(responseString);
+                    if (!obj.Error)
                     {
-                        //create command and assign the query and connection from the constructor
-                        MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                        //Execute command
-                        cmd.ExecuteNonQuery();
-
-                        //close connection
-                        this.CloseConnection();
                         friendarray.Add(user);
                         return new Response(statuscode.OK, "Friend request sent sucessfully");
                     }
@@ -450,11 +415,11 @@ namespace databaseConnector
         /// </summary>
         /// <param name="username"> the user to send to</param>
         /// <returns>If the user was sucessfully requested</returns>
-        public Response RequestFriend(string username)
+        public async Task<Response> RequestFriend(string username)
         {
             if (IsLoggedIn())
             {
-                return RequestFriend(GetUser(username));
+                return await RequestFriend(GetUser(username));
             }
             return new Response(statuscode.ERROR, "User not logged in");
         }
@@ -464,11 +429,11 @@ namespace databaseConnector
         /// </summary>
         /// <param name="userID"> the ID of the user to send to</param>
         /// <returns>If the user was sucessfully requested</returns>
-        public Response RequestFriend(int userID)
+        public async Task<Response> RequestFriend(int userID)
         {
             if (IsLoggedIn())
             {
-                return RequestFriend(new User(userID, "", friends.NO));
+                return await RequestFriend(new User(userID, "", friends.NO));
             }
             return new Response(statuscode.ERROR, "User not logged in");
         }
@@ -480,7 +445,7 @@ namespace databaseConnector
         /// <param name="friendID">the friend in question</param>
         /// <param name="to">which direction was the request sent?</param>
         /// <returns>a response</returns>
-        private Response UpdateFriendRequestStatus(friends newStatus, int friendID, bool to)
+        private async Task<Response> UpdateFriendRequestStatus(friends newStatus, int friendID, bool to)
         {
             if (IsLoggedIn())
             {
@@ -490,19 +455,23 @@ namespace databaseConnector
                     if (fri.ID == friendID)
                     {
                         if (newStatus == friends.NO)
-                            return RemoveFriend(friendID);
+                            return await RemoveFriend(friendID);
+                        var values = new Dictionary<string, string>
+            {
+                { "id", UID.ToString() },
+                { "to", to.ToString() },
+                { "newstatus", newStatus.ToString() }
+            };
 
-                        string query = "update `friends` SET `status`='" + newStatus.ToString() + "' WHERE " + (to ? "`ID2`" : "`ID1`") + " = " + friendID + " AND " + (to ? "`ID1`" : "`ID2`") + " = " + UID + " ";
-                        if (this.OpenConnection() == true)
+                        var content = new FormUrlEncodedContent(values);
+
+                        var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/friends/updaterequest", content);
+
+                        var responseString = await response.Content.ReadAsStringAsync();
+                        //Read the data determine the result
+                        dynamic obj = JsonConvert.DeserializeObject(responseString);
+                        if (!obj.Error)
                         {
-                            //create command and assign the query and connection from the constructor
-                            MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                            //Execute command
-                            cmd.ExecuteNonQuery();
-
-                            //close connection
-                            this.CloseConnection();
                             friendarray[index] = new User(friendarray[index].ID, friendarray[index].username, newStatus);
 
                             return new Response(statuscode.OK, "Friend request Updated sucessfully");
@@ -522,7 +491,7 @@ namespace databaseConnector
         /// </summary>
         /// <param name="friendID">the ID of the request to accept</param>
         /// <returns> if the acceptance was sucessful</returns>
-        public Response AcceptFriend(int friendID)
+        public async Task<Response> AcceptFriend(int friendID)
         {
             foreach (User user in friendarray)
             {
@@ -530,7 +499,7 @@ namespace databaseConnector
                 {
                     if (user.friend == friends.PENDING_TO)
                     {
-                        return UpdateFriendRequestStatus(friends.YES, friendID, true);
+                        return await UpdateFriendRequestStatus(friends.YES, friendID, true);
                     }
                     else if (user.friend == friends.PENDING_FROM)
                     {
@@ -546,24 +515,27 @@ namespace databaseConnector
         /// </summary>
         /// <param name="friendID">The user to block</param>
         /// <returns>The sadness in you heart</returns>
-        public Response RemoveFriend(int friendID)
+        public async Task<Response> RemoveFriend(int friendID)
         {
             foreach (User user in friendarray)
             {
                 if (user.ID == friendID)
                 {
+                    var values = new Dictionary<string, string>
+            {
+                { "id", UID.ToString() },
+                { "friendid", friendID.ToString() }
+            };
 
-                    string query = "DELETE FROM `friends` WHERE (`ID1` = " + friendID + " AND `ID2` = " + UID + ") OR (`ID2` = " + friendID + " AND `ID1` = " + UID + ")";
-                    if (this.OpenConnection() == true)
+                    var content = new FormUrlEncodedContent(values);
+
+                    var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/friends/removefriend", content);
+
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    //Read the data determine the result
+                    dynamic obj = JsonConvert.DeserializeObject(responseString);
+                    if (!obj.Error)
                     {
-                        //create command and assign the query and connection from the constructor
-                        MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                        //Execute command
-                        cmd.ExecuteNonQuery();
-
-                        //close connection
-                        this.CloseConnection();
                         friendarray.Remove(user);
 
                         return new Response(statuscode.OK, "Friend removed");
@@ -580,36 +552,47 @@ namespace databaseConnector
         /// </summary>
         /// <param name="thing"> the event to add, it not called 'event' because that's a keyword</param>
         /// <returns>If the event was sucessfully added</returns>
-        public Response AddEvent(Event thing)
-        {
-            if (IsLoggedIn())
-            {
-                string query = "insert into `events` (`ID`, `shared`,`EventName`, `notes`, `Location`, `TimeStart`, `TimeEnd`, `Day`) values ( " + UID + ", " + thing.shared + ", '" + thing.eventName + "', '" + thing.notes + "', '" + thing.location + "', " + thing.startTime + ", " + thing.endTime + ", '" + thing.Day.ToString() + "' )";
-                if (this.OpenConnection() == true)
-                {
-                    //create command and assign the query and connection from the constructor
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
+        //public async Task<Response> AddEvent(Event thing)
+        //{
+        //    if (IsLoggedIn())
+        //    {
+        //        var values = new Dictionary<string, string>
+        //    {
+        //        { "id", UID.ToString() },
+        //        { "friendid", friendID.ToString() }
+        //    };
 
-                    //Execute command
-                    cmd.ExecuteNonQuery();
+        //        var content = new FormUrlEncodedContent(values);
 
-                    query = "select `EventID` from `events` where `ID` = " + UID + " AND eventName = '" + thing.eventName + "' AND TimeStart = " + thing.startTime + " LIMIT 1";
-                    cmd = new MySqlCommand(query, connection);
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
+        //        var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/friends/removefriend", content);
 
-                    dataReader.Read();
-                    int id = int.Parse(dataReader["EventID"] + "");
+        //        var responseString = await response.Content.ReadAsStringAsync();
+                
+        //        if (this.OpenConnection() == true)
+        //        {
+        //            //create command and assign the query and connection from the constructor
+        //            MySqlCommand cmd = new MySqlCommand(query, connection);
 
-                    events.Add(new Event(id, UID, thing.eventName, thing.shared, thing.startTime, thing.endTime, thing.Day));
-                    //close connection
-                    this.CloseConnection();
+        //            //Execute command
+        //            cmd.ExecuteNonQuery();
 
-                    return new Response(statuscode.OK, "event added sucessfully");
-                }
-                return new Response(statuscode.ERROR, "Could not open database");
-            }
-            return new Response(statuscode.ERROR, "User not logged in");
-        }
+        //            query = "select `EventID` from `events` where `ID` = " + UID + " AND eventName = '" + thing.eventName + "' AND TimeStart = " + thing.startTime + " LIMIT 1";
+        //            cmd = new MySqlCommand(query, connection);
+        //            MySqlDataReader dataReader = cmd.ExecuteReader();
+
+        //            dataReader.Read();
+        //            int id = int.Parse(dataReader["EventID"] + "");
+
+        //            events.Add(new Event(id, UID, thing.eventName, thing.shared, thing.startTime, thing.endTime, thing.Day));
+        //            //close connection
+        //            this.CloseConnection();
+
+        //            return new Response(statuscode.OK, "event added sucessfully");
+        //        }
+        //        return new Response(statuscode.ERROR, "Could not open database");
+        //    }
+        //    return new Response(statuscode.ERROR, "User not logged in");
+        //}
 
         /// <summary>
         /// Replaces an old event with a new one. (untested)

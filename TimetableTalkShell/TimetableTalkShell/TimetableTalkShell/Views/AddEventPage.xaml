@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="TimetableTalkShell.Views.ReviewPage"
+    x:Class="TimetableTalkShell.Views.AddEventPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
     xmlns:dataform="clr-namespace:Syncfusion.XForms.DataForm;assembly=Syncfusion.SfDataForm.XForms"
@@ -21,14 +21,14 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ReviewStyles.xaml" />
+                <ResourceDictionary Source="AddEventStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <!--  Binding Context for OverAllFeedback Page  -->
     <ContentPage.BindingContext>
-        <viewModel:ReviewViewModel />
+        <viewModel:AddEventViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>

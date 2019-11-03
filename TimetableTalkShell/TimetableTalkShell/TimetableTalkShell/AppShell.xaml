@@ -62,8 +62,8 @@
     <ShellContent Route="resetpassword"
                       ContentTemplate="{DataTemplate views:ResetPasswordPage}" 
                       IsTabStop="False"/>
-    <ShellContent Route="review"
-                      ContentTemplate="{DataTemplate views:ReviewPage}" 
+    <ShellContent Route="addevent"
+                      ContentTemplate="{DataTemplate views:AddEventPage}" 
                       IsTabStop="False"/>
     <ShellContent Route="bill"
                       ContentTemplate="{DataTemplate views:BillPage}"
