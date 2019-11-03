@@ -75,7 +75,7 @@
                     
 
                     <!--  Entry to get email ID from user  -->
-                    <local:SimpleEmailEntry
+                    <border:SfBorder
                         BackgroundColor="{DynamicResource Gray-White}"
                         Style="{StaticResource SfBorderStyle}">
                         <control:BorderlessEntry
@@ -87,7 +87,7 @@
                             Text="{Binding Email}"
                             FontSize="16"
                             TextColor="{Binding Subcolor}" />
-                    </local:SimpleEmailEntry>
+                    </border:SfBorder>
 
                     <!--  Entry to get password from user  -->
                     <border:SfBorder
@@ -105,22 +105,7 @@
                             TextColor="LightGray" />
                     </border:SfBorder>
 
-                    <!--  Entry to get the confirm password from user  -->
-                    <border:SfBorder
-                        BackgroundColor="{DynamicResource Gray-White}"
-                        BorderColor="{Binding Source={x:Reference ConfirmPasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
-                        Style="{StaticResource SfBorderStyle}">
-                        <control:BorderlessEntry
-                            x:Name="ConfirmPasswordEntry"
-                            IsPassword="true"
-                            Placeholder="Confirm Password"
-                            PlaceholderColor="{DynamicResource Gray-700}"
-                            Style="{StaticResource EntryStyle}"
-                            Text="{Binding ConfirmPassword}"
-                            FontSize="16"
-                            TextColor="LightGray" />
-                    </border:SfBorder>
-
+                    
                     <!--  Sign-up button  -->
                     <buttons:SfButton
                         Command="{Binding SignUpCommand}"
