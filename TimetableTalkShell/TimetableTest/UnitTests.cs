@@ -244,4 +244,31 @@ namespace TimetableTest
         }
 
     }
+
+
+    [TestClass]
+    public class ChangeUsernameViewModelTest
+    {
+
+        [TestMethod]
+        public void ChangeUsernameClickedCommandTest()
+        {
+            //Arrange
+            var vm = new ChangeUsernameViewModel();
+            vm.newUsername = "heya";
+            
+
+
+            //Act
+            vm.ChangeUsername.Execute(null);
+
+            //Assert
+            Assert.IsTrue(vm.GetType().Name == "ChangeUsernameViewModel", "viewmodel");// Correct result
+
+        }
+
+
+       
+
+    }
 }
