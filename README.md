@@ -1,4 +1,4 @@
-# Timetable
+# Timetable - PLEASE USE THIS BRANCH FOR MARKING AND OR APPLICATION DEMO
 ## Current name: __Timetable Talk__
 
 A multiplatform mobile application for creating and sharing your timetable with your friends.
