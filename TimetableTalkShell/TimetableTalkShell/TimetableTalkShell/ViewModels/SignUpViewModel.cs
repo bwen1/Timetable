@@ -149,20 +149,7 @@ namespace TimetableTalkShell.ViewModels
 
             await Shell.Current.GoToAsync("//login");
 
-            //databaseConnector.Response response = App.backend.SignUp(this.Email, this.password);
-            //if (response.status == databaseConnector.statuscode.OK)
-            //{
-            //    //navigate from here, to login
-            //}
-            //else if (response.status == databaseConnector.statuscode.ERROR)
-            //{
-            //    //the signup failed, change text / color
-            //    this.Email = "";
-            //    this.Password = "";
-            //    this.Subcolor = "#FFD62F2F";
-            //    this.InvalidMessage = response.message;
-            //}
-            // Do something
+            
         }
 
         /// <summary>

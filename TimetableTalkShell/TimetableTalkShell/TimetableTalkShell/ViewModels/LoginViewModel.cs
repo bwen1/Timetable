@@ -11,7 +11,7 @@ namespace TimetableTalkShell.ViewModels
     public class LoginViewModel : LoginBaseViewModel
     {
         #region Fields
-
+        private string name;
         private string password;
         private string color;
         private string invalidmessage = "Your Timetable is waiting for you :)";
@@ -28,7 +28,7 @@ namespace TimetableTalkShell.ViewModels
             this.LoginCommand = new Command(this.LoginClicked);
             this.SignUpCommand = new Command(this.SignUpClicked);
             this.ForgotPasswordCommand = new Command(this.ForgotPasswordClicked);
-            this.SocialMediaLoginCommand = new Command(this.SocialLoggedIn);
+            
         }
 
         #endregion
@@ -53,6 +53,25 @@ namespace TimetableTalkShell.ViewModels
                 }
 
                 this.password = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+
+            set
+            {
+                if (this.name == value)
+                {
+                    return;
+                }
+
+                this.name = value;
                 this.OnPropertyChanged();
             }
         }
@@ -114,10 +133,7 @@ namespace TimetableTalkShell.ViewModels
         /// </summary>
         public Command ForgotPasswordCommand { get; set; }
 
-        /// <summary>
-        /// Gets or sets the command that is executed when the social media login button is clicked.
-        /// </summary>
-        public Command SocialMediaLoginCommand { get; set; }
+        
 
         #endregion
 
@@ -130,32 +146,24 @@ namespace TimetableTalkShell.ViewModels
         private async void LoginClicked(object obj)
         {
 
-            databaseConnector.Response response = App.backend.LogIn("Bob", password);
+            databaseConnector.Response response = App.backend.LogIn(name, password);
             if (response.status == databaseConnector.statuscode.OK)
             {
-                Application.Current.MainPage = new AppShell();
                 await Shell.Current.GoToAsync("//timetable");
                 
+            }
+            else if (response.status == databaseConnector.statuscode.ERROR)
+            {
+                //the login failed, change text / color
+                this.Name = "";
+                this.Password = "";
+                this.Subcolor = "#FFD62F2F";
+                this.InvalidMessage = response.message;
             }
 
 
 
-            // Do something
-            //databaseConnector.Response response = App.backend.LogIn(this.Email, this.password);
-            //if (response.status == databaseConnector.statuscode.OK)
-            //{
-            //    App.backend.GetFriends();
-            //    App.backend.GetEvents();
-            //    //navigate from here, to home
-            //}
-            //else if (response.status == databaseConnector.statuscode.ERROR)
-            //{
-            //    //the signup failed, change text / color
-            //    this.Email = "";
-            //    this.Password = "";
-            //    this.Subcolor = "#FFD62F2F";
-            //    this.InvalidMessage = "Invalid Email or Password!";
-            //}
+
         }
 
         /// <summary>
@@ -174,21 +182,12 @@ namespace TimetableTalkShell.ViewModels
         /// <param name="obj">The Object</param>
         private async void ForgotPasswordClicked(object obj)
         {
-            var label = obj as Label;
-            label.BackgroundColor = Color.FromHex("#70FFFFFF");
-            await Task.Delay(100);
-            label.BackgroundColor = Color.Transparent;
-            
+            // navigate to signup page
+            await Shell.Current.GoToAsync("//reset");
+
         }
 
-        /// <summary>
-        /// Invoked when social media login button is clicked.
-        /// </summary>
-        /// <param name="obj">The Object</param>
-        private void SocialLoggedIn(object obj)
-        {
-            // Do something
-        }
+       
 
         #endregion
     }
