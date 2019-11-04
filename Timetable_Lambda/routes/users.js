@@ -88,4 +88,22 @@ router.post('/changepassword', function (req, res, next) {
         });
 });
 
+router.get('/userid/:username', function (req, res, next) {
+    const name = req.params.username;
+    req.db.from('users').select('ID')
+        .where({Name: name})
+        .then((rows) => {
+            if (rows.length != 0) {
+                res.status(200).json({ "Error": false, "Message": "User Id retrived", "ID": rows[0].ID});
+            }
+            else {
+                res.status(200).json({ "Error": false, "Message": "User dosen't exist" });
+            }
+        })
+        .catch((e) => {
+            console.log(e);
+            res.status(400).json({ "Error": true, "Message": "There was an error executing the sql query, " + e.message });
+        });
+});
+
 module.exports = router;
