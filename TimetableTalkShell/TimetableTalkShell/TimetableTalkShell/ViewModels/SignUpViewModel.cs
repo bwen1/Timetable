@@ -165,7 +165,7 @@ namespace TimetableTalkShell.ViewModels
                 await Shell.Current.GoToAsync("//login");
 
             }
-            else if (response.status == databaseConnector.statuscode.ERROR)
+            else 
             {
                 //the signup failed, change text / color
                 this.Email = "";
