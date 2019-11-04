@@ -12,7 +12,8 @@
     Title="Sign Up"
     BackgroundColor="{DynamicResource Gray-Chosen}"
     NavigationPage.HasNavigationBar="False"
-    Shell.NavBarIsVisible="False">
+    Shell.NavBarIsVisible="False"
+    >
 
     <ContentPage.Resources>
         <ResourceDictionary>

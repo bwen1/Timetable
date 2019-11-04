@@ -12,7 +12,7 @@
     Title="Sign Up"
     NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False"
-    BackgroundColor="{DynamicResource Gray-Chosen}" >
+    BackgroundColor="{DynamicResource Gray-Chosen}">
     <!--NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False">-->
 

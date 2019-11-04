@@ -22,7 +22,7 @@ namespace TimetableTalkShell
                 Response re = backend.LogIn(Preferences.Get("Saved_User", ""), Preferences.Get("Saved_Pass", "No"));
                 if(re.status == statuscode.OK)
                 {
-                    MainPage = new AboutPage();
+                    MainPage = new TimetablePage();
                 }
                 else if (re.status == statuscode.NOT_THESE_DROIDS)
                 {

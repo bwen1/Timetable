@@ -15,6 +15,7 @@
     BackgroundColor="#2b2b2b"
     NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False"
+    Shell.FlyoutBehavior="Flyout"
     >
     <!--NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False"-->
