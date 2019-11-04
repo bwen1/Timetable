@@ -36,9 +36,9 @@ namespace TimetableTalkShell.Views
         {
             await Shell.Current.GoToAsync("//resetpassword");
         }
-        private async void OnReview(object sender, EventArgs e)
+        private async void OnAddCommitment(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//review");
+            await Shell.Current.GoToAsync("//addcommitment");
         }
         private async void OnAbout(object sender, EventArgs e)
         {

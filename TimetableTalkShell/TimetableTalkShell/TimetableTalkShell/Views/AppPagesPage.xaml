@@ -15,7 +15,7 @@
         <Button Text="Login Page" Clicked="OnLogin" />
         <Button Text="Signup Page" Clicked="OnSignup" /> 
         <Button Text="Reset Password Page" Clicked="OnResetPassword" />
-        <Button Text="Review Page" Clicked="OnReview" />
+        <Button Text="Add Commitment Page" Clicked="OnAddCommitment" />
         <Button Text="About Page" Clicked="OnAbout" />
         <Button Text="Bill Page" Clicked="OnBill" />
         <Button Text="Thomas Page" Clicked="OnThomas"/>

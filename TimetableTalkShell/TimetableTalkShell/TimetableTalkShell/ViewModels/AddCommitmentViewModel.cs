@@ -7,11 +7,11 @@ namespace TimetableTalkShell.ViewModels
     /// ViewModel for review page.
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class AddCommitmentViewModel
+    public class AddEventViewModel
     {
         #region Constructor
 
-        public AddCommitmentViewModel()
+        public AddEventViewModel()
         {
             this.UploadCommand = new Command<object>(this.OnUploadTapped);
             this.SubmitCommand = new Command<object>(this.OnSubmitTapped);
