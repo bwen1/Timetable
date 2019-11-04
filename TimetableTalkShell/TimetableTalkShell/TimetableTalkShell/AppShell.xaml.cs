@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 using TimetableTalkShell.Views;
 
 namespace TimetableTalkShell
@@ -16,7 +17,7 @@ namespace TimetableTalkShell
         public AppShell()
         {
             InitializeComponent();
-            
+            this.LogoutCommand = new Command(this.LogoutClicked);
             Shell.SetTabBarIsVisible(this, false);
         }
 
@@ -47,6 +48,16 @@ namespace TimetableTalkShell
         void OnNavigated(object sender, ShellNavigatedEventArgs e)
         {
 
+        }
+        /// <summary>
+        /// Gets or sets the command that is executed when the Log out button is clicked.
+        /// </summary>
+        public Command LogoutCommand { get; set; }
+        private async void LogoutClicked()
+        {
+            Preferences.Clear();
+            App.backend.LogOut();
+            await Shell.Current.GoToAsync("//timetable");
         }
 
     }

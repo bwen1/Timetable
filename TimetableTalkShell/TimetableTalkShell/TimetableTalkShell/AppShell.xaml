@@ -53,6 +53,8 @@
                       ContentTemplate="{DataTemplate views:AppPagesPage}"
                       IsTabStop="False" />
     </FlyoutItem>
+    <MenuItem Text="Logout"
+              Command="{Binding LogoutCommand}" />
 
     <ShellContent Route="items"
                       

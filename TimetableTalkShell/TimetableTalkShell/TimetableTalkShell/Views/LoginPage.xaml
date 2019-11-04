@@ -11,7 +11,8 @@
     xmlns:viewModel="clr-namespace:TimetableTalkShell.ViewModels"
     BackgroundColor="{DynamicResource Gray-Chosen}"
     NavigationPage.HasNavigationBar="False"
-    Shell.NavBarIsVisible="False">
+    Shell.NavBarIsVisible="False"
+    >
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -81,19 +82,19 @@
                         TextColor="LightGray" />
 
                     <!--  Entry to get email ID from user  -->
-                    <!--<local:SimpleEmailEntry Grid.Row="2" Margin="0,8"
+                    <border:SfBorder Grid.Row="2" Margin="0,8"
                            BackgroundColor="{DynamicResource Gray-White}"
                                                 Style="{StaticResource SfBorderStyle}">
                         <control:BorderlessEntry
                             x:Name="EmailEntry"
-                            IsPassword="true"
-                            Placeholder="Email"
+                            IsPassword="False"
+                            Placeholder="username"
                             PlaceholderColor="{Binding Subcolor}"
                             Style="{StaticResource EntryStyle}"
-                            Text="{Binding Email}"
+                            Text="{Binding Name}"
                             FontSize="16"
                             TextColor="LightGray" />
-                    </local:SimpleEmailEntry>-->
+                    </border:SfBorder>
 
                     <!--  Entry to get password from user  -->
                     <border:SfBorder
