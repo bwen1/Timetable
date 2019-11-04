@@ -158,9 +158,10 @@ namespace TimetableTalkShell.ViewModels
         /// <param name="obj">The Object</param>
         private async void SignUpClicked(object obj)
         {
-            databaseConnector.Response response = App.backend.SignUp("Bob", password);
+            databaseConnector.Response response = App.backend.SignUp(password, confirmPassword);
             if (response.status == databaseConnector.statuscode.OK)
             {
+                
                 await Shell.Current.GoToAsync("//login");
 
             }
@@ -170,7 +171,7 @@ namespace TimetableTalkShell.ViewModels
                 this.Email = "";
                 this.Password = "";
                 this.Subcolor = "#FFD62F2F";
-                this.InvalidMessage = response.message;
+                this.InvalidMessage = response.message; 
             }
         }
 

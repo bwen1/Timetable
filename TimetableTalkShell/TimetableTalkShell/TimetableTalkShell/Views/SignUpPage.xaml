@@ -98,7 +98,7 @@
                         <control:BorderlessEntry
                             x:Name="PasswordEntry"
                             IsPassword="true"
-                            Placeholder="Password"
+                            Placeholder="Username"
                             PlaceholderColor="{DynamicResource Gray-700}"
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Password}"
@@ -114,7 +114,7 @@
                         <control:BorderlessEntry
                             x:Name="ConfirmPasswordEntry"
                             IsPassword="true"
-                            Placeholder="Confirm Password"
+                            Placeholder="Password"
                             PlaceholderColor="{DynamicResource Gray-700}"
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding ConfirmPassword}"
