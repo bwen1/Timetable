@@ -121,10 +121,10 @@ namespace Backend_Tester
             Console.WriteLine("The response from the signup was\n\tCode: " + resp.status.ToString() + "\n\tMessage: " + resp.message);
         }
 
-        static public void get_friends(Backend bk)
+        static public async void get_friends(Backend bk)
         {
             Console.WriteLine("Getting Users...");
-            User[] friends = bk.GetFriends();
+            User[] friends = await bk.GetFriends();
             foreach(User user in friends)
             {
                 Console.WriteLine("\nUser: " + user.username);
@@ -160,19 +160,19 @@ namespace Backend_Tester
             Console.WriteLine("The response from the friend removal was\n\tCode: " + res.status.ToString() + "\n\tMessage: " + res.message);
         }
 
-        public static void get_events(Backend bk)
+        public static async  void get_events(Backend bk)
         {
             Console.WriteLine("Getting all events...");
-            Event[] events = bk.GetEvents();
+            Event[] events = await bk.GetEvents();
             foreach(Event e in events)
             {
                 Console.WriteLine("\nEvent, Name: " + e.eventName + "\n\tOwner: " + e.ID + "\n\tShared: " + (e.shared ? "yes" : "no") +"\n\tDay: "+e.Day.ToString()+"\n\tLocation: "+e.location+ "\n\tNotes: " + e.notes);
             }
         }
-        public static void get_my_events(Backend bk)
+        public static async void get_my_events(Backend bk)
         {
             Console.WriteLine("Getting user events...");
-            Event[] events = bk.GetMyEvents();
+            Event[] events = await bk.GetMyEvents();
             foreach (Event e in events)
             {
                 Console.WriteLine("\nEvent, Name: " + e.eventName + "\n\tOwner: " + e.ID + "\n\tShared: " + (e.shared ? "yes" : "no") + "\n\tDay: " + e.Day.ToString() + "\n\tLocation: " + e.location + "\n\tNotes: " + e.notes);
@@ -181,14 +181,14 @@ namespace Backend_Tester
         public static void update_events (Backend bk)
         {
             Console.WriteLine("Updating local copy of events...");
-            if(bk.UpdateEvents().Length != 0)
+            if(bk.UpdateEvents().Result.Length != 0)
             {
                 Console.WriteLine("done!");
             }
             else
             {
                 Console.WriteLine("error");
-                Event[] events = bk.UpdateEvents();
+                Event[] events = bk.UpdateEvents().Result;
                 foreach (Event e in events)
                 {
                     Console.WriteLine("\nEvent, Name: " + e.eventName + "\n\tOwner: " + e.ID + "\n\tShared: " + (e.shared ? "yes" : "no") + "\n\tDay: " + e.Day.ToString() + "\n\tLocation: " + e.location + "\n\tNotes: " + e.notes);

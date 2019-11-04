@@ -147,12 +147,13 @@ namespace TimetableTalkShell.ViewModels
         private async void LoginClicked(object obj)
         {
 
-            databaseConnector.Response response = App.backend.LogIn(name, password);
+            databaseConnector.Response response = await App.backend.LogIn(name, password);
             if (response.status == databaseConnector.statuscode.OK)
             {
                 Preferences.Set("Saved_Login", "");
                 Preferences.Set("Saved_User", name);
                 Preferences.Set("Saved_Pass", password);
+                
                 await Shell.Current.GoToAsync("//timetable");
                 
             }

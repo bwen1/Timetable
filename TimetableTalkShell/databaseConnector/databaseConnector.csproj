@@ -16,14 +16,6 @@
     <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="17.3.0.21" />
     <PackageReference Include="Syncfusion.Xamarin.GridCommon" Version="17.3.0.21" />
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.3.0.21" />
-    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="17.3.0.21" />
-    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="17.3.0.21" />
-    <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="17.3.0.21" />
-    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.3.0.21" />
-    <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="17.3.0.21" />
-    <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="17.3.0.21" />
-    <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="17.3.0.21" />
-    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="17.3.0.21" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 

@@ -2,7 +2,6 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-using MySql.Data.MySqlClient;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -98,7 +97,6 @@ namespace databaseConnector
         private int UID;
         public string UserName { get; private set; }
         private static readonly HttpClient client = new HttpClient();
-        private MySqlConnection connection;
         private string server;
         private string database;
         private string uid;
@@ -135,6 +133,11 @@ namespace databaseConnector
             return (UID == 0 ? false : true);
         }
 
+        struct RU
+        {
+            public bool Error;
+            public string Message;
+        }
         /// <summary>
         /// Queries the database to see if that username is taken yet.
         /// </summary>
@@ -148,7 +151,8 @@ namespace databaseConnector
 
             string responseString = await client.GetStringAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/users/avcheck/" + username);
             //Read the data determine the result
-            dynamic obj = JsonConvert.DeserializeObject(responseString);
+         
+            RU obj = JsonConvert.DeserializeObject<RU>(responseString);
             if (!obj.Error)
             {
                 if (obj.Message == "Name taken")
@@ -185,6 +189,12 @@ namespace databaseConnector
         }
         #endregion
 
+        struct RL
+        {
+            public bool Error;
+            public string Message;
+            public int id;
+        }
         /// <summary>
         /// Logs the user in, actually It queries the database to confirm details, then sets the users ID as the active user.
         /// </summary>
@@ -194,6 +204,10 @@ namespace databaseConnector
         public async Task<Response> LogIn(string username, string password)
         {
             bool Avalible;
+            if(username == null || username == "" || password == null || password == "")
+            {
+                return new Response(statuscode.INVALID_DATA, "Missing username or password");
+            }
             string psh = GetHashString(password);
             Console.WriteLine(psh);
             var values = new Dictionary<string, string>
@@ -208,7 +222,7 @@ namespace databaseConnector
 
             var responseString = await response.Content.ReadAsStringAsync();
             //Read the data determine the result
-            dynamic obj = JsonConvert.DeserializeObject(responseString);
+            RL obj = JsonConvert.DeserializeObject<RL>(responseString);
 
             if (!obj.Error)
             {
@@ -256,6 +270,10 @@ namespace databaseConnector
             if (await IsUsernameAvalible(username))
             {
                 bool Avalible;
+                if(password == null || password.Length < 5)
+                {
+                    return new Response(statuscode.INVALID_DATA, "Password not strong enough");
+                }
                 string psh = GetHashString(password);
                 Console.WriteLine(psh);
                 var values = new Dictionary<string, string>
@@ -270,7 +288,7 @@ namespace databaseConnector
 
                 var responseString = await response.Content.ReadAsStringAsync();
                 //Read the data determine the result
-                dynamic obj = JsonConvert.DeserializeObject(responseString);
+                RU obj = JsonConvert.DeserializeObject<RU>(responseString);
 
                 if (!obj.Error)
                 {
@@ -317,8 +335,8 @@ namespace databaseConnector
 
                     var responseString = await response.Content.ReadAsStringAsync();
                     //Read the data determine the result
-                    dynamic obj = JsonConvert.DeserializeObject(responseString);
-                    if (!obj.error)
+                    RU obj = JsonConvert.DeserializeObject<RU>(responseString);
+                    if (!obj.Error)
                     {
                         this.UserName = newUsername;
                         return new Response(statuscode.OK, "Username Updated");
@@ -356,7 +374,7 @@ namespace databaseConnector
 
                     var responseString = await response.Content.ReadAsStringAsync();
                     //Read the data determine the result
-                    dynamic obj = JsonConvert.DeserializeObject(responseString);
+                    RU obj = JsonConvert.DeserializeObject<RU>(responseString);
                     if (!obj.Error)
                     {
                         return new Response(statuscode.OK, "Password Updated");
@@ -391,7 +409,7 @@ namespace databaseConnector
 
                     var responseString = await response.Content.ReadAsStringAsync();
                     //Read the data determine the result
-                    dynamic obj = JsonConvert.DeserializeObject(responseString);
+                    RU obj = JsonConvert.DeserializeObject<RU>(responseString);
                     if (!obj.Error)
                     {
                         friendarray.Add(user);
@@ -419,7 +437,7 @@ namespace databaseConnector
         {
             if (IsLoggedIn())
             {
-                return await RequestFriend(GetUser(username));
+                return await RequestFriend(await GetUser(username));
             }
             return new Response(statuscode.ERROR, "User not logged in");
         }
@@ -469,7 +487,7 @@ namespace databaseConnector
 
                         var responseString = await response.Content.ReadAsStringAsync();
                         //Read the data determine the result
-                        dynamic obj = JsonConvert.DeserializeObject(responseString);
+                        RU obj = JsonConvert.DeserializeObject<RU>(responseString);
                         if (!obj.Error)
                         {
                             friendarray[index] = new User(friendarray[index].ID, friendarray[index].username, newStatus);
@@ -533,7 +551,7 @@ namespace databaseConnector
 
                     var responseString = await response.Content.ReadAsStringAsync();
                     //Read the data determine the result
-                    dynamic obj = JsonConvert.DeserializeObject(responseString);
+                    RU obj = JsonConvert.DeserializeObject<RU>(responseString);
                     if (!obj.Error)
                     {
                         friendarray.Remove(user);
@@ -547,6 +565,12 @@ namespace databaseConnector
             return new Response(statuscode.NOT_THESE_DROIDS, "no friend with that ID, try refreshing the data with UpdateFriends()");
         }
 
+        struct RAE
+        {
+            public bool Error;
+            public string Message;
+            public int EventID;
+        }
         /// <summary>
         /// Adds an event to the current users scedual.
         /// </summary>
@@ -573,11 +597,11 @@ namespace databaseConnector
                 var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/events/addevent", content);
 
                 var responseString = await response.Content.ReadAsStringAsync();
-                dynamic obj = JsonConvert.DeserializeObject(responseString);
+                RAE obj = JsonConvert.DeserializeObject<RAE>(responseString);
 
                 if (!obj.Error)
                 {
-                    int id = int.Parse(obj.EventID);
+                    int id = obj.EventID;
 
                     events.Add(new Event(id, UID, thing.eventName, thing.shared, thing.startTime, thing.endTime, thing.Day));
                     //close connection
@@ -618,7 +642,7 @@ namespace databaseConnector
                 var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/events/editevent", content);
 
                 var responseString = await response.Content.ReadAsStringAsync();
-                dynamic obj = JsonConvert.DeserializeObject(responseString);
+                RU obj = JsonConvert.DeserializeObject<RU>(responseString);
                 if (!obj.Error)
                 {
                     events.Remove(oldEvent);
@@ -637,22 +661,25 @@ namespace databaseConnector
         /// </summary>
         /// <param name="thing">the event to remove, it not called 'event' because that's a keyword</param>
         /// <returns>If the event was 'taken out of the picture', if you know what I mean...</returns>
-        public Response RemoveEvent(Event thing)
+        public async Task<Response> RemoveEvent(Event thing)
         {
             if (!myevents.Contains(thing))
                 return new Response(statuscode.ERROR, "That event could not be found, try running updateEvents()");
 
-            string query = "DELETE FROM `events` WHERE `EventID` = " + thing.eID + " ";
-            if (this.OpenConnection() == true)
+            var values = new Dictionary<string, string>
             {
-                //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                { "eventid", thing.eID.ToString() }
+            };
 
-                //Execute command
-                cmd.ExecuteNonQuery();
+            var content = new FormUrlEncodedContent(values);
 
-                //close connection
-                this.CloseConnection();
+            var response = await client.PostAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/events/removeevent", content);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+            //Read the data determine the result
+            RU obj = JsonConvert.DeserializeObject<RU>(responseString);
+            if (!obj.Error)
+            {
                 events.Remove(thing);
 
                 return new Response(statuscode.OK, "Event removed");
@@ -664,7 +691,7 @@ namespace databaseConnector
         /// Gets the current user, and their friends events.
         /// </summary>
         /// <returns>An array of events</returns>
-        public Event[] GetEvents()
+        public async Task<Event[]> GetEvents()
         {
             if (IsLoggedIn())
             {
@@ -676,38 +703,58 @@ namespace databaseConnector
                     return e.ToArray();
 
                 }
-                return UpdateEvents();
+                return await UpdateEvents();
             }
             return new Event[] { };
         }
 
+        struct queryevent {
+            public int EventID;
+            public int ID;
+            public bool shared;
+            public string EventName;
+            public string notes;
+            public string Location;
+            public string TimeStart;
+            public string TimeEnd;
+            public day Day;
+        }
+
+        struct EventResponse
+        {
+            public bool Error;
+            public string Message;
+            public queryevent[] Events;
+        }
         /// <summary>
         /// Updates the local copy of personal and shared events.
         /// </summary>
         /// <returns>all relevant events</returns>
-        public Event[] UpdateEvents()
+        public async Task<Event[]> UpdateEvents()
         {
             events.Clear();
             myevents.Clear();
             string inquery;
             if (friendarray.Count != 0)
             {
-                inquery = "(" + friendarray[0].ID;
+                inquery = "" + friendarray[0].ID;
                 for (int i = 1; i < friendarray.Count; i++)
                     inquery = inquery + ", " + friendarray[i].ID;
-                inquery = inquery + ")";
+                inquery = inquery + "";
             }
             else
             {
                 return new Event[] { };
             }
-            string query = "SELECT * FROM `event` WHERE `ID` IN " + inquery + " AND `shared` = true";
+            string responseString = await client.GetStringAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/events/events?=" + inquery);
+            //Read the data determine the result
+            EventResponse obj = JsonConvert.DeserializeObject<EventResponse>(responseString);
 
             //Create a list to store the result
             List<Event> list = new List<Event>();
 
             //get the users events
-            Event[] ev = GetMyEvents();
+            Event[] ev = await GetMyEvents();
             myevents.AddRange(ev);
             list.AddRange(ev);
             //events.AddRange(ev);
@@ -719,36 +766,24 @@ namespace databaseConnector
             day d;
 
 
-            //Open connection
-            if (this.OpenConnection() == true)
+            if (!obj.Error)
             {
-                //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-
                 //Read the data and store them in the list
-                while (dataReader.Read())
+                foreach(queryevent qev in obj.Events)
                 {
-                    eID = int.Parse(dataReader["EventID"] + "");
-                    ID = int.Parse(dataReader["ID"] + "");
-                    s = bool.Parse(dataReader["shared"] + "");
-                    name = dataReader["EventName"] + "";
-                    notes = dataReader["notes"] + "";
-                    loc = dataReader["Location"] + "";
-                    st = convert_time(int.Parse(dataReader["TimeStart"] + ""));
-                    et = convert_time(int.Parse(dataReader["TimeEnd"] + ""));
-                    Enum.TryParse(dataReader["Day"] + "", out d);
+                    eID = qev.EventID;
+                    ID = qev.ID;
+                    s = qev.shared;
+                    name = qev.EventName;
+                    notes = qev.notes;
+                    loc = qev.Location;
+                    st = qev.TimeStart;
+                    et = qev.TimeEnd;
+                    d = qev.Day;
 
                     list.Add(new Event(eID, ID, name, s, st, et, d, loc, notes));
                     events.Add(new Event(eID, ID, name, s, st, et, d, loc, notes));
                 }
-
-                //close Data Reader
-                dataReader.Close();
-
-                //close Connection
-                this.CloseConnection();
 
                 //return list to be displayed
                 return list.ToArray();
@@ -763,13 +798,15 @@ namespace databaseConnector
         /// Gets an array of the current users events. 
         /// </summary>
         /// <returns>an array of the current users events</returns>
-        public Event[] GetMyEvents()
+        public async Task<Event[]> GetMyEvents()
         {
             if (myevents.Count != 0)
             {
                 return myevents.ToArray();
             }
-            string query = "SELECT * FROM `event` WHERE `ID` = " + UID + "";
+            string responseString = await client.GetStringAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/events/myevents/" + UID.ToString());
+            //Read the data determine the result
+            EventResponse obj = JsonConvert.DeserializeObject<EventResponse>(responseString);
 
             //Create a list to store the result
             List<Event> list = new List<Event>();
@@ -780,35 +817,24 @@ namespace databaseConnector
 
 
             //Open connection
-            if (this.OpenConnection() == true)
+            if (!obj.Error)
             {
-                //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-
                 //Read the data and store them in the list
-                while (dataReader.Read())
+                foreach (queryevent qev in obj.Events)
                 {
-                    eID = int.Parse(dataReader["EventID"] + "");
-                    ID = int.Parse(dataReader["ID"] + "");
-                    s = bool.Parse(dataReader["shared"] + "");
-                    name = dataReader["EventName"] + "";
-                    notes = dataReader["notes"] + "";
-                    loc = dataReader["Location"] + "";
-                    st = convert_time(int.Parse(dataReader["TimeStart"] + ""));
-                    et = convert_time(int.Parse(dataReader["TimeEnd"] + ""));
-                    Enum.TryParse(dataReader["Day"] + "", out d);
+                    eID = qev.EventID;
+                    ID = qev.ID;
+                    s = qev.shared;
+                    name = qev.EventName;
+                    notes = qev.notes;
+                    loc = qev.Location;
+                    st = qev.TimeStart;
+                    et = qev.TimeEnd;
+                    d = qev.Day;
 
                     list.Add(new Event(eID, ID, name, s, st, et, d, loc, notes));
                     myevents.Add(new Event(eID, ID, name, s, st, et, d, loc, notes));
                 }
-
-                //close Data Reader
-                dataReader.Close();
-
-                //close Connection
-                this.CloseConnection();
 
                 //return list to be displayed
                 return list.ToArray();
@@ -823,7 +849,7 @@ namespace databaseConnector
         ///  Gets the current users pending, accepted and blocked friends
         /// </summary>
         /// <returns>the users friends and their status</returns>
-        public User[] GetFriends()
+        public async Task<User[]> GetFriends()
         {
             if (!IsLoggedIn())
                 return friendarray.ToArray();
@@ -834,18 +860,32 @@ namespace databaseConnector
             }
             else
             {
-                return UpdateFriends();
+                return await UpdateFriends();
             }
 
         }
 
+        struct friretrun
+        {
+            public int ID;
+            public string Name;
+            public friends status;
+        }
+        struct FriendResponse
+        {
+            public bool Error;
+            public string Message;
+            public friretrun[] data;
+        }
         /// <summary>
         /// updates the local copy of uesr friend objects, includes of all statuses
         /// </summary>
         /// <returns>an array of the users friends</returns>
-        public User[] UpdateFriends()
+        public async Task<User[]> UpdateFriends()
         {
-            string query = " SELECT `Name`, `ID`, `status` AS `!status` FROM (SELECT `Name`, `ID` FROM `users` WHERE `ID` IN (SELECT `ID1` FROM `friends` WHERE `ID2` = " + UID + ")) AS T INNER JOIN `friends` ON `ID` = `ID1` group by `Name`";
+            string responseString = await client.GetStringAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/friends/friends/" + UID.ToString());
+            //Read the data determine the result
+            FriendResponse obj = JsonConvert.DeserializeObject<FriendResponse>(responseString);
             //Create a list to store the result
             List<User> list = new List<User>();
             friendarray.Clear();
@@ -854,63 +894,18 @@ namespace databaseConnector
             friends status;
 
             //Open connection
-            if (this.OpenConnection() == true)
+            if (!obj.Error)
             {
-                //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 //Read the data and store them in the list
-                while (dataReader.Read())
+                foreach(friretrun fri in obj.data)
                 {
-                    foreach (var item in dataReader)
-                    {
-                        Console.WriteLine(item.ToString());
-                    }
-                    ID = int.Parse(dataReader["ID"] + "");
-                    name = dataReader["Name"] + "";
-                    if ((dataReader["!status"] + "") == "PENDING_TO")
-                    {
-                        status = friends.PENDING_FROM;
-                    }
-                    if ((dataReader["!status"] + "") == "BLOCKED_TO")
-                    {
-                        status = friends.BLOCKED_FROM;
-                    }
-                    else
-                    {
-                        Enum.TryParse(dataReader["!status"] + "", out status);
-                        Console.WriteLine(dataReader["!status"] + "");
-                    }
+                    ID = fri.ID;
+                    name = fri.Name;
+                    status = fri.status;
                     list.Add(new User(ID, name, status));
                     friendarray.Add(new User(ID, name, status));
                 }
-
-                //close Data Reader
-                dataReader.Close();
-
-                query = "SELECT `Name`, `ID`, `status`  FROM (SELECT `Name`, `ID` FROM `users` WHERE `ID` IN (SELECT `ID2` FROM `friends` WHERE `ID1` = " + UID + ")) AS T INNER JOIN `friends` ON `ID` = `ID2` group by `Name` ";
-                //Create Command
-                cmd = new MySqlCommand(query, connection);
-                //Create a data reader and Execute the command
-                dataReader = cmd.ExecuteReader();
-
-                //Read the data and store them in the list
-                while (dataReader.Read())
-                {
-                    ID = int.Parse(dataReader["ID"] + "");
-                    name = dataReader["Name"] + "";
-                    Enum.TryParse(dataReader["status"] + "", out status);
-                    list.Add(new User(ID, name, status));
-                    friendarray.Add(new User(ID, name, status));
-                }
-
-                //close Data Reader
-                dataReader.Close();
-
-                //close Connection
-                this.CloseConnection();
 
                 //return list to be displayed
                 return list.ToArray();
@@ -920,39 +915,33 @@ namespace databaseConnector
                 return list.ToArray();
             }
         }
-
+        struct RGU
+        {
+            public bool Error;
+            public string Message;
+            public int ID;
+        }
         /// <summary>
         /// Get the user object associated with a given username.
         /// </summary>
         /// <param name="username">the name to get</param>
         /// <returns>the first user returned</returns>
-        private User GetUser(string username)
+        private async Task<User> GetUser(string username)
         {
-            string query = "select * FROM `users` WHERE `Name` = '" + username + "' LIMIT 1";
-            if (this.OpenConnection() == true)
+            string responseString = await client.GetStringAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/users/userid" + username);
+            //Read the data determine the result
+            RGU obj = JsonConvert.DeserializeObject<RGU>(responseString);
+            if (!obj.Error)
             {
-                //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-
                 //Read the data determine the result
-                if (dataReader.Read())
+                if (obj.Message == "User Id retrived")
                 {
-                    int id = int.Parse(dataReader["ID"] + "");
-                    //close Data Reader
-                    dataReader.Close();
-
-                    //close connection
-                    this.CloseConnection();
+                    int id = obj.ID;
 
                     return new User(id, username, friends.PENDING_TO);
                 }
                 else
                 {
-                    //close Data Reader
-                    dataReader.Close();
-
                     //close connection
                     this.CloseConnection();
                     return new User(0, "", friends.NO);

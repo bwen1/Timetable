@@ -118,10 +118,10 @@ namespace TimetableTalkShell.ViewModels
         /// Invoked when the Submit button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void SubmitClicked(object obj)
+        private async void SubmitClicked(object obj)
         {
             // Do something
-            databaseConnector.Response response = App.backend.ChangePassword(newPassword, confirmPassword);
+            databaseConnector.Response response = await App.backend.ChangePassword(newPassword, confirmPassword);
             if(response.status == databaseConnector.statuscode.OK)
             {
                 //navigate or display to the user in some way, that the password has been changed.
