@@ -746,7 +746,7 @@ namespace databaseConnector
             {
                 return new Event[] { };
             }
-            string responseString = await client.GetStringAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/events/events?=" + inquery);
+            string responseString = await client.GetStringAsync("http://ec2-3-82-249-155.compute-1.amazonaws.com:3000/events/events?friends=" + inquery);
             //Read the data determine the result
             EventResponse obj = JsonConvert.DeserializeObject<EventResponse>(responseString);
 

@@ -97,7 +97,7 @@ router.get('/userid/:username', function (req, res, next) {
                 res.status(200).json({ "Error": false, "Message": "User Id retrived", "ID": rows[0].ID});
             }
             else {
-                res.status(200).json({ "Error": fasle, "Message": "User dosen't exist" });
+                res.status(200).json({ "Error": false, "Message": "User dosen't exist" });
             }
         })
         .catch((e) => {
