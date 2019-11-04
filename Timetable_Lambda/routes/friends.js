@@ -87,11 +87,20 @@ router.get('/friends/:user', function (req, res, next) {
         rows.forEach(row => {
           if(row.ID1 == id){
             frids.push(row.ID2);
+            fstatus.push(row.status);
           }
           else if(row.ID2 == id){
             frids.push(row.ID1);
+            if(row.status == "PENDING_TO")
+              fstatus.push("PENDING_FROM");
+            else if (row.status == "PENDING_FROM")
+              fstatus.push("PENDING_TO");
+            else if (row.status == "BLOCKED_TO")
+              fstatus.push("BLOCKED_FROM")
+            else
+              fstatus.push("BLOCKED_TO")
           }
-          fstatus.push(row.status);
+          
         });
         console.log(frids);
         req.db.from('users')
