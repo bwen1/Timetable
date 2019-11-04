@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 using Xamarin.Forms.Internals;
 
 namespace TimetableTalkShell.ViewModels
@@ -149,6 +150,9 @@ namespace TimetableTalkShell.ViewModels
             databaseConnector.Response response = App.backend.LogIn(name, password);
             if (response.status == databaseConnector.statuscode.OK)
             {
+                Preferences.Set("Saved_Login", "");
+                Preferences.Set("Saved_User", name);
+                Preferences.Set("Saved_Pass", password);
                 await Shell.Current.GoToAsync("//timetable");
                 
             }

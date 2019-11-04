@@ -1,5 +1,6 @@
 using System;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
 using TimetableTalkShell.Services;
 using TimetableTalkShell.Views;
@@ -16,7 +17,32 @@ namespace TimetableTalkShell
             InitializeComponent();
             backend = new Backendtest();
             DependencyService.Register<MockDataStore>();
-            MainPage = new LoginPage();
+            if (Preferences.ContainsKey("Saved_Login"))
+            {
+                Response re = backend.LogIn(Preferences.Get("Saved_User", ""), Preferences.Get("Saved_Pass", "No"));
+                if(re.status == statuscode.OK)
+                {
+                    MainPage = new TimetablePage();
+                }
+                else if (re.status == statuscode.NOT_THESE_DROIDS)
+                {
+                    Preferences.Clear();
+                    Page p = new Page();
+                    Device.BeginInvokeOnMainThread(async () => {
+                        await MainPage.DisplayAlert("Saved login fail", "We coulden't log you in with your saved credentials", "OK");
+                        MainPage = new LoginPage();
+                    });
+                }
+                else
+                {
+                    MainPage = new LoginPage();
+                }
+            }
+            else
+            {
+                MainPage = new LoginPage();
+            }
+            
             
             
             //MainPage = new AppShell();

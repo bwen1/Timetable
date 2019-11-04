@@ -7,8 +7,9 @@
              xmlns:vm="clr-namespace:TimetableTalkShell.ViewModels"
              x:Class="TimetableTalkShell.Views.TimetablePage"
              Title="{Binding Title}"
-             NavigationPage.HasNavigationBar="False"
-             Shell.NavBarIsVisible="False">
+             NavigationPage.HasNavigationBar="True"
+             Shell.NavBarIsVisible="True"
+             Shell.FlyoutBehavior="Flyout">
 
     <ContentPage.BindingContext>
         <vm:TimetableViewModel />
