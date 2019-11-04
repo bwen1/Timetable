@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Internals;
+using TimetableTalkShell.Views;
 
 namespace TimetableTalkShell.ViewModels
 {
@@ -28,8 +29,8 @@ namespace TimetableTalkShell.ViewModels
         /// </summary>
         public SignUpViewModel()
         {
-            this.LoginCommand = new Command(this.LoginClicked);
-            this.SignUpCommand = new Command(this.SignUpClicked);
+            //this.LoginCommand = new Command(this.LoginClicked);
+            //this.SignUpCommand = new Command(this.SignUpClicked);
         }
 
         #endregion
@@ -148,6 +149,7 @@ namespace TimetableTalkShell.ViewModels
         {
 
             await Shell.Current.GoToAsync("//login");
+            
 
             //databaseConnector.Response response = App.backend.SignUp(this.Email, this.password);
             //if (response.status == databaseConnector.statuscode.OK)
@@ -174,6 +176,7 @@ namespace TimetableTalkShell.ViewModels
             databaseConnector.Response response = App.backend.LogIn("Bob", password);
             if (response.status == databaseConnector.statuscode.OK)
             {
+
                 await Shell.Current.GoToAsync("//login");
 
             }
