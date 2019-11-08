@@ -1,5 +1,5 @@
 # Timetable Lambda
-The new and improved backend for timetable talk.
+## **DO NOT USE, REFER TO the `master` BRANCH FOR THE OFFICIAL VERSION** 
 
  **notes:** 
  - _requires serverless to be globally installed if you want to deploy, along with the /.aws/credettials file existing within your user directory_
