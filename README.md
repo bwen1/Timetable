@@ -1,4 +1,4 @@
-# Timetable - PLEASE USE THIS BRANCH FOR MARKING AND OR APPLICATION DEMO
+# Timetable - PLEASE USE THIS BRANCH FOR APPLICATION DEMO
 # Plese note that while this branch has functioning navigation, all features involving the database connector libary and timetable_Lambda, are actually on the master branch due to internal misscomunication.  As such please refer to master for the fully working backend, along with functional prefrences.
 ## Current name: __Timetable Talk__
 
