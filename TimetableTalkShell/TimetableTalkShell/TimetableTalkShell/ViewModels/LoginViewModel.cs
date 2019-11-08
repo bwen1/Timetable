@@ -2,6 +2,11 @@
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using Xamarin.Forms.Internals;
+using System.ComponentModel;
+using System;
+using TimetableTalkShell.Views;
+
+
 
 namespace TimetableTalkShell.ViewModels
 {
@@ -177,8 +182,11 @@ namespace TimetableTalkShell.ViewModels
         /// <param name="obj">The Object</param>
         private async void SignUpClicked(object obj)
         {
+            
+             await Shell.Current.GoToAsync("//signup");
+
             // navigate to signup page
-            await Shell.Current.GoToAsync("//signup");
+            //await Shell.Current.GoToAsync("//signup");
         }
 
         /// <summary>

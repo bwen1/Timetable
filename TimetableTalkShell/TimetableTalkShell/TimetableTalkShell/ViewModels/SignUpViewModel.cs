@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Internals;
+using TimetableTalkShell.Views;
 
 namespace TimetableTalkShell.ViewModels
 {
@@ -11,7 +12,7 @@ namespace TimetableTalkShell.ViewModels
     {
         #region Fields
 
-        
+        private string name;
 
         private string password;
 
@@ -28,8 +29,8 @@ namespace TimetableTalkShell.ViewModels
         /// </summary>
         public SignUpViewModel()
         {
-            this.LoginCommand = new Command(this.LoginClicked);
-            this.SignUpCommand = new Command(this.SignUpClicked);
+            //this.LoginCommand = new Command(this.LoginClicked);
+            //this.SignUpCommand = new Command(this.SignUpClicked);
         }
 
         #endregion
@@ -148,8 +149,22 @@ namespace TimetableTalkShell.ViewModels
         {
 
             await Shell.Current.GoToAsync("//login");
-
             
+
+            //databaseConnector.Response response = App.backend.SignUp(this.Email, this.password);
+            //if (response.status == databaseConnector.statuscode.OK)
+            //{
+            //    //navigate from here, to login
+            //}
+            //else if (response.status == databaseConnector.statuscode.ERROR)
+            //{
+            //    //the signup failed, change text / color
+            //    this.Email = "";
+            //    this.Password = "";
+            //    this.Subcolor = "#FFD62F2F";
+            //    this.InvalidMessage = response.message;
+            //}
+            // Do something
         }
 
         /// <summary>
@@ -158,20 +173,12 @@ namespace TimetableTalkShell.ViewModels
         /// <param name="obj">The Object</param>
         private async void SignUpClicked(object obj)
         {
-            databaseConnector.Response response = await App.backend.SignUp(password, confirmPassword);
+            databaseConnector.Response response = App.backend.LogIn("Bob", password);
             if (response.status == databaseConnector.statuscode.OK)
             {
-                
+
                 await Shell.Current.GoToAsync("//login");
 
-            }
-            else 
-            {
-                //the signup failed, change text / color
-                this.Email = "";
-                this.Password = "";
-                this.Subcolor = "#FFD62F2F";
-                this.InvalidMessage = response.message; 
             }
         }
 
