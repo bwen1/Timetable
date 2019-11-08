@@ -1,4 +1,4 @@
-# Timetable - PLEASE USE THIS BRANCH FOR MARKING AND OR APPLICATION DEMO, NOT SOME CODE MOGHT NOT WORK OR BREAK, SOME THINGS ONLY WORK ON `assignment_three_master`
+# Timetable - PLEASE NOTE SOME CODE MOGHT NOT WORK OR BREAK, SOME THINGS ONLY WORK ON `assignment_three_master`
 
 ## Current name: __Timetable Talk__
 
