@@ -39,6 +39,10 @@
     </Shell.FlyoutHeader>
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Route="timetable"
+                      Title="Timetable"
+                      ContentTemplate="{DataTemplate views:TimetablePage}"
+                      IsTabStop="False" />
         <ShellContent Icon="tab_about.png"
                       Route="about"
                       Title="About Us"
@@ -64,8 +68,8 @@
     <ShellContent Route="resetpassword"
                       ContentTemplate="{DataTemplate views:ResetPasswordPage}" 
                       IsTabStop="False"/>
-    <ShellContent Route="addevent"
-                      ContentTemplate="{DataTemplate views:AddEventPage}" 
+    <ShellContent Route="addcommitment"
+                      ContentTemplate="{DataTemplate views:AddCommitmentPage}" 
                       IsTabStop="False"/>
     <ShellContent Route="bill"
                       ContentTemplate="{DataTemplate views:BillPage}"
@@ -73,9 +77,7 @@
     <ShellContent Route="thomas"
                       ContentTemplate="{DataTemplate views:ThomasPage}"
                       IsTabStop="False" />
-    <ShellContent Route="timetable"
-                  ContentTemplate="{DataTemplate views:TimetablePage}"
-                  IsTabStop="False" />
+    
 
 
 

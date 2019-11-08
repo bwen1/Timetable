@@ -7,11 +7,11 @@ namespace TimetableTalkShell.ViewModels
     /// ViewModel for review page.
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class AddCommitmentViewModel
+    public class AddEventViewModel
     {
         #region Constructor
 
-        public AddCommitmentViewModel()
+        public AddEventViewModel()
         {
             this.UploadCommand = new Command<object>(this.OnUploadTapped);
             this.SubmitCommand = new Command<object>(this.OnSubmitTapped);
@@ -48,10 +48,10 @@ namespace TimetableTalkShell.ViewModels
         /// Invoked when the Submit button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private async void OnSubmitTapped(object obj)
+        private void OnSubmitTapped(object obj)
         {
             // Do something
-            databaseConnector.Response response = await App.backend.AddEvent(new databaseConnector.Event());
+            databaseConnector.Response response = App.backend.AddEvent(new databaseConnector.Event());
             // add the varibles from the page to the event object like Event(name, shared, start, end, day, location, [notes])
             if(response.status == databaseConnector.statuscode.OK)
             {

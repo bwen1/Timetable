@@ -8,12 +8,12 @@ namespace TimetableTalkShell.Views
     /// </summary>
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddEventStyles
+    public partial class AddCommitmentStyles
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddEventStyles" /> class.
+        /// Initializes a new instance of the <see cref="AddCommitmentStyles" /> class.
         /// </summary>
-        public AddEventStyles()
+        public AddCommitmentStyles()
         {
             this.InitializeComponent();
         }
